@@ -51,3 +51,4 @@ build/
 .gradle/
 local/
 spikes/*.class
+.DS_Store
