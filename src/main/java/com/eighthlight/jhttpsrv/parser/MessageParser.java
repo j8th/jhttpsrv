@@ -37,8 +37,8 @@ public class MessageParser {
         return result;
     }
 
-    public Request parseInputStream(InputStream myis) {
-        return new Request();
-    }
+//    public Request parseInputStream(InputStream myis) {
+//        return new Request();
+//    }
 
 }
