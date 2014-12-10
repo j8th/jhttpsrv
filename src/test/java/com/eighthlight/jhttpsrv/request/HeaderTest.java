@@ -1,6 +1,6 @@
 package com.eighthlight.jhttpsrv.request;
 
-import com.eighthlight.jhttpsrv.parser.MessageParser;
+import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.testmessage.GETRequestChrome;
 import org.junit.After;
 import org.junit.Assert;
@@ -15,7 +15,7 @@ public class HeaderTest {
 
     @Before
     public void setUp() throws Exception {
-        MessageParser myParser = new MessageParser();
+        RequestParser myParser = new RequestParser();
         myHeadersMap = myParser.parseHeaders(GETRequestChrome.HEADERS);
         myHeader = new Header(myHeadersMap);
     }

@@ -2,7 +2,6 @@ package com.eighthlight.jhttpsrv.parser;
 
 import com.eighthlight.jhttpsrv.request.Header;
 import com.eighthlight.jhttpsrv.request.Request;
-import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
 import com.eighthlight.jhttpsrv.testmessage.GETRequestChrome;
 import org.junit.After;
 import org.junit.Assert;
@@ -16,12 +15,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MessageParserTest {
-    private MessageParser myParser;
+public class RequestParserTest {
+    private RequestParser myParser;
 
     @Before
     public void setUp() throws Exception {
-        myParser = new MessageParser();
+        myParser = new RequestParser();
     }
 
     @After

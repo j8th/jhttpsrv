@@ -1,6 +1,6 @@
 package com.eighthlight.jhttpsrv.request;
 
-import com.eighthlight.jhttpsrv.parser.MessageParser;
+import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.testmessage.GETRequestChrome;
 import org.junit.After;
 import org.junit.Assert;
@@ -9,10 +9,8 @@ import org.junit.Test;
 
 import java.util.Map;
 
-import static org.junit.Assert.*;
-
 public class RequestTest {
-    private MessageParser parser;
+    private RequestParser parser;
     private Map<String, String> requestLine;
     private Header header;
     private Body body;
@@ -20,7 +18,7 @@ public class RequestTest {
 
     @Before
     public void setUp() throws Exception {
-        parser = new MessageParser();
+        parser = new RequestParser();
         requestLine = parser.parseRequestLine(GETRequestChrome.REQUEST_LINE);
         header = new Header(parser.parseHeaders(GETRequestChrome.HEADERS));
         body = new Body(GETRequestChrome.BODY);

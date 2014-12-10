@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * Created by jason on 12/8/14.
  */
-public class MessageParser {
+public class RequestParser {
 
     public static final String CRLF = "\r\n";
 
