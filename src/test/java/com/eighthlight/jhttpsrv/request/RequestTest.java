@@ -36,4 +36,12 @@ public class RequestTest {
     public void getHeaders() {
         Assert.assertEquals(header, request.getHeader());
     }
+
+    public void isGET() {
+        Assert.assertTrue(request.isGET());
+    }
+
+    public void isPOST() {
+        Assert.assertFalse(request.isPOST());
+    }
 }
