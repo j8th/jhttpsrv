@@ -1,6 +1,6 @@
 package com.eighthlight.jhttpsrv.parsers;
 
-import com.eighthlight.jhttpsrv.httpmessages.HttpMessage;
+import com.eighthlight.jhttpsrv.request.HttpRequest;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -37,8 +37,8 @@ public class HttpMessageParser {
         return result;
     }
 
-    public HttpMessage parseInputStream(InputStream myis) {
-        return new HttpMessage();
+    public HttpRequest parseInputStream(InputStream myis) {
+        return new HttpRequest();
     }
 
 }

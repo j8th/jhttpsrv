@@ -1,6 +1,6 @@
 package com.eighthlight.jhttpsrv.parsers;
 
-import com.eighthlight.jhttpsrv.testmessages.GETRequestChrome;
+import com.eighthlight.jhttpsrv.testmessage.GETRequestChrome;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HttpMessageParserTest {
+public class HttpRequestParserTest {
     private HttpMessageParser myParser;
 
     @Before
@@ -29,7 +29,7 @@ public class HttpMessageParserTest {
         expected.put("URL", "/something/cool/here");
         expected.put("Protocol-Version", "1.1");
 
-        Map<String, String> myMap = myParser.parseRequestLine(GETRequestChrome.RequestLine);
+        Map<String, String> myMap = myParser.parseRequestLine(GETRequestChrome.REQUEST_LINE);
 
         Assert.assertEquals(expected, myMap);
     }
@@ -44,7 +44,7 @@ public class HttpMessageParserTest {
         expected.put("Accept-Encoding", "gzip, deflate, sdch");
         expected.put("Accept-Language", "en-US,en;q=0.8");
 
-        Map<String, String> myMap = myParser.parseHeaders(GETRequestChrome.Headers);
+        Map<String, String> myMap = myParser.parseHeaders(GETRequestChrome.HEADERS);
 
         Assert.assertEquals(expected, myMap);
 
