@@ -28,10 +28,10 @@ public class Request {
     }
 
     public boolean isGET() {
-        return method == ProtocolStrings.HTTP_METHOD_GET;
+        return method.equals(ProtocolStrings.HTTP_METHOD_GET);
     }
 
     public boolean isPOST() {
-        return method == ProtocolStrings.HTTP_METHOD_POST;
+        return method.equals(ProtocolStrings.HTTP_METHOD_POST);
     }
 }

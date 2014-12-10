@@ -37,10 +37,12 @@ public class RequestTest {
         Assert.assertEquals(header, request.getHeader());
     }
 
+    @Test
     public void isGET() {
         Assert.assertTrue(request.isGET());
     }
 
+    @Test
     public void isPOST() {
         Assert.assertFalse(request.isPOST());
     }
