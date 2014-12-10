@@ -46,4 +46,9 @@ public class RequestTest {
     public void isPOST() {
         Assert.assertFalse(request.isPOST());
     }
+
+    @Test
+    public void getURL() {
+        Assert.assertEquals("/something/cool/here", request.getURL());
+    }
 }

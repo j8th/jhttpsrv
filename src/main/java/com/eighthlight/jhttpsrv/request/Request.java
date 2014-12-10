@@ -34,4 +34,8 @@ public class Request {
     public boolean isPOST() {
         return method.equals(ProtocolStrings.HTTP_METHOD_POST);
     }
+
+    public String getURL() {
+        return url;
+    }
 }
