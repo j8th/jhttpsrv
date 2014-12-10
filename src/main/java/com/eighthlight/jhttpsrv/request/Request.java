@@ -1,14 +1,13 @@
 package com.eighthlight.jhttpsrv.request;
 
+import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
+
 import java.util.Map;
 
 /**
  * Created by jason on 12/8/14.
  */
 public class Request {
-    private static final String HTTP_METHOD_GET  = "GET";
-    private static final String HTTP_METHOD_POST = "POST";
-
     // The parts of the Request-Line.
     private String method;
     private String url;
@@ -17,8 +16,8 @@ public class Request {
     private Header header;
 
     public Request(Map<String, String> myRequestLine, Header myHeader, Body myBody) {
-        method = myRequestLine.get("Method");
-        url = myRequestLine.get("URL");
+        method = myRequestLine.get(ProtocolStrings.METHOD);
+        url = myRequestLine.get(ProtocolStrings.URL);
         //protocolVersion = myRequestLine.get("ProtocolVersion");
 
         header = myHeader;
@@ -29,10 +28,10 @@ public class Request {
     }
 
     public boolean isGET() {
-        return method == HTTP_METHOD_GET;
+        return method == ProtocolStrings.HTTP_METHOD_GET;
     }
 
     public boolean isPOST() {
-        return method == HTTP_METHOD_POST;
+        return method == ProtocolStrings.HTTP_METHOD_POST;
     }
 }

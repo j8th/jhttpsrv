@@ -1,6 +1,7 @@
 package com.eighthlight.jhttpsrv.parser;
 
 import com.eighthlight.jhttpsrv.request.Request;
+import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -16,9 +17,9 @@ public class MessageParser {
     public Map<String, String> parseRequestLine(String requestLine) {
         HashMap<String, String> result = new HashMap<String, String>();
         String[] tokens = requestLine.trim().split(" ");
-        result.put("Method", tokens[0]);
-        result.put("URL", tokens[1]);
-        result.put("Protocol-Version", tokens[2].substring(tokens[2].indexOf('/')+1));
+        result.put(ProtocolStrings.METHOD, tokens[0]);
+        result.put(ProtocolStrings.URL, tokens[1]);
+        result.put(ProtocolStrings.PROTOCOL_VERSION, tokens[2].substring(tokens[2].indexOf('/') + 1));
         return result;
     }
 

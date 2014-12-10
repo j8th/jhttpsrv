@@ -1,5 +1,7 @@
 package com.eighthlight.jhttpsrv.request;
 
+import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
+
 import java.util.Map;
 
 /**
@@ -14,12 +16,12 @@ public class Header {
     private String[] acceptLanguage;
 
     public Header(Map<String, String> headers) {
-        host = headers.get("Host");
-        connection = headers.get("Connection");
-        accept = headers.get("Accept").split(",");
-        userAgent = headers.get("User-Agent");
-        acceptEncoding = headers.get("Accept-Encoding").split(", ");
-        acceptLanguage = headers.get("Accept-Language").split(",");
+        host = headers.get(ProtocolStrings.HOST);
+        connection = headers.get(ProtocolStrings.CONNECTION);
+        accept = headers.get(ProtocolStrings.ACCEPT).split(",");
+        userAgent = headers.get(ProtocolStrings.USER_AGENT);
+        acceptEncoding = headers.get(ProtocolStrings.ACCEPT_ENCODING).split(", ");
+        acceptLanguage = headers.get(ProtocolStrings.ACCEPT_LANGUAGE).split(",");
     }
 
     public String getHost() {
