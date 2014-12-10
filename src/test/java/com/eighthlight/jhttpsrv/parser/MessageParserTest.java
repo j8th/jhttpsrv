@@ -1,11 +1,18 @@
 package com.eighthlight.jhttpsrv.parser;
 
+import com.eighthlight.jhttpsrv.request.Header;
+import com.eighthlight.jhttpsrv.request.Request;
+import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
 import com.eighthlight.jhttpsrv.testmessage.GETRequestChrome;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,6 +54,19 @@ public class MessageParserTest {
         Map<String, String> myMap = myParser.parseHeaders(GETRequestChrome.HEADERS);
 
         Assert.assertEquals(expected, myMap);
+    }
 
+    @Test
+    public void parseInputStream() {
+        InputStream myis = new ByteArrayInputStream(GETRequestChrome.EntireMessage.getBytes(StandardCharsets.UTF_8));
+        try {
+            Request request = myParser.parseInputStream(myis);
+            Assert.assertTrue(request.isGET());
+            Assert.assertEquals("/something/cool/here", request.getURL());
+            Header header = request.getHeader();
+            Assert.assertEquals("localhost", header.getHost());
+        } catch (IOException e) {
+            Assert.fail("We should never get an exception here from a simple string-backed InputStream.  What did you do wrong?");
+        }
     }
 }
