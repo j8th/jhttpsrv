@@ -1,4 +1,4 @@
-package com.eighthlight.jhttpsrv.testmessages;
+package com.eighthlight.jhttpsrv.testmessage;
 
 /**
  * Created by jason on 12/8/14.
@@ -17,9 +17,9 @@ public class GETRequestChrome {
      * http://tools.ietf.org/html/rfc2616#section-4.2
      */
 
-    public final static String RequestLine = "GET /something/cool/here HTTP/1.1\r\n";
+    public final static String REQUEST_LINE = "GET /something/cool/here HTTP/1.1\r\n";
 
-    public final static String Header =
+    public final static String HEADERS =
                     "Host: localhost\r\n" +
                     "Connection: keep-alive\r\n" +
                     "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\r\n" +
@@ -27,10 +27,10 @@ public class GETRequestChrome {
                     "Accept-Encoding: gzip, deflate, sdch\r\n" +
                     "Accept-Language: en-US,en;q=0.8\r\n";
 
-    public final static String EmptyLine = "\r\n";
+    public final static String EMPTY_LINE = "\r\n";
 
-    public final static String Body = "";
+    public final static String BODY = "";
 
 
-    public final static String EntireMessage = RequestLine + Header + EmptyLine + Body;
+    public final static String EntireMessage = REQUEST_LINE + HEADERS + EMPTY_LINE + BODY;
 }
