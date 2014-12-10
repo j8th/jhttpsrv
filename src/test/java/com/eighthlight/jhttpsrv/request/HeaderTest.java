@@ -1,6 +1,6 @@
 package com.eighthlight.jhttpsrv.request;
 
-import com.eighthlight.jhttpsrv.parsers.HttpMessageParser;
+import com.eighthlight.jhttpsrv.parser.MessageParser;
 import com.eighthlight.jhttpsrv.testmessage.GETRequestChrome;
 import org.junit.After;
 import org.junit.Assert;
@@ -9,15 +9,15 @@ import org.junit.Test;
 
 import java.util.Map;
 
-public class HttpHeaderTest {
+public class HeaderTest {
     private Map<String, String> myHeadersMap;
-    private HttpHeader myHeader;
+    private Header myHeader;
 
     @Before
     public void setUp() throws Exception {
-        HttpMessageParser myParser = new HttpMessageParser();
+        MessageParser myParser = new MessageParser();
         myHeadersMap = myParser.parseHeaders(GETRequestChrome.HEADERS);
-        myHeader = new HttpHeader(myHeadersMap);
+        myHeader = new Header(myHeadersMap);
     }
 
     @After

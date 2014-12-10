@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Created by jason on 12/8/14.
  */
-public class HttpHeader {
+public class Header {
     private String host;
     private String connection;
     private String[] accept;
@@ -13,7 +13,7 @@ public class HttpHeader {
     private String[] acceptEncoding;
     private String[] acceptLanguage;
 
-    public HttpHeader(Map<String, String> headers) {
+    public Header(Map<String, String> headers) {
         host = headers.get("Host");
         connection = headers.get("Connection");
         accept = headers.get("Accept").split(",");

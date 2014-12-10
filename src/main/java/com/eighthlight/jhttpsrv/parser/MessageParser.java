@@ -1,6 +1,6 @@
-package com.eighthlight.jhttpsrv.parsers;
+package com.eighthlight.jhttpsrv.parser;
 
-import com.eighthlight.jhttpsrv.request.HttpRequest;
+import com.eighthlight.jhttpsrv.request.Request;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Created by jason on 12/8/14.
  */
-public class HttpMessageParser {
+public class MessageParser {
 
     public static final String CRLF = "\r\n";
 
@@ -37,8 +37,8 @@ public class HttpMessageParser {
         return result;
     }
 
-    public HttpRequest parseInputStream(InputStream myis) {
-        return new HttpRequest();
+    public Request parseInputStream(InputStream myis) {
+        return new Request();
     }
 
 }

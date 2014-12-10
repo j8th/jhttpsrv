@@ -1,4 +1,4 @@
-package com.eighthlight.jhttpsrv.parsers;
+package com.eighthlight.jhttpsrv.parser;
 
 import com.eighthlight.jhttpsrv.testmessage.GETRequestChrome;
 import org.junit.After;
@@ -9,12 +9,12 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HttpRequestParserTest {
-    private HttpMessageParser myParser;
+public class MessageParserTest {
+    private MessageParser myParser;
 
     @Before
     public void setUp() throws Exception {
-        myParser = new HttpMessageParser();
+        myParser = new MessageParser();
     }
 
     @After
