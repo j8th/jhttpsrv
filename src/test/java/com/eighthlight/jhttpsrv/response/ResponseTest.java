@@ -1,10 +1,10 @@
 package com.eighthlight.jhttpsrv.response;
 
+import com.eighthlight.jhttpsrv.shared.StatusCodes;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class ResponseTest {
     private Response response;
@@ -20,7 +20,21 @@ public class ResponseTest {
     }
 
     @Test
-    public void setStatus() {
-        
+    public void getProtocolVersion() {
+        Assert.assertEquals("1.1", response.getProtocolVersion());
+    }
+
+    @Test
+    public void set_get_StatusCode() {
+        Assert.assertEquals(0, response.getStatusCode());
+        response.setStatusCode(StatusCodes.OK);
+        Assert.assertEquals(StatusCodes.OK, response.getStatusCode());
+    }
+
+    @Test
+    public void getReasonPhrase() {
+        Assert.assertEquals(null, response.getReasonPhrase());
+        response.setStatusCode(StatusCodes.OK);
+        Assert.assertEquals(StatusCodes.OK_PHRASE, response.getReasonPhrase());
     }
 }
