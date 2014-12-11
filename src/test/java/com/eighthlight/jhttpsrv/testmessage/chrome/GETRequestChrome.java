@@ -1,4 +1,4 @@
-package com.eighthlight.jhttpsrv.testmessage;
+package com.eighthlight.jhttpsrv.testmessage.chrome;
 
 /**
  * Created by jason on 12/8/14.

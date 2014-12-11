@@ -2,7 +2,7 @@ package com.eighthlight.jhttpsrv.parser;
 
 import com.eighthlight.jhttpsrv.request.Header;
 import com.eighthlight.jhttpsrv.request.Request;
-import com.eighthlight.jhttpsrv.testmessage.GETRequestChrome;
+import com.eighthlight.jhttpsrv.testmessage.chrome.GETRequestChrome;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

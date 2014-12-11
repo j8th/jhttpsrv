@@ -1,10 +1,7 @@
 package com.eighthlight.jhttpsrv.request;
 
-import com.eighthlight.jhttpsrv.testmessage.GETRequestChrome;
 import org.junit.After;
 import org.junit.Before;
-
-import static org.junit.Assert.*;
 
 public class BodyTest {
 
