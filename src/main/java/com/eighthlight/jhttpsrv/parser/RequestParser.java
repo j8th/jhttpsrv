@@ -73,6 +73,13 @@ public class RequestParser {
         return new Request(requestLineMap, header, body);
     }
 
+
+
+
+
+    /*
+     * Private Methods
+     */
     // TODO: Throw some exceptions for when we exceed the buffer size.
     /**
      * Reads an InputStream up until the supplied pattern of bytes is encountered and returns all the bytes read,
