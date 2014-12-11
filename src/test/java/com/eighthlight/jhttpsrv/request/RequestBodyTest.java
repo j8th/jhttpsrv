@@ -3,7 +3,7 @@ package com.eighthlight.jhttpsrv.request;
 import org.junit.After;
 import org.junit.Before;
 
-public class BodyTest {
+public class RequestBodyTest {
 
     @Before
     public void setUp() throws Exception {

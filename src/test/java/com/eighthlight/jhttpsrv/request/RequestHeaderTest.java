@@ -9,15 +9,15 @@ import org.junit.Test;
 
 import java.util.Map;
 
-public class HeaderTest {
+public class RequestHeaderTest {
     private Map<String, String> myHeadersMap;
-    private Header myHeader;
+    private RequestHeader myHeader;
 
     @Before
     public void setUp() throws Exception {
         RequestParser myParser = new RequestParser();
         myHeadersMap = myParser.parseHeaders(GETRequestChrome.HEADERS);
-        myHeader = new Header(myHeadersMap);
+        myHeader = new RequestHeader(myHeadersMap);
     }
 
     @After

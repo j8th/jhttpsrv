@@ -13,16 +13,16 @@ public class Request {
     private String url;
     //private String protocolVersion;
 
-    private Header header;
+    private RequestHeader header;
 
-    public Request(Map<String, String> myRequestLine, Header myHeader) {
+    public Request(Map<String, String> myRequestLine, RequestHeader myHeader) {
         method = myRequestLine.get(ProtocolStrings.METHOD);
         url = myRequestLine.get(ProtocolStrings.URL);
 
         header = myHeader;
     }
 
-    public Request(Map<String, String> myRequestLine, Header myHeader, Body myBody) {
+    public Request(Map<String, String> myRequestLine, RequestHeader myHeader, RequestBody myBody) {
         method = myRequestLine.get(ProtocolStrings.METHOD);
         url = myRequestLine.get(ProtocolStrings.URL);
         //protocolVersion = myRequestLine.get("ProtocolVersion");
@@ -30,7 +30,7 @@ public class Request {
         header = myHeader;
     }
 
-    public Header getHeader() {
+    public RequestHeader getHeader() {
         return header;
     }
 

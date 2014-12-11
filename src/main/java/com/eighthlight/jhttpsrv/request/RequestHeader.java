@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * Created by jason on 12/8/14.
  */
-public class Header {
+public class RequestHeader {
     private String host;
     private String connection;
     private String[] accept;
@@ -15,7 +15,7 @@ public class Header {
     private String[] acceptEncoding;
     private String[] acceptLanguage;
 
-    public Header(Map<String, String> headers) {
+    public RequestHeader(Map<String, String> headers) {
         String myHeader;
 
         host = headers.get(ProtocolStrings.HOST);

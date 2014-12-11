@@ -1,7 +1,7 @@
 package com.eighthlight.jhttpsrv.parser;
 
-import com.eighthlight.jhttpsrv.request.Body;
-import com.eighthlight.jhttpsrv.request.Header;
+import com.eighthlight.jhttpsrv.request.RequestBody;
+import com.eighthlight.jhttpsrv.request.RequestHeader;
 import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.shared.ProtocolIntegers;
 import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
@@ -67,8 +67,8 @@ public class RequestParser {
         Map<String, String> requestLineMap = parseRequestLine(requestLineString);
         Map<String, String> headerMap = parseHeaders(headerString);
 
-        Header header = new Header(headerMap);
-        Body body = new Body(bodyString);
+        RequestHeader header = new RequestHeader(headerMap);
+        RequestBody body = new RequestBody(bodyString);
 
         return new Request(requestLineMap, header, body);
     }

@@ -1,6 +1,6 @@
 package com.eighthlight.jhttpsrv.parser;
 
-import com.eighthlight.jhttpsrv.request.Header;
+import com.eighthlight.jhttpsrv.request.RequestHeader;
 import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETRequestChrome;
 import org.junit.After;
@@ -62,7 +62,7 @@ public class RequestParserTest {
             Request request = myParser.parseInputStream(myis);
             Assert.assertTrue(request.isGET());
             Assert.assertEquals("/helloworld", request.getURL());
-            Header header = request.getHeader();
+            RequestHeader header = request.getHeader();
             Assert.assertEquals("localhost", header.getHost());
         } catch (IOException e) {
             Assert.fail("We should never get an exception here from a simple string-backed InputStream.  What did you do wrong?");

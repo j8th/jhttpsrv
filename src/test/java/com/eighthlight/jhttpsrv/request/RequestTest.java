@@ -12,15 +12,15 @@ import java.util.Map;
 public class RequestTest {
     private RequestParser parser;
     private Map<String, String> requestLine;
-    private Header header;
-    private Body body;
+    private RequestHeader header;
+    private RequestBody body;
     private Request request;
 
     @Before
     public void setUp() throws Exception {
         parser = new RequestParser();
         requestLine = parser.parseRequestLine(GETRequestChrome.REQUEST_LINE);
-        header = new Header(parser.parseHeaders(GETRequestChrome.HEADERS));
+        header = new RequestHeader(parser.parseHeaders(GETRequestChrome.HEADERS));
         request = new Request(requestLine, header);
     }
 
