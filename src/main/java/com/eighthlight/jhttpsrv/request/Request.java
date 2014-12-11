@@ -15,6 +15,13 @@ public class Request {
 
     private Header header;
 
+    public Request(Map<String, String> myRequestLine, Header myHeader) {
+        method = myRequestLine.get(ProtocolStrings.METHOD);
+        url = myRequestLine.get(ProtocolStrings.URL);
+
+        header = myHeader;
+    }
+
     public Request(Map<String, String> myRequestLine, Header myHeader, Body myBody) {
         method = myRequestLine.get(ProtocolStrings.METHOD);
         url = myRequestLine.get(ProtocolStrings.URL);

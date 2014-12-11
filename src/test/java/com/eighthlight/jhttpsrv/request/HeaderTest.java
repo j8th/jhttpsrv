@@ -49,7 +49,7 @@ public class HeaderTest {
 
     @Test
     public void getAcceptEncoding() {
-        String[] expected = {"gzip", "deflate", "sdch"};
+        String[] expected = null;
         Assert.assertEquals(expected, myHeader.getAcceptEncoding());
     }
 

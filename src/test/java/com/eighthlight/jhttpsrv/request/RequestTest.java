@@ -21,8 +21,7 @@ public class RequestTest {
         parser = new RequestParser();
         requestLine = parser.parseRequestLine(GETRequestChrome.REQUEST_LINE);
         header = new Header(parser.parseHeaders(GETRequestChrome.HEADERS));
-        body = new Body(GETRequestChrome.BODY);
-        request = new Request(requestLine, header, body);
+        request = new Request(requestLine, header);
     }
 
     @After
@@ -47,6 +46,6 @@ public class RequestTest {
 
     @Test
     public void getURL() {
-        Assert.assertEquals("/something/cool/here", request.getURL());
+        Assert.assertEquals("/helloworld", request.getURL());
     }
 }

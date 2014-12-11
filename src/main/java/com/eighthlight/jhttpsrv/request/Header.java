@@ -16,12 +16,21 @@ public class Header {
     private String[] acceptLanguage;
 
     public Header(Map<String, String> headers) {
+        String myHeader;
+
         host = headers.get(ProtocolStrings.HOST);
         connection = headers.get(ProtocolStrings.CONNECTION);
-        accept = headers.get(ProtocolStrings.ACCEPT).split(",");
+
+        myHeader = headers.get(ProtocolStrings.ACCEPT);
+        accept = myHeader == null ? null : myHeader.split(",");
+
         userAgent = headers.get(ProtocolStrings.USER_AGENT);
-        acceptEncoding = headers.get(ProtocolStrings.ACCEPT_ENCODING).split(", ");
-        acceptLanguage = headers.get(ProtocolStrings.ACCEPT_LANGUAGE).split(",");
+
+        myHeader = headers.get(ProtocolStrings.ACCEPT_ENCODING);
+        acceptEncoding = myHeader == null ? null : myHeader.split(", ");
+
+        myHeader = headers.get(ProtocolStrings.ACCEPT_LANGUAGE);
+        acceptLanguage = myHeader == null ? null : myHeader.split(",");
     }
 
     public String getHost() {

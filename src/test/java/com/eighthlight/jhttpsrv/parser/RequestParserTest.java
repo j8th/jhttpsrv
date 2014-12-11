@@ -32,7 +32,7 @@ public class RequestParserTest {
     public void parseRequestLine() {
         Map<String, String> expected = new HashMap<String, String>();
         expected.put("Method", "GET");
-        expected.put("URL", "/something/cool/here");
+        expected.put("URL", "/helloworld");
         expected.put("Protocol-Version", "1.1");
 
         Map<String, String> myMap = myParser.parseRequestLine(GETRequestChrome.REQUEST_LINE);
@@ -45,9 +45,9 @@ public class RequestParserTest {
         Map<String, String> expected = new HashMap<String, String>();
         expected.put("Host", "localhost");
         expected.put("Connection", "keep-alive");
+        expected.put("Cache-Control", "max-age=0");
         expected.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
         expected.put("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36");
-        expected.put("Accept-Encoding", "gzip, deflate, sdch");
         expected.put("Accept-Language", "en-US,en;q=0.8");
 
         Map<String, String> myMap = myParser.parseHeaders(GETRequestChrome.HEADERS);
@@ -61,7 +61,7 @@ public class RequestParserTest {
         try {
             Request request = myParser.parseInputStream(myis);
             Assert.assertTrue(request.isGET());
-            Assert.assertEquals("/something/cool/here", request.getURL());
+            Assert.assertEquals("/helloworld", request.getURL());
             Header header = request.getHeader();
             Assert.assertEquals("localhost", header.getHost());
         } catch (IOException e) {
