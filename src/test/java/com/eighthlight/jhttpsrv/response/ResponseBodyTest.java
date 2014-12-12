@@ -1,5 +1,6 @@
 package com.eighthlight.jhttpsrv.response;
 
+import com.eighthlight.jhttpsrv.testmessage.chrome.GETResponseChrome;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -25,5 +26,12 @@ public class ResponseBodyTest {
         Assert.assertNull(body.getContent());
         body.setContent("<p>hello</p>\n");
         Assert.assertEquals("<p>hello</p>\n", body.getContent());
+    }
+
+    @Test
+    public void getContentLength() {
+        Assert.assertEquals(0, body.getContentLength());
+        body.setContent(GETResponseChrome.BODY);
+        Assert.assertEquals(93, body.getContentLength());
     }
 }
