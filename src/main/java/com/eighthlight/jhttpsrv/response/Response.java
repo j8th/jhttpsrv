@@ -11,6 +11,8 @@ public class Response {
 
 
     private int statuscode = 0;
+    private ResponseHeader header;
+    private ResponseBody body;
 
 
 
@@ -28,5 +30,21 @@ public class Response {
 
     public String getReasonPhrase() {
         return StatusCodes.CodeToPhrase(statuscode);
+    }
+
+    public void setHeaders(ResponseHeader myHeader) {
+        header = myHeader;
+    }
+
+    public ResponseHeader getHeaders() {
+        return header;
+    }
+
+    public void setBody(ResponseBody myBody) {
+        body = myBody;
+    }
+
+    public ResponseBody getBody() {
+        return body;
     }
 }
