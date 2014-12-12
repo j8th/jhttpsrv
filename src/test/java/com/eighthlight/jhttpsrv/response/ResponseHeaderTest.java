@@ -24,7 +24,7 @@ public class ResponseHeaderTest {
 
     @Test
     public void set_get_ContentType() {
-        Assert.assertNull(responseHeader.getContentType());
+        Assert.assertEquals("", responseHeader.getContentType());
         responseHeader.setContentType(MIMETypes.HTML);
         Assert.assertEquals(MIMETypes.HTML, responseHeader.getContentType());
     }
