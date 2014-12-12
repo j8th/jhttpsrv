@@ -23,7 +23,7 @@ public class ResponseBodyTest {
 
     @Test
     public void set_get_Content() {
-        Assert.assertNull(body.getContent());
+        Assert.assertEquals("", body.getContent());
         body.setContent("<p>hello</p>\n");
         Assert.assertEquals("<p>hello</p>\n", body.getContent());
     }

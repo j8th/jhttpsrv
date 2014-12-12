@@ -6,7 +6,7 @@ import java.io.UnsupportedEncodingException;
  * Created by jason on 12/11/14.
  */
 public class ResponseBody {
-    private String content;
+    private String content = "";
 
     public String getContent() {
         return content;
@@ -20,12 +20,12 @@ public class ResponseBody {
         if(content == null)
             return 0;
         try {
+            // TODO: Figure out how we want to handle our character sets...
             byte[] bytes = content.getBytes("UTF-8");
             return bytes.length;
         } catch(UnsupportedEncodingException e) {
             e.printStackTrace();
+            return 0;
         }
-
-        return 0;
     }
 }
