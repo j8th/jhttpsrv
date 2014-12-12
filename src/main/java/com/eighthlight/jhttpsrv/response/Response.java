@@ -11,11 +11,16 @@ public class Response {
 
 
     private int statuscode = 0;
-    private ResponseHeader header;
-    private ResponseBody body;
+    private ResponseHeader header = new ResponseHeader();
+    private ResponseBody body = new ResponseBody();
 
 
 
+    /* Constructors */
+
+
+
+    /* Public Methods */
     public String getProtocolVersion() {
         return HTTP_VERSION;
     }

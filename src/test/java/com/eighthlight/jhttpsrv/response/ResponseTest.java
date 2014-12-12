@@ -17,10 +17,6 @@ public class ResponseTest {
         response = new Response();
         headers = new ResponseHeader();
         body = new ResponseBody();
-
-
-        //headers.setContentType(MIMETypes.HTML);
-        //headers.setContentLength();
     }
 
     @After
@@ -49,13 +45,18 @@ public class ResponseTest {
 
     @Test
     public void set_get_Headers() {
-        Assert.assertNull(response.getHeaders());
+        ResponseHeader initialHeader = response.getHeaders();
+        Assert.assertNotNull(initialHeader);
+        Assert.assertNotSame(headers, initialHeader);
         response.setHeaders(headers);
         Assert.assertEquals(headers, response.getHeaders());
     }
 
+    @Test
     public void set_get_Body() {
-        Assert.assertNull(response.getBody());
+        ResponseBody initialBody = response.getBody();
+        Assert.assertNotNull(initialBody);
+        Assert.assertNotSame(body, response.getBody());
         response.setBody(body);
         Assert.assertEquals(body, response.getBody());
     }
