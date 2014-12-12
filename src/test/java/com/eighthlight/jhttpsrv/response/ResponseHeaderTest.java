@@ -28,4 +28,11 @@ public class ResponseHeaderTest {
         responseHeader.setContentType(MIMETypes.HTML);
         Assert.assertEquals(MIMETypes.HTML, responseHeader.getContentType());
     }
+
+    @Test
+    public void set_get_ContentLength() {
+        Assert.assertEquals(0, responseHeader.getContentLength());
+        responseHeader.setContentLength(412);
+        Assert.assertEquals(412, responseHeader.getContentLength());
+    }
 }
