@@ -2,6 +2,7 @@ package com.eighthlight.jhttpsrv;
 
 import com.eighthlight.jhttpsrv.server.Jhttpsrv;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 
 /**
@@ -9,11 +10,10 @@ import java.net.ServerSocket;
  */
 public class Main {
 
-    public static void main(String[] args) {
-        System.out.println("I will be an http server one day.");
-        //ServerSocket myServerSocket = new ServerSocket(80);
-        //Jhttpsrv server = new Jhttpsrv(myServerSocket);
-        //server.run();
+    public static void main(String[] args) throws IOException {
+        ServerSocket myServerSocket = new ServerSocket(80);
+        Jhttpsrv server = new Jhttpsrv(myServerSocket);
+        server.run();
     }
 
 }
