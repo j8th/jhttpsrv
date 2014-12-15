@@ -8,10 +8,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
-
-import static org.junit.Assert.*;
-
 public class JhttpsrvTest {
     private Jhttpsrv jhttpsrv;
 
@@ -28,7 +24,7 @@ public class JhttpsrvTest {
     @Test
     public void handle() throws Exception {
         MockSocket socket = new MockSocket();
-        socket.seedInputStream(GETRequestChrome.EntireMessage);
+        socket.seedInputStream(GETRequestChrome.ENTIRE_MESSAGE);
         jhttpsrv.handle(socket);
         Assert.assertEquals(GETResponseChrome.ENTIRE_MESSAGE, socket.getOutputStreamAsString());
     }

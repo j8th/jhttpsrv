@@ -57,7 +57,7 @@ public class RequestParserTest {
 
     @Test
     public void parseInputStream() {
-        InputStream myis = new ByteArrayInputStream(GETRequestChrome.EntireMessage.getBytes(StandardCharsets.UTF_8));
+        InputStream myis = new ByteArrayInputStream(GETRequestChrome.ENTIRE_MESSAGE.getBytes(StandardCharsets.UTF_8));
         try {
             Request request = myParser.parseInputStream(myis);
             Assert.assertTrue(request.isGET());

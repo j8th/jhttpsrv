@@ -31,5 +31,5 @@ public class GETRequestChrome {
 
 
 
-    public final static String EntireMessage = REQUEST_LINE + HEADERS + EMPTY_LINE;
+    public final static String ENTIRE_MESSAGE = REQUEST_LINE + HEADERS + EMPTY_LINE;
 }
