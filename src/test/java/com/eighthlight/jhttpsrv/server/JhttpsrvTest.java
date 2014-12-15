@@ -36,6 +36,7 @@ public class JhttpsrvTest {
         socket.seedInputStream(GETRequestChrome.ENTIRE_MESSAGE);
         jhttpsrv.handle(socket);
         Assert.assertEquals(GETResponseChrome.ENTIRE_MESSAGE, socket.getOutputStreamAsString());
+        Assert.assertTrue(socket.isClosed());
     }
 
     @Test

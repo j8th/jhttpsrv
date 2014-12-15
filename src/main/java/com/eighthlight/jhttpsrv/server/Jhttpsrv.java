@@ -52,6 +52,7 @@ public class Jhttpsrv implements Runnable {
 
         String responseString = responseBuilder.buildResponse(response);
         os.write(responseString.getBytes(StandardCharsets.UTF_8.toString()));
+        mySocket.close();
     }
 
     public void run() {
