@@ -58,4 +58,9 @@ public class RequestHeaderTest {
         String[] expected = {"en-US", "en;q=0.8"};
         Assert.assertEquals(expected, myHeader.getAcceptLanguage());
     }
+
+    @Test
+    public void getContentLength() {
+        Assert.assertEquals(0, myHeader.getContentLength());
+    }
 }

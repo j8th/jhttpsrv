@@ -10,6 +10,7 @@ import java.util.Map;
 public class RequestHeader {
     private String host;
     private String connection;
+    private int contentlength;
     private String[] accept;
     private String userAgent;
     private String[] acceptEncoding;
@@ -20,6 +21,9 @@ public class RequestHeader {
 
         host = headers.get(ProtocolStrings.HOST);
         connection = headers.get(ProtocolStrings.CONNECTION);
+
+        myHeader = headers.get(ProtocolStrings.CONTENT_LENGTH);
+        contentlength = myHeader == null ? 0 : Integer.parseInt(myHeader);
 
         myHeader = headers.get(ProtocolStrings.ACCEPT);
         accept = myHeader == null ? null : myHeader.split(",");
@@ -57,6 +61,9 @@ public class RequestHeader {
         return acceptLanguage;
     }
 
+    public int getContentLength() {
+        return contentlength;
+    }
 
 
 }
