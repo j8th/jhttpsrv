@@ -7,13 +7,22 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import static org.mockito.Mockito.mock;
 
 public class JhttpsrvTest {
+    private ServerSocket mockServerSocket;
     private Jhttpsrv jhttpsrv;
 
     @Before
     public void setUp() throws Exception {
-        jhttpsrv = new Jhttpsrv();
+        mockServerSocket = mock(ServerSocket.class);
+        jhttpsrv = new Jhttpsrv(mockServerSocket);
     }
 
     @After
@@ -27,5 +36,11 @@ public class JhttpsrvTest {
         socket.seedInputStream(GETRequestChrome.ENTIRE_MESSAGE);
         jhttpsrv.handle(socket);
         Assert.assertEquals(GETResponseChrome.ENTIRE_MESSAGE, socket.getOutputStreamAsString());
+    }
+
+    @Test
+    public void run() throws Exception {
+        new Thread(jhttpsrv).start();
+        Mockito.verify(mockServerSocket).accept();
     }
 }

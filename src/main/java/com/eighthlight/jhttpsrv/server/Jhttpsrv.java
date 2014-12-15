@@ -11,14 +11,15 @@ import com.eighthlight.jhttpsrv.shared.StatusCodes;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
 /**
  * Created by jason on 12/15/14.
  */
-public class Jhttpsrv {
-    //private ServerSocket serverSocket;
+public class Jhttpsrv implements Runnable {
+    private ServerSocket serverSocket;
     //private Router router;
 
     private RequestParser requestParser = new RequestParser();
@@ -33,6 +34,9 @@ public class Jhttpsrv {
         //requestParser = new RequestParser();
         //responseBuilder = new ResponseBuilder();
     //}
+    public Jhttpsrv(ServerSocket myServerSocket) {
+        serverSocket = myServerSocket;
+    }
 
 
 
@@ -49,11 +53,15 @@ public class Jhttpsrv {
         String responseString = responseBuilder.buildResponse(response);
         os.write(responseString.getBytes(StandardCharsets.UTF_8.toString()));
     }
-//
-//    public void start() {
-//        while(true){
-//            Socket mySocket = serverSocket.accept();
-//            handle(mySocket);
-//        }
-//    }
+
+    public void run() {
+        while(true){
+            try {
+                Socket mySocket = serverSocket.accept();
+                handle(mySocket);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

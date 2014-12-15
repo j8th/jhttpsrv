@@ -13,7 +13,7 @@ public class Main {
         System.out.println("I will be an http server one day.");
         //ServerSocket myServerSocket = new ServerSocket(80);
         //Jhttpsrv server = new Jhttpsrv(myServerSocket);
-        //server.start();
+        //server.run();
     }
 
 }
