@@ -47,28 +47,37 @@ public class RequestParser {
     public Request parseInputStream(InputStream myis) throws IOException {
         BufferedInputStream bis = new BufferedInputStream(myis);
 
+        /*
+         * Read all the bytes for the Request-Line and the Headers.
+         * Parse them into handy objects.
+         */
         byte[] requestLineBytes = getBytesUntilPattern(bis, ProtocolIntegers.END_OF_LINE);
         byte[] headerBytes = getBytesUntilPattern(bis, ProtocolIntegers.END_OF_HTTP_HEADER);
-        int bytes_read = 0;
-        bis.mark(ProtocolIntegers.LIMIT_BODY_FIELD_SIZE);
-        while(bis.read() != -1) {
-            bytes_read++;
-            //if(bytes_read > ProtocolIntegers.LIMIT_BODY_FIELD_SIZE)
-                //throw new Exception("Maximum number of bytes to be read exceeded.  Max: " + ProtocolIntegers.LIMIT_BODY_FIELD_SIZE);
-        }
-        bis.reset();
-        byte[] bodyBytes = new byte[bytes_read];
-        bis.read(bodyBytes, 0, bytes_read);
 
         String requestLineString = new String(requestLineBytes);
         String headerString = new String(headerBytes);
-        String bodyString = new String(bodyBytes);
 
         Map<String, String> requestLineMap = parseRequestLine(requestLineString);
         Map<String, String> headerMap = parseHeaders(headerString);
 
         RequestHeader header = new RequestHeader(headerMap);
-        RequestBody body = new RequestBody(bodyString);
+        RequestBody body = new RequestBody("");
+
+
+        /*
+         * Check the Headers for the presence of the Content-Length header field.
+         * This field signifies that we have a Message Body in the HTTP Message.
+         *
+         * Reference:
+         * http://tools.ietf.org/html/rfc2616#section-4.3
+         */
+        int bodyLength = header.getContentLength();
+        if(bodyLength > 0) {
+            byte[] bodyBytes = new byte[bodyLength];
+            bis.read(bodyBytes, 0, bodyLength);
+            String bodyString = new String(bodyBytes);
+            body = new RequestBody(bodyString);
+        }
 
         return new Request(requestLineMap, header, body);
     }
