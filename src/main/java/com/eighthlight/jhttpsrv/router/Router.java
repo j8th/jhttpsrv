@@ -12,11 +12,11 @@ import java.util.Map;
  */
 public class Router {
     private Class<? extends RequestHandler> defaultHandler;
-    private Map<String, Class> routes;
+    private Map<String, Class<? extends RequestHandler>> routes;
 
     public Router() {
         defaultHandler = OKRequestHandler.class;
-        routes = new LinkedHashMap<String, Class>();
+        routes = new LinkedHashMap<String, Class<? extends RequestHandler> >();
     }
 
     public RequestHandler route(Request request) {
