@@ -1,5 +1,13 @@
 package com.eighthlight.jhttpsrv.testmessage.chrome;
 
+import com.eighthlight.jhttpsrv.parser.RequestParser;
+import com.eighthlight.jhttpsrv.request.Request;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+
 /**
  * Created by jason on 12/8/14.
  */
@@ -32,4 +40,10 @@ public class GETRequestChrome {
 
 
     public final static String ENTIRE_MESSAGE = REQUEST_LINE + HEADERS + EMPTY_LINE;
+
+    public final static Request asObj() throws IOException {
+        RequestParser parser = new RequestParser();
+        InputStream is = new ByteArrayInputStream(ENTIRE_MESSAGE.getBytes(StandardCharsets.UTF_8));
+        return parser.parseInputStream(is);
+    }
 }
