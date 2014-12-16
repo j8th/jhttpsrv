@@ -1,6 +1,7 @@
 package com.eighthlight.jhttpsrv;
 
 import com.eighthlight.jhttpsrv.handler.HelloWorldRequestHandler;
+import com.eighthlight.jhttpsrv.handler.RedirectRequestHandler;
 import com.eighthlight.jhttpsrv.handler.TimeRequestHandler;
 import com.eighthlight.jhttpsrv.router.Router;
 import com.eighthlight.jhttpsrv.server.Jhttpsrv;
@@ -22,6 +23,7 @@ public class Main {
         router = new Router();
 
         // Setup the routes.
+        router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/redirect", RedirectRequestHandler.class);
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/time", TimeRequestHandler.class);
 
         jhttpsrv = new Jhttpsrv(serverSocket, router);
