@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -39,8 +40,20 @@ public class TimeRequestHandlerTest {
         Response response = timeRequestHandler.run(request);
         ZoneId zoneid = ZoneId.of("US/Central");
         ZonedDateTime zdt = ZonedDateTime.now(zoneid);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss zzz");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm zzz");
         String now = zdt.format(formatter);
         Assert.assertEquals(now, response.getBody().getContent());
+    }
+
+    @Test
+    public void testWaits() throws Exception {
+        long before = System.currentTimeMillis();
+        Response response = timeRequestHandler.run(request);
+        long after = System.currentTimeMillis();
+        long difference = after - before;
+
+        // We allow some leeway, because waiting tends to be rather imprecise with computers.
+        if(difference < 900 || difference > 1100)
+            Assert.fail("The TimeRequestHandler did not wait one second.");
     }
 }

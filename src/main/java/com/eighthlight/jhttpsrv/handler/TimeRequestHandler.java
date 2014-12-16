@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Created by jason on 12/11/14.
  *
- * The TimeRequestHandler returns the current time in the message body.
+ * The TimeRequestHandler waits for one second, and then returns the current time in the message body.
  */
 public class TimeRequestHandler implements RequestHandler {
     public Response run(Request request) {
@@ -23,9 +23,15 @@ public class TimeRequestHandler implements RequestHandler {
         ResponseHeader header = new ResponseHeader();
         ResponseBody body = new ResponseBody();
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         ZoneId zoneId = ZoneId.of("US/Central");
         ZonedDateTime zdt = ZonedDateTime.now(zoneId);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss zzz");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm zzz");
         String now = zdt.format(formatter);
 
         body.setContent(now);
