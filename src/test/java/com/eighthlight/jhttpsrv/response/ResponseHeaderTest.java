@@ -35,4 +35,11 @@ public class ResponseHeaderTest {
         responseHeader.setContentLength(412);
         Assert.assertEquals(412, responseHeader.getContentLength());
     }
+
+    @Test
+    public void set_get_Location() {
+        Assert.assertEquals("", responseHeader.getLocation());
+        responseHeader.setLocation("http://example.com/redirect/here");
+        Assert.assertEquals("http://example.com/redirect/here", responseHeader.getLocation());
+    }
 }

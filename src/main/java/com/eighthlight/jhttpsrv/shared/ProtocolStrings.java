@@ -28,6 +28,7 @@ public class ProtocolStrings {
     // Response Header Keys
     public static final String CONTENT_LENGTH = "Content-Length";
     public static final String CONTENT_TYPE = "Content-Type";
+    public static final String LOCATION = "Location";
 
     public static final List<String> RESPONSE_HEADER_KEYS;
     static {
@@ -35,6 +36,7 @@ public class ProtocolStrings {
 
         myList.add(CONTENT_LENGTH);
         myList.add(CONTENT_TYPE);
+        myList.add(LOCATION);
 
         RESPONSE_HEADER_KEYS = Collections.unmodifiableList(myList);
     }
