@@ -30,7 +30,7 @@ public class ResponseBuilder {
             try {
                 Method method = header.getClass().getMethod(methodName);
                 String headerVal = "" + method.invoke(header);
-                if(headerKey.length() > 0)
+                if(headerVal.length() > 0)
                     result += String.format("%s: %s\r\n", headerKey, headerVal);
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
