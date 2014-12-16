@@ -1,6 +1,7 @@
 package com.eighthlight.jhttpsrv.server;
 
 import com.eighthlight.jhttpsrv.mocks.MockSocket;
+import com.eighthlight.jhttpsrv.router.Router;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETRequestChrome;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETResponseChrome;
 import org.junit.After;
@@ -17,12 +18,14 @@ import static org.mockito.Mockito.mock;
 
 public class JhttpsrvTest {
     private ServerSocket mockServerSocket;
+    private Router router;
     private Jhttpsrv jhttpsrv;
 
     @Before
     public void setUp() throws Exception {
         mockServerSocket = mock(ServerSocket.class);
-        jhttpsrv = new Jhttpsrv(mockServerSocket);
+        router = new Router();
+        jhttpsrv = new Jhttpsrv(mockServerSocket, router);
     }
 
     @After

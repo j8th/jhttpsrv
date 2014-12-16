@@ -6,6 +6,7 @@ import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.handler.HelloWorldRequestHandler;
 import com.eighthlight.jhttpsrv.handler.RequestHandler;
+import com.eighthlight.jhttpsrv.router.Router;
 import com.eighthlight.jhttpsrv.shared.StatusCodes;
 
 import java.io.IOException;
@@ -20,22 +21,16 @@ import java.nio.charset.StandardCharsets;
  */
 public class Jhttpsrv implements Runnable {
     private ServerSocket serverSocket;
-    //private Router router;
+    private Router router;
 
     private RequestParser requestParser = new RequestParser();
     private ResponseBuilder responseBuilder = new ResponseBuilder();
 
 
     /* Constructors */
-    //public Jhttpsrv(ServerSocket myServerSocket, Router myRouter) {
-        //serverSocket = myServerSocket;
-        //router = myRouter;
-
-        //requestParser = new RequestParser();
-        //responseBuilder = new ResponseBuilder();
-    //}
-    public Jhttpsrv(ServerSocket myServerSocket) {
+    public Jhttpsrv(ServerSocket myServerSocket, Router myRouter) {
         serverSocket = myServerSocket;
+        router = myRouter;
     }
 
 
