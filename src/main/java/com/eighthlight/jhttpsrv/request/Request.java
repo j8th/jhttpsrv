@@ -45,4 +45,8 @@ public class Request {
     public String getURL() {
         return url;
     }
+
+    public String getMethod() {
+        return method;
+    }
 }

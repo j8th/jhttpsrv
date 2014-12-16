@@ -1,6 +1,7 @@
 package com.eighthlight.jhttpsrv.request;
 
 import com.eighthlight.jhttpsrv.parser.RequestParser;
+import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETRequestChrome;
 import org.junit.After;
 import org.junit.Assert;
@@ -47,5 +48,10 @@ public class RequestTest {
     @Test
     public void getURL() {
         Assert.assertEquals("/helloworld", request.getURL());
+    }
+
+    @Test
+    public void getMethod() {
+        Assert.assertEquals(ProtocolStrings.HTTP_METHOD_GET, request.getMethod());
     }
 }
