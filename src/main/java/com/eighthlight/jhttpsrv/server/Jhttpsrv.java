@@ -42,7 +42,7 @@ public class Jhttpsrv implements Runnable {
         OutputStream os = mySocket.getOutputStream();
 
         Request request = requestParser.parseInputStream(is);
-        RequestHandler handler = new HelloWorldRequestHandler();
+        RequestHandler handler = router.route(request);
         Response response = handler.run(request);
 
         String responseString = responseBuilder.buildResponse(response);

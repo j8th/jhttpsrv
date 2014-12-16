@@ -1,7 +1,9 @@
 package com.eighthlight.jhttpsrv.server;
 
+import com.eighthlight.jhttpsrv.handler.HelloWorldRequestHandler;
 import com.eighthlight.jhttpsrv.mocks.MockSocket;
 import com.eighthlight.jhttpsrv.router.Router;
+import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETRequestChrome;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETResponseChrome;
 import org.junit.After;
@@ -25,6 +27,7 @@ public class JhttpsrvTest {
     public void setUp() throws Exception {
         mockServerSocket = mock(ServerSocket.class);
         router = new Router();
+        router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/helloworld", HelloWorldRequestHandler.class);
         jhttpsrv = new Jhttpsrv(mockServerSocket, router);
     }
 
