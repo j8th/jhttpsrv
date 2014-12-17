@@ -4,19 +4,15 @@ import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETRequestChrome;
+import com.eighthlight.jhttpsrv.testmessage.chrome.TestRequestMaker;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-
-import static org.junit.Assert.*;
 
 public class TimeRequestHandlerTest {
     private TimeRequestHandler timeRequestHandler;
@@ -27,7 +23,7 @@ public class TimeRequestHandlerTest {
         RequestParser parser = new RequestParser();
 
         timeRequestHandler = new TimeRequestHandler();
-        request = GETRequestChrome.asObj();
+        request = TestRequestMaker.fromString(GETRequestChrome.ENTIRE_MESSAGE);
     }
 
     @After

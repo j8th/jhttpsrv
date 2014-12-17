@@ -40,10 +40,4 @@ public class GETRequestChrome {
 
 
     public final static String ENTIRE_MESSAGE = REQUEST_LINE + HEADERS + EMPTY_LINE;
-
-    public final static Request asObj() throws IOException {
-        RequestParser parser = new RequestParser();
-        InputStream is = new ByteArrayInputStream(ENTIRE_MESSAGE.getBytes(StandardCharsets.UTF_8));
-        return parser.parseInputStream(is);
-    }
 }
