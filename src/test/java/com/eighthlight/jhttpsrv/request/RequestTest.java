@@ -2,7 +2,7 @@ package com.eighthlight.jhttpsrv.request;
 
 import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
-import com.eighthlight.jhttpsrv.testmessage.chrome.GETRequestChrome;
+import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,8 +20,8 @@ public class RequestTest {
     @Before
     public void setUp() throws Exception {
         parser = new RequestParser();
-        requestLine = parser.parseRequestLine(GETRequestChrome.REQUEST_LINE);
-        header = new RequestHeader(parser.parseHeaders(GETRequestChrome.HEADERS));
+        requestLine = parser.parseRequestLine(GETHelloworldRequest.REQUEST_LINE);
+        header = new RequestHeader(parser.parseHeaders(GETHelloworldRequest.HEADERS));
         request = new Request(requestLine, header);
     }
 

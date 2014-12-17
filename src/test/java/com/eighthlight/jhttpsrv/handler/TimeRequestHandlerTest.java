@@ -3,7 +3,7 @@ package com.eighthlight.jhttpsrv.handler;
 import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.response.Response;
-import com.eighthlight.jhttpsrv.testmessage.chrome.GETRequestChrome;
+import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
 import com.eighthlight.jhttpsrv.testmessage.chrome.TestRequestMaker;
 import org.junit.After;
 import org.junit.Assert;
@@ -23,7 +23,7 @@ public class TimeRequestHandlerTest {
         RequestParser parser = new RequestParser();
 
         timeRequestHandler = new TimeRequestHandler();
-        request = TestRequestMaker.fromString(GETRequestChrome.ENTIRE_MESSAGE);
+        request = TestRequestMaker.fromString(GETHelloworldRequest.ENTIRE_MESSAGE);
     }
 
     @After

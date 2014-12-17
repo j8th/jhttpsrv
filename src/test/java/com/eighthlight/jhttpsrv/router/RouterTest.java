@@ -5,10 +5,8 @@ import com.eighthlight.jhttpsrv.handler.OKRequestHandler;
 import com.eighthlight.jhttpsrv.handler.RequestHandler;
 import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.request.Request;
-import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
-import com.eighthlight.jhttpsrv.shared.StatusCodes;
-import com.eighthlight.jhttpsrv.testmessage.chrome.GETRequestChrome;
+import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -19,7 +17,6 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.junit.Assert.*;
 
 public class RouterTest {
     private Router router;
@@ -28,7 +25,7 @@ public class RouterTest {
     @Before
     public void setUp() throws Exception {
         RequestParser parser = new RequestParser();
-        InputStream is = new ByteArrayInputStream(GETRequestChrome.ENTIRE_MESSAGE.getBytes(StandardCharsets.UTF_8));
+        InputStream is = new ByteArrayInputStream(GETHelloworldRequest.ENTIRE_MESSAGE.getBytes(StandardCharsets.UTF_8));
 
         router = new Router();
         request = parser.parseInputStream(is);

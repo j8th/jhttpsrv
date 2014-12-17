@@ -4,17 +4,15 @@ import com.eighthlight.jhttpsrv.handler.HelloWorldRequestHandler;
 import com.eighthlight.jhttpsrv.mocks.MockSocket;
 import com.eighthlight.jhttpsrv.router.Router;
 import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
-import com.eighthlight.jhttpsrv.testmessage.chrome.GETRequestChrome;
-import com.eighthlight.jhttpsrv.testmessage.chrome.GETResponseChrome;
+import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
+import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldResponse;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.net.ServerSocket;
-import java.net.Socket;
 
 import static org.mockito.Mockito.mock;
 
@@ -39,9 +37,9 @@ public class JhttpsrvTest {
     @Test
     public void handle() throws Exception {
         MockSocket socket = new MockSocket();
-        socket.seedInputStream(GETRequestChrome.ENTIRE_MESSAGE);
+        socket.seedInputStream(GETHelloworldRequest.ENTIRE_MESSAGE);
         jhttpsrv.handle(socket);
-        Assert.assertEquals(GETResponseChrome.ENTIRE_MESSAGE, socket.getOutputStreamAsString());
+        Assert.assertEquals(GETHelloworldResponse.ENTIRE_MESSAGE, socket.getOutputStreamAsString());
         Assert.assertTrue(socket.isClosed());
     }
 

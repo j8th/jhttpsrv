@@ -1,12 +1,10 @@
 package com.eighthlight.jhttpsrv.response;
 
-import com.eighthlight.jhttpsrv.testmessage.chrome.GETResponseChrome;
+import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldResponse;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class ResponseBodyTest {
     private ResponseBody body;
@@ -31,7 +29,7 @@ public class ResponseBodyTest {
     @Test
     public void getContentLength() {
         Assert.assertEquals(0, body.getContentLength());
-        body.setContent(GETResponseChrome.BODY);
+        body.setContent(GETHelloworldResponse.BODY);
         Assert.assertEquals(93, body.getContentLength());
     }
 }

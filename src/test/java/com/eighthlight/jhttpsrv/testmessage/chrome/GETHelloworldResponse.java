@@ -3,7 +3,7 @@ package com.eighthlight.jhttpsrv.testmessage.chrome;
 /**
  * Created by jason on 12/11/14.
  */
-public class GETResponseChrome {
+public class GETHelloworldResponse {
     public final static String STATUS_LINE = "HTTP/1.1 200 OK\r\n";
 
     public final static String HEADERS =

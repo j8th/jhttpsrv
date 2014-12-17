@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * Created by jason on 12/8/14.
  */
-public class GETRequestChrome {
+public class GETHelloworldRequest {
 
     /**
      * The complete 4 strings that comprise the request, separated into their 4 parts.

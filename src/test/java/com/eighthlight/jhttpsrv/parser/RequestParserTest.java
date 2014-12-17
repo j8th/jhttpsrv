@@ -2,7 +2,7 @@ package com.eighthlight.jhttpsrv.parser;
 
 import com.eighthlight.jhttpsrv.request.RequestHeader;
 import com.eighthlight.jhttpsrv.request.Request;
-import com.eighthlight.jhttpsrv.testmessage.chrome.GETRequestChrome;
+import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -35,7 +35,7 @@ public class RequestParserTest {
         expected.put("URL", "/helloworld");
         expected.put("Protocol-Version", "1.1");
 
-        Map<String, String> myMap = myParser.parseRequestLine(GETRequestChrome.REQUEST_LINE);
+        Map<String, String> myMap = myParser.parseRequestLine(GETHelloworldRequest.REQUEST_LINE);
 
         Assert.assertEquals(expected, myMap);
     }
@@ -50,14 +50,14 @@ public class RequestParserTest {
         expected.put("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36");
         expected.put("Accept-Language", "en-US,en;q=0.8");
 
-        Map<String, String> myMap = myParser.parseHeaders(GETRequestChrome.HEADERS);
+        Map<String, String> myMap = myParser.parseHeaders(GETHelloworldRequest.HEADERS);
 
         Assert.assertEquals(expected, myMap);
     }
 
     @Test
     public void parseInputStream() {
-        InputStream myis = new ByteArrayInputStream(GETRequestChrome.ENTIRE_MESSAGE.getBytes(StandardCharsets.UTF_8));
+        InputStream myis = new ByteArrayInputStream(GETHelloworldRequest.ENTIRE_MESSAGE.getBytes(StandardCharsets.UTF_8));
         try {
             Request request = myParser.parseInputStream(myis);
             Assert.assertTrue(request.isGET());

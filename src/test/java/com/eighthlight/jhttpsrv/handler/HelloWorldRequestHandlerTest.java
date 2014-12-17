@@ -4,8 +4,8 @@ import com.eighthlight.jhttpsrv.builder.ResponseBuilder;
 import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.response.Response;
-import com.eighthlight.jhttpsrv.testmessage.chrome.GETRequestChrome;
-import com.eighthlight.jhttpsrv.testmessage.chrome.GETResponseChrome;
+import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
+import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldResponse;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -23,7 +23,7 @@ public class HelloWorldRequestHandlerTest {
     @Before
     public void setUp() throws Exception {
         RequestParser parser = new RequestParser();
-        InputStream is = new ByteArrayInputStream(GETRequestChrome.ENTIRE_MESSAGE.getBytes(StandardCharsets.UTF_8));
+        InputStream is = new ByteArrayInputStream(GETHelloworldRequest.ENTIRE_MESSAGE.getBytes(StandardCharsets.UTF_8));
 
         handler = new HelloWorldRequestHandler();
         request = parser.parseInputStream(is);
@@ -38,6 +38,6 @@ public class HelloWorldRequestHandlerTest {
     @Test
     public void testRun() throws Exception {
         Response response = handler.run(request);
-        Assert.assertEquals(GETResponseChrome.ENTIRE_MESSAGE, builder.buildResponse(response));
+        Assert.assertEquals(GETHelloworldResponse.ENTIRE_MESSAGE, builder.buildResponse(response));
     }
 }
