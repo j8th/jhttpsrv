@@ -4,6 +4,7 @@ import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETindexhtmlRequest;
+import com.eighthlight.jhttpsrv.testmessage.chrome.TestRequestMaker;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,8 +16,7 @@ public class FileRequestHandlerTest {
     @Before
     public void setUp() throws Exception {
         fileRequestHandler = new FileRequestHandler();
-        request = GETindexhtmlRequest.asObj();
-        System.out.println(request.getURL());
+        request = TestRequestMaker.fromString(GETindexhtmlRequest.ENTIRE_MESSAGE);
     }
 
     @After
