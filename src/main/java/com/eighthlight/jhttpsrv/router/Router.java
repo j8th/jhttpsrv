@@ -42,4 +42,8 @@ public class Router {
         String route = String.format("%s %s", httpmethod, url);
         routes.put(route, handlerClass);
     }
+
+    public void setDefaultRouteHandler(Class<? extends RequestHandler> myClass) {
+        defaultHandler = myClass;
+    }
 }

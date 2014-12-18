@@ -1,5 +1,6 @@
 package com.eighthlight.jhttpsrv.router;
 
+import com.eighthlight.jhttpsrv.handler.FileRequestHandler;
 import com.eighthlight.jhttpsrv.handler.HelloWorldRequestHandler;
 import com.eighthlight.jhttpsrv.handler.OKRequestHandler;
 import com.eighthlight.jhttpsrv.handler.RequestHandler;
@@ -41,6 +42,15 @@ public class RouterTest {
         // A new Router with no routes established should return the default default handler, the OKRequestHandler.
         RequestHandler handler = router.route(request);
         Assert.assertThat(handler, instanceOf(OKRequestHandler.class));
+    }
+
+    @Test
+    public void testSetDefaultRouteHandler() throws Exception {
+        router.setDefaultRouteHandler(FileRequestHandler.class);
+        // Since we add no routes at all to our test router here, the handler returned for any request should be
+        //     an instance of the default handler.
+        RequestHandler handler = router.route(request);
+        Assert.assertThat(handler, instanceOf(FileRequestHandler.class));
     }
 
     @Test

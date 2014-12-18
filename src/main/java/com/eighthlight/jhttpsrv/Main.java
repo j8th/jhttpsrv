@@ -1,9 +1,6 @@
 package com.eighthlight.jhttpsrv;
 
-import com.eighthlight.jhttpsrv.handler.FormRequestHandler;
-import com.eighthlight.jhttpsrv.handler.HelloWorldRequestHandler;
-import com.eighthlight.jhttpsrv.handler.RedirectRequestHandler;
-import com.eighthlight.jhttpsrv.handler.TimeRequestHandler;
+import com.eighthlight.jhttpsrv.handler.*;
 import com.eighthlight.jhttpsrv.router.Router;
 import com.eighthlight.jhttpsrv.server.Jhttpsrv;
 import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
@@ -26,7 +23,7 @@ public class Main {
         // Setup the routes.
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/redirect", RedirectRequestHandler.class);
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/time", TimeRequestHandler.class);
-        router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/form", FormRequestHandler.class);
+        router.setDefaultRouteHandler(FileRequestHandler.class);
 
         jhttpsrv = new Jhttpsrv(serverSocket, router);
     }
