@@ -2,6 +2,7 @@ package com.eighthlight.jhttpsrv.handler;
 
 import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.response.Response;
+import com.eighthlight.jhttpsrv.shared.MIMETypes;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETindexhtmlRequest;
 import com.eighthlight.jhttpsrv.testmessage.chrome.TestRequestMaker;
@@ -9,6 +10,10 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class FileRequestHandlerTest {
     private FileRequestHandler fileRequestHandler;
@@ -29,6 +34,12 @@ public class FileRequestHandlerTest {
     public void testRun() throws Exception {
         Response response = fileRequestHandler.run(request);
 
+        String FilePath = FileRequestHandler.getRootDir() + "/index.html";
+        byte[] bytes = Files.readAllBytes(Paths.get(FilePath));
+        String fileContents = new String(bytes, StandardCharsets.UTF_8);
+
+        Assert.assertEquals(MIMETypes.HTML, response.getHeaders().getContentType());
+        Assert.assertEquals(fileContents, response.getBody().getContent());
     }
 
     @Test
