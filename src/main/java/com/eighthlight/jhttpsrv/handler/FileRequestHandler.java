@@ -11,7 +11,24 @@ import com.eighthlight.jhttpsrv.shared.MIMETypes;
  * Created by jason on 12/11/14.
  */
 public class FileRequestHandler implements RequestHandler {
+    private static String rootdir = System.getProperty("user.dir") + "/www";
+
+
+
     public Response run(Request request) {
         return new Response();
+    }
+
+
+
+    /*
+     * Static Methods
+     */
+    public static String getRootDir() {
+        return rootdir;
+    }
+
+    public static void setRootDir(String absolutePath) {
+        rootdir = absolutePath;
     }
 }
