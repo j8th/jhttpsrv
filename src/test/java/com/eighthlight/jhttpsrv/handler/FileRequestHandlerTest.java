@@ -3,6 +3,8 @@ package com.eighthlight.jhttpsrv.handler;
 import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.shared.MIMETypes;
+import com.eighthlight.jhttpsrv.shared.StatusCodes;
+import com.eighthlight.jhttpsrv.testmessage.chrome.GET404Request;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETindexhtmlRequest;
 import com.eighthlight.jhttpsrv.testmessage.chrome.TestRequestMaker;
@@ -40,6 +42,14 @@ public class FileRequestHandlerTest {
 
         Assert.assertEquals(MIMETypes.HTML, response.getHeaders().getContentType());
         Assert.assertEquals(fileContents, response.getBody().getContent());
+    }
+
+    @Test
+    public void testRequestedFileUnreadable() throws Exception {
+        Request request = TestRequestMaker.fromString(GET404Request.ENTIRE_MESSAGE);
+        Response response = fileRequestHandler.run(request);
+
+        Assert.assertEquals(StatusCodes.NOT_FOUND, response.getStatusCode());
     }
 
     @Test

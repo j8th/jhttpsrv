@@ -6,6 +6,7 @@ import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.response.ResponseBody;
 import com.eighthlight.jhttpsrv.response.ResponseHeader;
 import com.eighthlight.jhttpsrv.shared.MIMETypes;
+import com.eighthlight.jhttpsrv.shared.StatusCodes;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -27,12 +28,17 @@ public class FileRequestHandler implements RequestHandler {
 
         // Set the body
         String path = rootdir + request.getURL();
-        try {
-            byte[] bytes = Files.readAllBytes(Paths.get(path));
-            String contents = new String(bytes, StandardCharsets.UTF_8);
-            body.setContent(contents);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(Files.isReadable(Paths.get(path))) {
+            try {
+                byte[] bytes = Files.readAllBytes(Paths.get(path));
+                String contents = new String(bytes, StandardCharsets.UTF_8);
+
+                body.setContent(contents);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            response.setStatusCode(StatusCodes.NOT_FOUND);
         }
 
         // Set the headers
@@ -43,7 +49,6 @@ public class FileRequestHandler implements RequestHandler {
         response.setHeaders(header);
         response.setBody(body);
 
-        // Return it
         return response;
     }
 
