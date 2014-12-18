@@ -42,6 +42,14 @@ public class FileRequestHandlerTest {
     }
 
     @Test
+    public void testPlainText() throws Exception {
+        Request request = TestRequestMaker.fromString(GETtextfileRequest.ENTIRE_MESSAGE);
+        Response response = fileRequestHandler.run(request);
+
+        Assert.assertEquals(MIMETypes.PLAIN_TEXT, response.getHeaders().getContentType());
+    }
+
+    @Test
     public void testRequestedFileUnreadable() throws Exception {
         Request request = TestRequestMaker.fromString(GET404Request.ENTIRE_MESSAGE);
         Response response = fileRequestHandler.run(request);

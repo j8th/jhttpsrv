@@ -1,0 +1,5 @@
+This is a plain text file.
+
+You should see it in your browser.
+
+EOF
