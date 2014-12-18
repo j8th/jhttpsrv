@@ -4,10 +4,7 @@ import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.shared.MIMETypes;
 import com.eighthlight.jhttpsrv.shared.StatusCodes;
-import com.eighthlight.jhttpsrv.testmessage.chrome.GET404Request;
-import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
-import com.eighthlight.jhttpsrv.testmessage.chrome.GETindexhtmlRequest;
-import com.eighthlight.jhttpsrv.testmessage.chrome.TestRequestMaker;
+import com.eighthlight.jhttpsrv.testmessage.chrome.*;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -47,6 +44,14 @@ public class FileRequestHandlerTest {
     @Test
     public void testRequestedFileUnreadable() throws Exception {
         Request request = TestRequestMaker.fromString(GET404Request.ENTIRE_MESSAGE);
+        Response response = fileRequestHandler.run(request);
+
+        Assert.assertEquals(StatusCodes.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    public void testRequestingADirectoryGives404() throws Exception {
+        Request request = TestRequestMaker.fromString(GETDirectoryRequest.ENTIRE_MESSAGE);
         Response response = fileRequestHandler.run(request);
 
         Assert.assertEquals(StatusCodes.NOT_FOUND, response.getStatusCode());

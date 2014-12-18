@@ -28,7 +28,7 @@ public class FileRequestHandler implements RequestHandler {
 
         // Set the body
         String path = rootdir + request.getURL();
-        if(Files.isReadable(Paths.get(path))) {
+        if(Files.isReadable(Paths.get(path)) && !Files.isDirectory(Paths.get(path))) {
             try {
                 byte[] bytes = Files.readAllBytes(Paths.get(path));
                 String contents = new String(bytes, StandardCharsets.UTF_8);
