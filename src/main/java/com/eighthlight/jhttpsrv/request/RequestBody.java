@@ -9,4 +9,8 @@ public class RequestBody {
     public RequestBody(String myRawBody) {
         rawBody = myRawBody;
     }
+
+    public boolean isEmpty() {
+        return rawBody.equals("");
+    }
 }
