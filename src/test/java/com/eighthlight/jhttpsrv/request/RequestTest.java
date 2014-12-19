@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class RequestTest {
@@ -53,5 +54,13 @@ public class RequestTest {
     @Test
     public void getMethod() {
         Assert.assertEquals(ProtocolStrings.HTTP_METHOD_GET, request.getMethod());
+    }
+
+    @Test
+    public void testIsEmpty() {
+        Assert.assertFalse(request.isEmpty());
+
+        request = new Request(new HashMap<String, String>(), new RequestHeader(new HashMap<String, String>()));
+        Assert.assertTrue(request.isEmpty());
     }
 }
