@@ -63,6 +63,13 @@ public class RequestParserTest {
     }
 
     @Test
+    public void testParseHeadersEmptyString() {
+        Map<String, String> myMap = myParser.parseHeaders("");
+
+        Assert.assertTrue(myMap.isEmpty());
+    }
+
+    @Test
     public void parseInputStream() {
         InputStream myis = new ByteArrayInputStream(GETHelloworldRequest.ENTIRE_MESSAGE.getBytes(StandardCharsets.UTF_8));
         try {

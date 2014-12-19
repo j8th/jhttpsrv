@@ -38,9 +38,11 @@ public class RequestParser {
         String val;
         for(int i=0; i < headerLines.length; i++) {
             tokens = headerLines[i].split(":");
-            key = tokens[0];
-            val = tokens[1].trim();
-            result.put(key, val);
+            if(tokens.length == 2) {
+                key = tokens[0];
+                val = tokens[1].trim();
+                result.put(key, val);
+            }
         }
         return result;
     }
