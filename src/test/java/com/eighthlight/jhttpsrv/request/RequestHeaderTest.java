@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class RequestHeaderTest {
@@ -49,7 +50,7 @@ public class RequestHeaderTest {
 
     @Test
     public void getAcceptEncoding() {
-        String[] expected = null;
+        String[] expected = new String[0];
         Assert.assertEquals(expected, myHeader.getAcceptEncoding());
     }
 
@@ -62,5 +63,14 @@ public class RequestHeaderTest {
     @Test
     public void getContentLength() {
         Assert.assertEquals(0, myHeader.getContentLength());
+    }
+
+    @Test
+    public void testIsEmpty() {
+        Assert.assertFalse(myHeader.isEmpty());
+
+        Map<String, String> emptyMap = new HashMap<String, String>();
+        myHeader = new RequestHeader(emptyMap);
+        Assert.assertTrue(myHeader.isEmpty());
     }
 }
