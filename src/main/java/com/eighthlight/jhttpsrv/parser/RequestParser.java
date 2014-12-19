@@ -22,6 +22,8 @@ public class RequestParser {
     public Map<String, String> parseRequestLine(String requestLine) {
         HashMap<String, String> result = new HashMap<String, String>();
         String[] tokens = requestLine.trim().split(" ");
+        if(tokens.length < 3)
+            return result;
         result.put(ProtocolStrings.METHOD, tokens[0]);
         result.put(ProtocolStrings.URL, tokens[1]);
         result.put(ProtocolStrings.PROTOCOL_VERSION, tokens[2].substring(tokens[2].indexOf('/') + 1));

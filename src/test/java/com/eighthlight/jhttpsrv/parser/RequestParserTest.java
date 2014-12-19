@@ -41,6 +41,13 @@ public class RequestParserTest {
     }
 
     @Test
+    public void testParseRequestLineEmptyString() {
+        Map<String, String> myMap = myParser.parseRequestLine("");
+
+        Assert.assertTrue(myMap.isEmpty());
+    }
+
+    @Test
     public void parseHeaders() {
         Map<String, String> expected = new HashMap<String, String>();
         expected.put("Host", "localhost");
