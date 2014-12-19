@@ -38,7 +38,11 @@ public class FileRequestHandler implements RequestHandler {
                 body.setContent(contents);
                 // Would have been nice, but seems to always return null.
                 //header.setContentType(Files.probeContentType(abspath));
-                header.setContentType(MIMETypes.FileExt2MIMEType(ext));
+                try {
+                    header.setContentType(MIMETypes.FileExt2MIMEType(ext));
+                } catch (IllegalArgumentException e) {
+                    header.setContentType(MIMETypes.HTML);
+                }
                 header.setContentLength(body.getContentLength());
             } catch (IOException e) {
                 e.printStackTrace();
