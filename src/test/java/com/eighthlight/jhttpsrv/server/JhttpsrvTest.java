@@ -39,7 +39,28 @@ public class JhttpsrvTest {
         MockSocket socket = new MockSocket();
         socket.seedInputStream(GETHelloworldRequest.ENTIRE_MESSAGE);
         jhttpsrv.handle(socket);
+
         Assert.assertEquals(GETHelloworldResponse.ENTIRE_MESSAGE, socket.getOutputStreamAsString());
+        Assert.assertTrue(socket.isClosed());
+    }
+
+    /*
+     * Google Chrome will sometimes make a connection with an "empty" socket;
+     *     the InputStream we get from it blocks on the first read(), and then
+     *     eventually returns a -1 indicating the end of the stream.
+     *
+     * This was causing the server to crash with an ArrayIndexOutOfBoundsException from
+     *     RequestParser.parseRequestLine().
+     *
+     * This test exists to replicate that scenario and ensure it's fixed.
+     */
+    @Test
+    public void testHandleEmptySocket() throws Exception {
+        MockSocket socket = new MockSocket();
+        socket.seedInputStream("");
+        jhttpsrv.handle(socket);
+
+        Assert.assertEquals("", socket.getOutputStreamAsString());
         Assert.assertTrue(socket.isClosed());
     }
 

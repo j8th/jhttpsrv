@@ -42,6 +42,12 @@ public class Jhttpsrv implements Runnable {
         OutputStream os = mySocket.getOutputStream();
 
         Request request = requestParser.parseInputStream(is);
+        // If the client didn't send us any data (the socket is "empty" and therefore the request is "empty"),
+        //    then just close this connection without saying anything back and quit.
+        if(request.isEmpty()) {
+            mySocket.close();
+            return;
+        }
         RequestHandler handler = router.route(request);
         Response response = handler.run(request);
 
