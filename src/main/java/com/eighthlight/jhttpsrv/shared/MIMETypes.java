@@ -9,6 +9,7 @@ import java.util.*;
 public class MIMETypes {
     public static final String HTML = "text/html";
     public static final String PLAIN_TEXT = "text/plain";
+    public static final String JPEG = "image/jpeg";
 
     private static final Map<String, String[]> MIMEType_FileExtensions;
     static {
@@ -16,6 +17,7 @@ public class MIMETypes {
 
         myMap.put(HTML, new String[] {"html", "htm"});
         myMap.put(PLAIN_TEXT, new String[] {"txt"});
+        myMap.put(JPEG, new String[] {"jpeg", "jpg"});
 
         MIMEType_FileExtensions = Collections.unmodifiableMap(myMap);
     }

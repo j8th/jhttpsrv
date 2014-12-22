@@ -50,6 +50,14 @@ public class FileRequestHandlerTest {
     }
 
     @Test
+    public void testImage() throws Exception {
+        Request request = TestRequestMaker.fromString(GETimageRequest.ENTIRE_MESSAGE);
+        Response response = fileRequestHandler.run(request);
+
+        Assert.assertEquals(MIMETypes.JPEG, response.getHeaders().getContentType());
+    }
+
+    @Test
     public void testRequestedFileUnreadable() throws Exception {
         Request request = TestRequestMaker.fromString(GET404Request.ENTIRE_MESSAGE);
         Response response = fileRequestHandler.run(request);
