@@ -11,6 +11,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.nio.charset.StandardCharsets;
+
 public class ResponseBuilderTest {
     private Response response;
     private ResponseHeader header;
@@ -39,22 +41,26 @@ public class ResponseBuilderTest {
     }
 
     @Test
-    public void buildStatusLine() {
-        Assert.assertEquals(GETHelloworldResponse.STATUS_LINE, responseBuilder.buildStatusLine(response));
+    public void testBuildStatusLine() {
+        byte[] statusLineBytes = GETHelloworldResponse.STATUS_LINE.getBytes(StandardCharsets.UTF_8);
+        Assert.assertArrayEquals(statusLineBytes, responseBuilder.buildStatusLine(response));
     }
 
     @Test
-    public void buildHeaders() {
-        Assert.assertEquals(GETHelloworldResponse.HEADERS, responseBuilder.buildHeaders(response));
+    public void testBuildHeaders() {
+        byte[] headerBytes = GETHelloworldResponse.HEADERS.getBytes(StandardCharsets.UTF_8);
+        Assert.assertArrayEquals(headerBytes, responseBuilder.buildHeaders(response));
     }
 
     @Test
-    public void buildBody() {
-        Assert.assertEquals(GETHelloworldResponse.BODY, responseBuilder.buildBody(response));
+    public void testBuildBody() {
+        byte[] bodyBytes = GETHelloworldResponse.BODY.getBytes(StandardCharsets.UTF_8);
+        Assert.assertArrayEquals(bodyBytes, responseBuilder.buildBody(response));
     }
 
     @Test
-    public void buildResponse() {
-        Assert.assertEquals(GETHelloworldResponse.ENTIRE_MESSAGE, responseBuilder.buildResponse(response));
+    public void testBuildResponse() {
+        byte[] responseBytes = GETHelloworldResponse.ENTIRE_MESSAGE.getBytes(StandardCharsets.UTF_8);
+        Assert.assertArrayEquals(responseBytes, responseBuilder.buildResponse(response));
     }
 }

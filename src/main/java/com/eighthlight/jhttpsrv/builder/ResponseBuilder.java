@@ -3,25 +3,29 @@ package com.eighthlight.jhttpsrv.builder;
 import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.response.ResponseBody;
 import com.eighthlight.jhttpsrv.response.ResponseHeader;
+import com.eighthlight.jhttpsrv.shared.ProtocolIntegers;
 import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by jason on 12/10/14.
  */
 public class ResponseBuilder {
-    public String buildStatusLine(Response response) {
+    public byte[] buildStatusLine(Response response) {
         String result = String.format("HTTP/%s %s %s\r\n",
                 response.getProtocolVersion(),
                 response.getStatusCode(),
                 response.getReasonPhrase());
 
-        return result;
+        return result.getBytes(StandardCharsets.UTF_8);
     }
 
-    public String buildHeaders(Response response) {
+    public byte[] buildHeaders(Response response) {
         String result = "";
         ResponseHeader header = response.getHeaders();
 
@@ -40,15 +44,31 @@ public class ResponseBuilder {
                 e.printStackTrace();
             }
         }
-        return result;
+        return result.getBytes(StandardCharsets.UTF_8);
     }
 
-    public String buildBody(Response response) {
+    public byte[] buildBody(Response response) {
         ResponseBody body = response.getBody();
         return body.getContent();
     }
 
-    public String buildResponse(Response response) {
-        return buildStatusLine(response) + buildHeaders(response) + "\r\n" + buildBody(response);
+    public byte[] buildResponse(Response response) {
+        byte[] statusLineBytes = buildStatusLine(response);
+        byte[] headerBytes = buildHeaders(response);
+        byte[] emptyLine = new byte[] {ProtocolIntegers.CR, ProtocolIntegers.LF};
+        byte[] bodyBytes = buildBody(response);
+
+        ByteArrayOutputStream myos = new ByteArrayOutputStream();
+        try {
+            myos.write(statusLineBytes);
+            myos.write(headerBytes);
+            myos.write(emptyLine);
+            myos.write(bodyBytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new byte[0];
+        }
+
+        return myos.toByteArray();
     }
 }
