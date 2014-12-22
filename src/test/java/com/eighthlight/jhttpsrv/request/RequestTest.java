@@ -32,16 +32,6 @@ public class RequestTest {
     }
 
     @Test
-    public void isGET() {
-        Assert.assertTrue(request.isGET());
-    }
-
-    @Test
-    public void isPOST() {
-        Assert.assertFalse(request.isPOST());
-    }
-
-    @Test
     public void getURL() {
         Assert.assertEquals("/helloworld", request.getURL());
     }

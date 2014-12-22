@@ -2,6 +2,7 @@ package com.eighthlight.jhttpsrv.parser;
 
 import com.eighthlight.jhttpsrv.request.RequestHeader;
 import com.eighthlight.jhttpsrv.request.Request;
+import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
 import org.junit.After;
 import org.junit.Assert;
@@ -69,7 +70,7 @@ public class RequestParserTest {
         InputStream myis = new ByteArrayInputStream(GETHelloworldRequest.ENTIRE_MESSAGE.getBytes(StandardCharsets.UTF_8));
         try {
             Request request = myParser.parseInputStream(myis);
-            Assert.assertTrue(request.isGET());
+            Assert.assertEquals(ProtocolStrings.HTTP_METHOD_GET, request.getMethod());
             Assert.assertEquals("/helloworld", request.getURL());
             RequestHeader header = request.getHeader();
             Assert.assertEquals("localhost", header.getHost());

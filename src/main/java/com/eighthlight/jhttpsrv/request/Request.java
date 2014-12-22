@@ -25,14 +25,6 @@ public class Request {
         return header;
     }
 
-    public boolean isGET() {
-        return method.equals(ProtocolStrings.HTTP_METHOD_GET);
-    }
-
-    public boolean isPOST() {
-        return method.equals(ProtocolStrings.HTTP_METHOD_POST);
-    }
-
     public String getURL() {
         return url;
     }
