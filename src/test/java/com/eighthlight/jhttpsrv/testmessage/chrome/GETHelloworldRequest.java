@@ -1,13 +1,5 @@
 package com.eighthlight.jhttpsrv.testmessage.chrome;
 
-import com.eighthlight.jhttpsrv.parser.RequestParser;
-import com.eighthlight.jhttpsrv.request.Request;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-
 public class GETHelloworldRequest {
     public final static String REQUEST_LINE = "GET /helloworld HTTP/1.1\r\n";
 
