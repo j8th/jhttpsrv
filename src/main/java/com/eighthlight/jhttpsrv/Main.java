@@ -29,7 +29,7 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        ServerSocket myServerSocket = new ServerSocket(80);
+        ServerSocket myServerSocket = new ServerSocket(8080);
         init(myServerSocket);
 
         jhttpsrv.run();
