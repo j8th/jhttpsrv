@@ -51,8 +51,8 @@ public class Jhttpsrv implements Runnable {
         RequestHandler handler = router.route(request);
         Response response = handler.run(request);
 
-        String responseString = responseBuilder.buildResponse(response);
-        os.write(responseString.getBytes(StandardCharsets.UTF_8.toString()));
+        byte[] responseBytes = responseBuilder.buildResponse(response);
+        os.write(responseBytes);
         mySocket.close();
     }
 

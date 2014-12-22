@@ -38,6 +38,6 @@ public class OKRequestHandlerTest {
         Response response = okRequestHandler.run(request);
         Assert.assertEquals(StatusCodes.OK, response.getStatusCode());
         Assert.assertEquals(MIMETypes.HTML, response.getHeaders().getContentType());
-        Assert.assertEquals("", response.getBody().getContent());
+        Assert.assertArrayEquals(new byte[0], response.getBody().getContent());
     }
 }

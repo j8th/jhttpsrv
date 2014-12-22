@@ -35,10 +35,9 @@ public class FileRequestHandlerTest {
 
         String FilePath = FileRequestHandler.getRootDir() + "/index.html";
         byte[] bytes = Files.readAllBytes(Paths.get(FilePath));
-        String fileContents = new String(bytes, StandardCharsets.UTF_8);
 
         Assert.assertEquals(MIMETypes.HTML, response.getHeaders().getContentType());
-        Assert.assertEquals(fileContents, response.getBody().getContent());
+        Assert.assertArrayEquals(bytes, response.getBody().getContent());
     }
 
     @Test

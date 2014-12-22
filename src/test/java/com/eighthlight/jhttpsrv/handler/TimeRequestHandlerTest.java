@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.nio.charset.StandardCharsets;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -38,7 +39,8 @@ public class TimeRequestHandlerTest {
         ZonedDateTime zdt = ZonedDateTime.now(zoneid);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm zzz");
         String now = zdt.format(formatter);
-        Assert.assertEquals(now, response.getBody().getContent());
+        String body = new String(response.getBody().getContent(), StandardCharsets.UTF_8);
+        Assert.assertEquals(now, body);
     }
 
     @Test

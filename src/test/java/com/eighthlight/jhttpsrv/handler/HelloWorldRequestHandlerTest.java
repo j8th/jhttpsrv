@@ -6,6 +6,7 @@ import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldResponse;
+import com.eighthlight.jhttpsrv.testmessage.chrome.TestRequestMaker;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,11 +23,8 @@ public class HelloWorldRequestHandlerTest {
 
     @Before
     public void setUp() throws Exception {
-        RequestParser parser = new RequestParser();
-        InputStream is = new ByteArrayInputStream(GETHelloworldRequest.ENTIRE_MESSAGE.getBytes(StandardCharsets.UTF_8));
-
         handler = new HelloWorldRequestHandler();
-        request = parser.parseInputStream(is);
+        request = TestRequestMaker.fromString(GETHelloworldRequest.ENTIRE_MESSAGE);
         builder = new ResponseBuilder();
     }
 
@@ -38,6 +36,8 @@ public class HelloWorldRequestHandlerTest {
     @Test
     public void testRun() throws Exception {
         Response response = handler.run(request);
-        Assert.assertEquals(GETHelloworldResponse.ENTIRE_MESSAGE, builder.buildResponse(response));
+        byte[] expected = GETHelloworldResponse.ENTIRE_MESSAGE.getBytes(StandardCharsets.UTF_8);
+
+        Assert.assertArrayEquals(expected, builder.buildResponse(response));
     }
 }
