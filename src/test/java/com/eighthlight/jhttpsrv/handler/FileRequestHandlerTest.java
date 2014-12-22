@@ -52,8 +52,10 @@ public class FileRequestHandlerTest {
     public void testImage() throws Exception {
         Request request = TestRequestMaker.fromString(GETimageRequest.ENTIRE_MESSAGE);
         Response response = fileRequestHandler.run(request);
+        byte[] fileBytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/www/images/testimg.jpeg"));
 
         Assert.assertEquals(MIMETypes.JPEG, response.getHeaders().getContentType());
+        Assert.assertArrayEquals(fileBytes, response.getBody().getContent());
     }
 
     @Test

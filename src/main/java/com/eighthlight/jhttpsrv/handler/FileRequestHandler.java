@@ -33,9 +33,8 @@ public class FileRequestHandler implements RequestHandler {
         if(Files.isReadable(abspath) && !Files.isDirectory(abspath)) {
             try {
                 byte[] bytes = Files.readAllBytes(abspath);
-                String contents = new String(bytes, StandardCharsets.UTF_8);
 
-                body.setContent(contents);
+                body.setContent(bytes);
                 // Would have been nice, but seems to always return null.
                 //header.setContentType(Files.probeContentType(abspath));
                 try {
