@@ -27,11 +27,6 @@ public class TimeRequestHandlerTest {
         request = TestRequestMaker.fromString(GETHelloworldRequest.ENTIRE_MESSAGE);
     }
 
-    @After
-    public void tearDown() throws Exception {
-
-    }
-
     @Test
     public void testRun() throws Exception {
         Response response = timeRequestHandler.run(request);

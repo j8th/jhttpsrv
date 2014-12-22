@@ -1,10 +1,6 @@
 package com.eighthlight.jhttpsrv.testmessage.chrome;
 
-/**
- * Created by jason on 12/17/14.
- */
 public class GETformRequest {
-
     public final static String REQUEST_LINE = "GET /form.html HTTP/1.1\r\n";
 
     public final static String HEADERS =
@@ -20,5 +16,4 @@ public class GETformRequest {
 
 
     public final static String ENTIRE_MESSAGE = REQUEST_LINE + HEADERS + EMPTY_LINE;
-
 }

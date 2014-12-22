@@ -12,11 +12,6 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Created by jason on 12/11/14.
- *
- * The TimeRequestHandler waits for one second, and then returns the current time in the message body.
- */
 public class TimeRequestHandler implements RequestHandler {
     public Response run(Request request) {
         Response response = new Response();

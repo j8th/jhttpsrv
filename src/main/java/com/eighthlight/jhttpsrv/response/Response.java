@@ -2,25 +2,13 @@ package com.eighthlight.jhttpsrv.response;
 
 import com.eighthlight.jhttpsrv.shared.StatusCodes;
 
-/**
- * Created by jason on 12/10/14.
- */
 public class Response {
     private static final String HTTP_VERSION = "1.1";
-
-
 
     private int statuscode = 0;
     private ResponseHeader header = new ResponseHeader();
     private ResponseBody body = new ResponseBody();
 
-
-
-    /* Constructors */
-
-
-
-    /* Public Methods */
     public String getProtocolVersion() {
         return HTTP_VERSION;
     }

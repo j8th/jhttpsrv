@@ -21,14 +21,4 @@ public class MainTest {
 
         jhttpsrv = Main.getJhttpsrv();
     }
-
-    @After
-    public void tearDown() throws Exception {
-
-    }
-
-    @Test
-    public void testMain() {
-
-    }
 }

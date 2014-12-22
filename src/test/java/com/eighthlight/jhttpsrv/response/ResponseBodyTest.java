@@ -16,11 +16,6 @@ public class ResponseBodyTest {
         body = new ResponseBody();
     }
 
-    @After
-    public void tearDown() throws Exception {
-
-    }
-
     @Test
     public void set_get_Content_String() {
         String content = "<p>hello</p>";

@@ -5,9 +5,6 @@ import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
 import java.util.IntSummaryStatistics;
 import java.util.Map;
 
-/**
- * Created by jason on 12/8/14.
- */
 public class RequestHeader {
     private String host;
     private String connection;
@@ -84,5 +81,4 @@ public class RequestHeader {
         }
         return true;
     }
-
 }

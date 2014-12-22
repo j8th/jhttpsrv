@@ -21,11 +21,6 @@ public class RequestHeaderTest {
         myHeader = new RequestHeader(myHeadersMap);
     }
 
-    @After
-    public void tearDown() throws Exception {
-
-    }
-
     @Test
     public void getHost() {
         Assert.assertEquals("localhost", myHeader.getHost());

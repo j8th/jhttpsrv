@@ -28,11 +28,6 @@ public class OKRequestHandlerTest {
         okRequestHandler = new OKRequestHandler();
     }
 
-    @After
-    public void tearDown() throws Exception {
-
-    }
-
     @Test
     public void run() {
         Response response = okRequestHandler.run(request);

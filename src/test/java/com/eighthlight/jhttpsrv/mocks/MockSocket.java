@@ -4,16 +4,10 @@ import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Created by jason on 12/15/14.
- */
 public class MockSocket extends Socket {
     private ByteArrayOutputStream os = new ByteArrayOutputStream();
     private ByteArrayInputStream is = new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8));
 
-
-
-    /* Public Methods */
     public OutputStream getOutputStream() {
         return os;
     }

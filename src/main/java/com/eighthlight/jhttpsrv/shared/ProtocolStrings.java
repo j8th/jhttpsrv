@@ -4,20 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by jason on 12/10/14.
- */
 public class ProtocolStrings {
-    // HTTP Methods
     public static final String HTTP_METHOD_GET  = "GET";
     public static final String HTTP_METHOD_POST = "POST";
 
-    // Elements of the Request-Line
     public static final String METHOD = "Method";
     public static final String URL = "URL";
     public static final String PROTOCOL_VERSION = "Protocol-Version";
 
-    // Request Header Keys
     public static final String HOST = "Host";
     public static final String CONNECTION = "Connection";
     public static final String ACCEPT = "Accept";
@@ -25,7 +19,6 @@ public class ProtocolStrings {
     public static final String ACCEPT_ENCODING = "Accept-Encoding";
     public static final String ACCEPT_LANGUAGE = "Accept-Language";
 
-    // Response Header Keys
     public static final String CONTENT_LENGTH = "Content-Length";
     public static final String CONTENT_TYPE = "Content-Type";
     public static final String LOCATION = "Location";

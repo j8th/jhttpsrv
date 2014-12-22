@@ -16,9 +16,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Created by jason on 12/15/14.
- */
 public class Jhttpsrv implements Runnable {
     private ServerSocket serverSocket;
     private Router router;
@@ -26,24 +23,16 @@ public class Jhttpsrv implements Runnable {
     private RequestParser requestParser = new RequestParser();
     private ResponseBuilder responseBuilder = new ResponseBuilder();
 
-
-    /* Constructors */
     public Jhttpsrv(ServerSocket myServerSocket, Router myRouter) {
         serverSocket = myServerSocket;
         router = myRouter;
     }
 
-
-
-
-    /* Public Methods */
     public void handle(Socket mySocket) throws IOException {
         InputStream is = mySocket.getInputStream();
         OutputStream os = mySocket.getOutputStream();
 
         Request request = requestParser.parseInputStream(is);
-        // If the client didn't send us any data (the socket is "empty" and therefore the request is "empty"),
-        //    then just close this connection without saying anything back and quit.
         if(request.isEmpty()) {
             mySocket.close();
             return;

@@ -26,11 +26,6 @@ public class RequestTest {
         request = new Request(requestLine, header);
     }
 
-    @After
-    public void tearDown() throws Exception {
-
-    }
-
     @Test
     public void getHeaders() {
         Assert.assertEquals(header, request.getHeader());

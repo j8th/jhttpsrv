@@ -15,13 +15,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-/**
- * Created by jason on 12/11/14.
- */
 public class FileRequestHandler implements RequestHandler {
     private static String rootdir = System.getProperty("user.dir") + "/www";
-
-
 
     public Response run(Request request) {
         Response response = new Response();
@@ -35,8 +30,6 @@ public class FileRequestHandler implements RequestHandler {
                 byte[] bytes = Files.readAllBytes(abspath);
 
                 body.setContent(bytes);
-                // Would have been nice, but seems to always return null.
-                //header.setContentType(Files.probeContentType(abspath));
                 try {
                     header.setContentType(MIMETypes.FileExt2MIMEType(ext));
                 } catch (IllegalArgumentException e) {
@@ -45,7 +38,6 @@ public class FileRequestHandler implements RequestHandler {
                 header.setContentLength(body.getContentLength());
             } catch (IOException e) {
                 e.printStackTrace();
-                // TODO: Could return an Internal Server Error (500 or whatever it is) here.
             }
         } else {
             response.setStatusCode(StatusCodes.NOT_FOUND);
@@ -57,11 +49,6 @@ public class FileRequestHandler implements RequestHandler {
         return response;
     }
 
-
-
-    /*
-     * Static Methods
-     */
     public static String getRootDir() {
         return rootdir;
     }

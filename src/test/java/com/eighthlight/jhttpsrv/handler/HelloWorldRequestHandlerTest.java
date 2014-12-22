@@ -28,11 +28,6 @@ public class HelloWorldRequestHandlerTest {
         builder = new ResponseBuilder();
     }
 
-    @After
-    public void tearDown() throws Exception {
-
-    }
-
     @Test
     public void testRun() throws Exception {
         Response response = handler.run(request);

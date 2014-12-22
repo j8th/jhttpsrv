@@ -23,11 +23,6 @@ public class RequestParserTest {
         myParser = new RequestParser();
     }
 
-    @After
-    public void tearDown() throws Exception {
-
-    }
-
     @Test
     public void parseRequestLine() {
         Map<String, String> expected = new HashMap<String, String>();

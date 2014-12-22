@@ -8,17 +8,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class StringUtilsTest {
-
-    @Before
-    public void setUp() throws Exception {
-
-    }
-
-    @After
-    public void tearDown() throws Exception {
-
-    }
-
     @Test
     public void testGetFileExtension() throws Exception {
         String myAbsFilePath = "/some/long/path/testfile.txt";

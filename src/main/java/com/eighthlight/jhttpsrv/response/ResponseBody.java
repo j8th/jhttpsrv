@@ -3,9 +3,6 @@ package com.eighthlight.jhttpsrv.response;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Created by jason on 12/11/14.
- */
 public class ResponseBody {
     private byte[] content = new byte[0];
 

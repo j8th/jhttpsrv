@@ -19,11 +19,6 @@ public class ResponseTest {
         body = new ResponseBody();
     }
 
-    @After
-    public void tearDown() throws Exception {
-
-    }
-
     @Test
     public void getProtocolVersion() {
         Assert.assertEquals("1.1", response.getProtocolVersion());

@@ -32,11 +32,6 @@ public class RouterTest {
         request = parser.parseInputStream(is);
     }
 
-    @After
-    public void tearDown() throws Exception {
-
-    }
-
     @Test
     public void testDefaultRoute() throws Exception {
         // A new Router with no routes established should return the default default handler, the OKRequestHandler.

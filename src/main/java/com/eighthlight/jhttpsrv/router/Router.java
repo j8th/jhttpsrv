@@ -7,9 +7,6 @@ import com.eighthlight.jhttpsrv.request.Request;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * Created by jason on 12/10/14.
- */
 public class Router {
     private Class<? extends RequestHandler> defaultHandler;
     private Map<String, Class<? extends RequestHandler>> routes;

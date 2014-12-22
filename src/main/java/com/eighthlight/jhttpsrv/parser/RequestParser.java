@@ -12,11 +12,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by jason on 12/8/14.
- */
 public class RequestParser {
-
     public static final String CRLF = "\r\n";
 
     public Map<String, String> parseRequestLine(String requestLine) {
@@ -47,16 +43,11 @@ public class RequestParser {
         return result;
     }
 
-    // TODO: Throw some exceptions for when we exceed the buffer size.
-    public Request parseInputStream(InputStream myis) throws IOException {
-        BufferedInputStream bis = new BufferedInputStream(myis);
+    public Request parseInputStream(InputStream inputStream) throws IOException {
+        BufferedInputStream bis = new BufferedInputStream(inputStream);
 
-        /*
-         * Read all the bytes for the Request-Line and the Headers.
-         * Parse them into handy objects.
-         */
-        byte[] requestLineBytes = getBytesUntilPattern(bis, ProtocolIntegers.END_OF_LINE);
-        byte[] headerBytes = getBytesUntilPattern(bis, ProtocolIntegers.END_OF_HTTP_HEADER);
+        byte[] requestLineBytes = getRequestLineBytes(bis);
+        byte[] headerBytes = getHeaderBytes(bis);
 
         String requestLineString = new String(requestLineBytes);
         String headerString = new String(headerBytes);
@@ -67,18 +58,10 @@ public class RequestParser {
         RequestHeader header = new RequestHeader(headerMap);
         RequestBody body = new RequestBody("");
 
-
-        /*
-         * Check the Headers for the presence of the Content-Length header field.
-         * This field signifies that we have a Message Body in the HTTP Message.
-         *
-         * Reference:
-         * http://tools.ietf.org/html/rfc2616#section-4.3
-         */
-        int bodyLength = header.getContentLength();
-        if(bodyLength > 0) {
-            byte[] bodyBytes = new byte[bodyLength];
-            bis.read(bodyBytes, 0, bodyLength);
+        int contentLength = header.getContentLength();
+        if(contentLength > 0) {
+            byte[] bodyBytes = new byte[contentLength];
+            bis.read(bodyBytes, 0, contentLength);
             String bodyString = new String(bodyBytes);
             body = new RequestBody(bodyString);
         }
@@ -86,27 +69,14 @@ public class RequestParser {
         return new Request(requestLineMap, header, body);
     }
 
+    private byte[] getHeaderBytes(BufferedInputStream bufferedInputStream) throws IOException {
+        return getBytesUntilPattern(bufferedInputStream, ProtocolIntegers.END_OF_HTTP_HEADER);
+    }
 
+    private byte[] getRequestLineBytes(BufferedInputStream bufferedInputStream) throws IOException {
+        return getBytesUntilPattern(bufferedInputStream, ProtocolIntegers.END_OF_LINE);
+    }
 
-
-
-    /*
-     * Private Methods
-     */
-    // TODO: Throw some exceptions for when we exceed the buffer size.
-    /**
-     * Reads an InputStream up until the supplied pattern of bytes is encountered and returns all the bytes read,
-     * up to and including the provided pattern.
-     * <p>
-     * The InputStream's internal pointer is NOT reset to the beginning of the stream, but rather will point to
-     * the final byte read.  So a subsequent call to read() on the InputStream will return the byte immediately after
-     * the final byte of the provided pattern.
-     *
-     * @param myis The InputStream to be read.
-     * @param bytePattern The pattern of bytes to look for.  Example:  {13, 10, 13, 10} would look for CRLFCRLF
-     * @param max_bytes Maximum number of bytes to return.  If more than this many bytes are read, the returned result may be unpredictable.
-     * @return A byte array comprised of all the bytes from the InputStream up until and including the provided pattern.
-     */
     private byte[] getBytesUntilPattern(BufferedInputStream myis, int[] bytePattern, int max_bytes) throws IOException {
         myis.mark(max_bytes);
         int i = 0;
@@ -119,8 +89,6 @@ public class RequestParser {
                 break;
 
             bytes_read++;
-            //if(bytes_read > max_bytes)
-                //throw new Exception("Maximum number of bytes to be read exceeded.  Max: " + max_bytes);
             if(current_byte == bytePattern[i])
                 i++;
             else
@@ -133,7 +101,6 @@ public class RequestParser {
         return result;
     }
 
-    // TODO: Javadoc?
     private byte[] getBytesUntilPattern(BufferedInputStream myis, int[] bytePattern) throws IOException {
         return getBytesUntilPattern(myis, bytePattern, ProtocolIntegers.LIMIT_HEADER_FIELD_SIZE);
     }

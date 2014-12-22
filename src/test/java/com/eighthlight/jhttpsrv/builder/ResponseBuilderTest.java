@@ -35,11 +35,6 @@ public class ResponseBuilderTest {
         response.setBody(body);
     }
 
-    @After
-    public void tearDown() throws Exception {
-
-    }
-
     @Test
     public void testBuildStatusLine() {
         byte[] statusLineBytes = GETHelloworldResponse.STATUS_LINE.getBytes(StandardCharsets.UTF_8);

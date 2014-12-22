@@ -17,11 +17,6 @@ public class ResponseHeaderTest {
         responseHeader = new ResponseHeader();
     }
 
-    @After
-    public void tearDown() throws Exception {
-
-    }
-
     @Test
     public void set_get_ContentType() {
         Assert.assertEquals("", responseHeader.getContentType());

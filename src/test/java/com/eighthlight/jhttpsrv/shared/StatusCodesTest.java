@@ -8,17 +8,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class StatusCodesTest {
-
-    @Before
-    public void setUp() throws Exception {
-
-    }
-
-    @After
-    public void tearDown() throws Exception {
-
-    }
-
     @Test
     public void CodeToPhrase() {
         Assert.assertEquals(StatusCodes.OK_PHRASE, StatusCodes.CodeToPhrase(StatusCodes.OK));

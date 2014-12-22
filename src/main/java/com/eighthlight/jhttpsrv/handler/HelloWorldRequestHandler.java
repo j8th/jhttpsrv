@@ -8,9 +8,6 @@ import com.eighthlight.jhttpsrv.response.ResponseHeader;
 import com.eighthlight.jhttpsrv.shared.MIMETypes;
 import com.eighthlight.jhttpsrv.shared.StatusCodes;
 
-/**
- * Created by jason on 12/11/14.
- */
 public class HelloWorldRequestHandler implements RequestHandler {
     private String bodyString =
             "<html>\n" +
@@ -21,8 +18,6 @@ public class HelloWorldRequestHandler implements RequestHandler {
             "<h1>Hello World</h1>\n" +
             "</body>\n" +
             "</html>\n";
-
-
 
     public Response run(Request request) {
         Response response = new Response();

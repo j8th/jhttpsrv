@@ -1,10 +1,6 @@
 package com.eighthlight.jhttpsrv.testmessage.chrome;
 
-/**
- * Created by jason on 12/17/14.
- */
 public class GETimageRequest {
-
     public final static String REQUEST_LINE = "GET /images/testimg.jpeg HTTP/1.1\r\n";
 
     public final static String HEADERS =
@@ -17,8 +13,5 @@ public class GETimageRequest {
 
     public final static String EMPTY_LINE = "\r\n";
 
-
-
     public final static String ENTIRE_MESSAGE = REQUEST_LINE + HEADERS + EMPTY_LINE;
-
 }

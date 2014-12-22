@@ -20,11 +20,6 @@ public class RedirectRequestHandlerTest {
         request = TestRequestMaker.fromString(GETHelloworldResponse.ENTIRE_MESSAGE);
     }
 
-    @After
-    public void tearDown() throws Exception {
-
-    }
-
     @Test
     public void testRun() throws Exception {
         Response response = handler.run(request);

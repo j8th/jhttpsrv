@@ -3,9 +3,6 @@ package com.eighthlight.jhttpsrv.shared;
 import java.io.File;
 import java.util.*;
 
-/**
- * Created by jason on 12/11/14.
- */
 public class MIMETypes {
     public static final String HTML = "text/html";
     public static final String PLAIN_TEXT = "text/plain";

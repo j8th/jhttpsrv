@@ -24,11 +24,6 @@ public class FileRequestHandlerTest {
         request = TestRequestMaker.fromString(GETindexhtmlRequest.ENTIRE_MESSAGE);
     }
 
-    @After
-    public void tearDown() throws Exception {
-
-    }
-
     @Test
     public void testRun() throws Exception {
         Response response = fileRequestHandler.run(request);

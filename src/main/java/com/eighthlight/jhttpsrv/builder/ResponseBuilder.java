@@ -12,9 +12,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Created by jason on 12/10/14.
- */
 public class ResponseBuilder {
     public byte[] buildStatusLine(Response response) {
         String result = String.format("HTTP/%s %s %s\r\n",
