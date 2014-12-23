@@ -30,7 +30,7 @@ public class Router {
         routes.put(route, myHandler);
     }
 
-    public void setDefaultRouteHandler(RequestHandler myRequestHandler) {
+    public void setDefaultRequestHandler(RequestHandler myRequestHandler) {
         defaultHandler = myRequestHandler;
     }
 

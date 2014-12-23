@@ -4,7 +4,6 @@ import com.eighthlight.jhttpsrv.handler.FileRequestHandler;
 import com.eighthlight.jhttpsrv.handler.HelloWorldRequestHandler;
 import com.eighthlight.jhttpsrv.handler.OKRequestHandler;
 import com.eighthlight.jhttpsrv.handler.RequestHandler;
-import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
@@ -12,10 +11,6 @@ import com.eighthlight.jhttpsrv.testmessage.chrome.TestRequestMaker;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 
@@ -36,8 +31,8 @@ public class RouterTest {
     }
 
     @Test
-    public void testSetDefaultRouteHandler() throws Exception {
-        router.setDefaultRouteHandler(new FileRequestHandler());
+    public void testSetDefaultRequestHandler() throws Exception {
+        router.setDefaultRequestHandler(new FileRequestHandler());
         RequestHandler handler = router.handlerByRoute(request);
         Assert.assertThat(handler, instanceOf(FileRequestHandler.class));
     }
