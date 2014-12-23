@@ -26,6 +26,7 @@ public class ResponseBuilder {
         String result = "";
         ResponseHeader header = response.getHeaders();
 
+        // TODO: Refactor.  Don't be clever.
         for(String headerKey : ProtocolStrings.RESPONSE_HEADER_KEYS) {
             String methodName = String.format("get%s", headerKey.replaceAll("-", ""));
             try {
@@ -33,11 +34,7 @@ public class ResponseBuilder {
                 String headerVal = "" + method.invoke(header);
                 if(headerVal.length() > 0)
                     result += String.format("%s: %s\r\n", headerKey, headerVal);
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

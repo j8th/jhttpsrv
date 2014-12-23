@@ -26,9 +26,7 @@ public class Router {
                 handler = defaultHandler.newInstance();
             else
                 handler = handlerClass.newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

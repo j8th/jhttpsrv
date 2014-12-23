@@ -30,6 +30,7 @@ public class FileRequestHandler implements RequestHandler {
                 byte[] bytes = Files.readAllBytes(abspath);
 
                 body.setContent(bytes);
+                // TODO: Refactor to not use exception.
                 try {
                     header.setContentType(MIMETypes.FileExt2MIMEType(ext));
                 } catch (IllegalArgumentException e) {
