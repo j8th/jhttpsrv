@@ -27,17 +27,17 @@ public class RequestTest {
     }
 
     @Test
-    public void getHeaders() {
+    public void testGetHeaders() {
         Assert.assertEquals(header, request.getHeader());
     }
 
     @Test
-    public void getURL() {
+    public void testGetURL() {
         Assert.assertEquals("/helloworld", request.getURL());
     }
 
     @Test
-    public void getMethod() {
+    public void testGetMethod() {
         Assert.assertEquals(ProtocolStrings.HTTP_METHOD_GET, request.getMethod());
     }
 

@@ -34,7 +34,6 @@ public class RouterTest {
 
     @Test
     public void testDefaultRoute() throws Exception {
-        // A new Router with no routes established should return the default default handler, the OKRequestHandler.
         RequestHandler handler = router.route(request);
         Assert.assertThat(handler, instanceOf(OKRequestHandler.class));
     }
@@ -42,19 +41,12 @@ public class RouterTest {
     @Test
     public void testSetDefaultRouteHandler() throws Exception {
         router.setDefaultRouteHandler(FileRequestHandler.class);
-        // Since we add no routes at all to our test router here, the handler returned for any request should be
-        //     an instance of the default handler.
         RequestHandler handler = router.route(request);
         Assert.assertThat(handler, instanceOf(FileRequestHandler.class));
     }
 
     @Test
-    public void route() throws Exception {
-        // TODO: This is tested by testDefaultRoute() and addRoute(), but add more detailed tests here later.
-    }
-
-    @Test
-    public void addRoute() throws Exception {
+    public void testAddRoute() throws Exception {
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/helloworld", HelloWorldRequestHandler.class);
         RequestHandler handler = router.route(request);
         Assert.assertThat(handler, instanceOf(HelloWorldRequestHandler.class));

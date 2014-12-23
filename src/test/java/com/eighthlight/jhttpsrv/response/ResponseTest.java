@@ -20,26 +20,26 @@ public class ResponseTest {
     }
 
     @Test
-    public void getProtocolVersion() {
+    public void testGetProtocolVersion() {
         Assert.assertEquals("1.1", response.getProtocolVersion());
     }
 
     @Test
-    public void set_get_StatusCode() {
+    public void testSet_Get_StatusCode() {
         Assert.assertEquals(0, response.getStatusCode());
         response.setStatusCode(StatusCodes.OK);
         Assert.assertEquals(StatusCodes.OK, response.getStatusCode());
     }
 
     @Test
-    public void getReasonPhrase() {
+    public void testGetReasonPhrase() {
         Assert.assertEquals(null, response.getReasonPhrase());
         response.setStatusCode(StatusCodes.OK);
         Assert.assertEquals(StatusCodes.OK_PHRASE, response.getReasonPhrase());
     }
 
     @Test
-    public void set_get_Headers() {
+    public void testSet_Get_Headers() {
         ResponseHeader initialHeader = response.getHeaders();
         Assert.assertNotNull(initialHeader);
         Assert.assertNotSame(headers, initialHeader);
@@ -48,7 +48,7 @@ public class ResponseTest {
     }
 
     @Test
-    public void set_get_Body() {
+    public void testSet_Get_Body() {
         ResponseBody initialBody = response.getBody();
         Assert.assertNotNull(initialBody);
         Assert.assertNotSame(body, response.getBody());

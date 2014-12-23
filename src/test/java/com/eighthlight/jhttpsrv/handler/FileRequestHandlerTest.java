@@ -62,7 +62,7 @@ public class FileRequestHandlerTest {
     }
 
     @Test
-    public void testRequestingADirectoryGives404() throws Exception {
+    public void testRequestingDirectoryGives404() throws Exception {
         Request request = TestRequestMaker.fromString(GETDirectoryRequest.ENTIRE_MESSAGE);
         Response response = fileRequestHandler.run(request);
 

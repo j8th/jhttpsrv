@@ -25,7 +25,7 @@ public class RequestParserTest {
     }
 
     @Test
-    public void parseRequestLine() {
+    public void testParseRequestLine() {
         Map<String, String> expected = new HashMap<String, String>();
         expected.put("Method", "GET");
         expected.put("URL", "/helloworld");
@@ -44,7 +44,7 @@ public class RequestParserTest {
     }
 
     @Test
-    public void parseHeaders() {
+    public void testParseHeaders() {
         Map<String, String> expected = new HashMap<String, String>();
         expected.put("Host", "localhost");
         expected.put("Connection", "keep-alive");
@@ -66,7 +66,7 @@ public class RequestParserTest {
     }
 
     @Test
-    public void parseInputStream() {
+    public void testParseInputStream() {
         InputStream myis = new ByteArrayInputStream(GETHelloworldRequest.ENTIRE_MESSAGE.getBytes(StandardCharsets.UTF_8));
         try {
             Request request = myParser.parseInputStream(myis);

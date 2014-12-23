@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 public class StatusCodesTest {
     @Test
-    public void CodeToPhrase() {
+    public void testCodeToPhrase() {
         Assert.assertEquals(StatusCodes.OK_PHRASE, StatusCodes.CodeToPhrase(StatusCodes.OK));
         Assert.assertEquals(StatusCodes.NOT_FOUND_PHRASE, StatusCodes.CodeToPhrase(StatusCodes.NOT_FOUND));
         Assert.assertNull(StatusCodes.CodeToPhrase(0));

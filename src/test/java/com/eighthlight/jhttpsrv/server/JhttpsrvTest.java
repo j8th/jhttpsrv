@@ -30,7 +30,7 @@ public class JhttpsrvTest {
     }
 
     @Test
-    public void handle() throws Exception {
+    public void testHandle() throws Exception {
         MockSocket socket = new MockSocket();
         socket.seedInputStream(GETHelloworldRequest.ENTIRE_MESSAGE);
         jhttpsrv.handle(socket);
@@ -50,7 +50,7 @@ public class JhttpsrvTest {
     }
 
     @Test
-    public void run() throws Exception {
+    public void testRun() throws Exception {
         new Thread(jhttpsrv).start();
         Mockito.verify(mockServerSocket).accept();
     }

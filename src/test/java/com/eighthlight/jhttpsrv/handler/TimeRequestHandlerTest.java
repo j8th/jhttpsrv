@@ -21,8 +21,6 @@ public class TimeRequestHandlerTest {
 
     @Before
     public void setUp() throws Exception {
-        RequestParser parser = new RequestParser();
-
         timeRequestHandler = new TimeRequestHandler();
         request = TestRequestMaker.fromString(GETHelloworldRequest.ENTIRE_MESSAGE);
     }
@@ -41,11 +39,10 @@ public class TimeRequestHandlerTest {
     @Test
     public void testWaits() throws Exception {
         long before = System.currentTimeMillis();
-        Response response = timeRequestHandler.run(request);
+        timeRequestHandler.run(request);
         long after = System.currentTimeMillis();
         long difference = after - before;
 
-        // We allow some leeway, because waiting tends to be rather imprecise with computers.
         if(difference < 900 || difference > 1100)
             Assert.fail("The TimeRequestHandler did not wait one second.");
     }

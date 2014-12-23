@@ -17,7 +17,7 @@ public class ResponseBodyTest {
     }
 
     @Test
-    public void set_get_Content_String() {
+    public void testSet_Get_ContentString() {
         String content = "<p>hello</p>";
 
         Assert.assertArrayEquals(new byte[0], body.getContent());
@@ -47,7 +47,7 @@ public class ResponseBodyTest {
     }
 
     @Test
-    public void getContentLength() {
+    public void testGetContentLength() {
         Assert.assertEquals(0, body.getContentLength());
         body.setContent(GETHelloworldResponse.BODY);
         Assert.assertEquals(93, body.getContentLength());

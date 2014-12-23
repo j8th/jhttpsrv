@@ -29,7 +29,7 @@ public class OKRequestHandlerTest {
     }
 
     @Test
-    public void run() {
+    public void testRun() {
         Response response = okRequestHandler.run(request);
         Assert.assertEquals(StatusCodes.OK, response.getStatusCode());
         Assert.assertEquals(MIMETypes.HTML, response.getHeaders().getContentType());
