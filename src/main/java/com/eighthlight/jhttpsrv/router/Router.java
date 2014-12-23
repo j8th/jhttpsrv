@@ -17,7 +17,7 @@ public class Router {
     }
 
     public RequestHandler handlerByRoute(Request request) {
-        String requestRoute = String.format("%s %s", request.getMethod(), request.getURL());
+        String requestRoute = buildRequestRoute(request.getMethod(), request.getURL());
         Class<? extends RequestHandler> handlerClass = routes.get(requestRoute);
 
         RequestHandler handler = null;
@@ -34,11 +34,15 @@ public class Router {
     }
 
     public void addRoute(String httpmethod, String url, Class<? extends RequestHandler> handlerClass) {
-        String route = String.format("%s %s", httpmethod, url);
+        String route = buildRequestRoute(httpmethod, url);
         routes.put(route, handlerClass);
     }
 
     public void setDefaultRouteHandler(Class<? extends RequestHandler> myClass) {
         defaultHandler = myClass;
+    }
+
+    private String buildRequestRoute(String HttpMethod, String Url) {
+        return String.format("%s %s", HttpMethod, Url);
     }
 }
