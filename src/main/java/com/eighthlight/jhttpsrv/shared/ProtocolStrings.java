@@ -22,15 +22,4 @@ public class ProtocolStrings {
     public static final String CONTENT_LENGTH = "Content-Length";
     public static final String CONTENT_TYPE = "Content-Type";
     public static final String LOCATION = "Location";
-
-    public static final List<String> RESPONSE_HEADER_KEYS;
-    static {
-        List<String> myList = new ArrayList<String>();
-
-        myList.add(CONTENT_LENGTH);
-        myList.add(CONTENT_TYPE);
-        myList.add(LOCATION);
-
-        RESPONSE_HEADER_KEYS = Collections.unmodifiableList(myList);
-    }
 }

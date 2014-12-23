@@ -26,18 +26,10 @@ public class ResponseBuilder {
         String result = "";
         ResponseHeader header = response.getHeaders();
 
-        // TODO: Refactor.  Don't be clever.
-        for(String headerKey : ProtocolStrings.RESPONSE_HEADER_KEYS) {
-            String methodName = String.format("get%s", headerKey.replaceAll("-", ""));
-            try {
-                Method method = header.getClass().getMethod(methodName);
-                String headerVal = "" + method.invoke(header);
-                if(headerVal.length() > 0)
-                    result += String.format("%s: %s\r\n", headerKey, headerVal);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        result += buildHeaderString(ProtocolStrings.CONTENT_LENGTH, header.getContentLength());
+        result += buildHeaderString(ProtocolStrings.CONTENT_TYPE, header.getContentType());
+        result += buildHeaderString(ProtocolStrings.LOCATION, header.getLocation());
+
         return result.getBytes(StandardCharsets.UTF_8);
     }
 
@@ -64,5 +56,17 @@ public class ResponseBuilder {
         }
 
         return myos.toByteArray();
+    }
+
+    private String buildHeaderString(String headerKey, String headerVal) {
+        if(headerVal != "")
+            return String.format("%s: %s\r\n", headerKey, headerVal);
+        return "";
+    }
+
+    private String buildHeaderString(String headerKey, int headerVal) {
+        if(headerVal > 0)
+            return String.format("%s: %s\r\n", headerKey, headerVal);
+        return "";
     }
 }
