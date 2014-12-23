@@ -8,7 +8,6 @@ import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,21 +33,21 @@ public class RouterTest {
 
     @Test
     public void testDefaultRoute() throws Exception {
-        RequestHandler handler = router.route(request);
+        RequestHandler handler = router.handlerByRoute(request);
         Assert.assertThat(handler, instanceOf(OKRequestHandler.class));
     }
 
     @Test
     public void testSetDefaultRouteHandler() throws Exception {
         router.setDefaultRouteHandler(FileRequestHandler.class);
-        RequestHandler handler = router.route(request);
+        RequestHandler handler = router.handlerByRoute(request);
         Assert.assertThat(handler, instanceOf(FileRequestHandler.class));
     }
 
     @Test
     public void testAddRoute() throws Exception {
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/helloworld", HelloWorldRequestHandler.class);
-        RequestHandler handler = router.route(request);
+        RequestHandler handler = router.handlerByRoute(request);
         Assert.assertThat(handler, instanceOf(HelloWorldRequestHandler.class));
     }
 }

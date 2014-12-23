@@ -4,17 +4,14 @@ import com.eighthlight.jhttpsrv.builder.ResponseBuilder;
 import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.response.Response;
-import com.eighthlight.jhttpsrv.handler.HelloWorldRequestHandler;
 import com.eighthlight.jhttpsrv.handler.RequestHandler;
 import com.eighthlight.jhttpsrv.router.Router;
-import com.eighthlight.jhttpsrv.shared.StatusCodes;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 
 public class Jhttpsrv implements Runnable {
     private ServerSocket serverSocket;
@@ -37,7 +34,7 @@ public class Jhttpsrv implements Runnable {
             mySocket.close();
             return;
         }
-        RequestHandler handler = router.route(request);
+        RequestHandler handler = router.handlerByRoute(request);
         Response response = handler.run(request);
 
         byte[] responseBytes = responseBuilder.buildResponse(response);

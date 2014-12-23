@@ -16,7 +16,7 @@ public class Router {
         routes = new LinkedHashMap<String, Class<? extends RequestHandler> >();
     }
 
-    public RequestHandler route(Request request) {
+    public RequestHandler handlerByRoute(Request request) {
         String requestRoute = String.format("%s %s", request.getMethod(), request.getURL());
         Class<? extends RequestHandler> handlerClass = routes.get(requestRoute);
 
