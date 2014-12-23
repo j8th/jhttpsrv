@@ -8,6 +8,7 @@ import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
+import com.eighthlight.jhttpsrv.testmessage.chrome.TestRequestMaker;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,11 +25,8 @@ public class RouterTest {
 
     @Before
     public void setUp() throws Exception {
-        RequestParser parser = new RequestParser();
-        InputStream is = new ByteArrayInputStream(GETHelloworldRequest.ENTIRE_MESSAGE.getBytes(StandardCharsets.UTF_8));
-
         router = new Router();
-        request = parser.parseInputStream(is);
+        request = TestRequestMaker.fromString(GETHelloworldRequest.ENTIRE_MESSAGE);
     }
 
     @Test
@@ -39,14 +37,14 @@ public class RouterTest {
 
     @Test
     public void testSetDefaultRouteHandler() throws Exception {
-        router.setDefaultRouteHandler(FileRequestHandler.class);
+        router.setDefaultRouteHandler(new FileRequestHandler());
         RequestHandler handler = router.handlerByRoute(request);
         Assert.assertThat(handler, instanceOf(FileRequestHandler.class));
     }
 
     @Test
     public void testAddRoute() throws Exception {
-        router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/helloworld", HelloWorldRequestHandler.class);
+        router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/helloworld", new HelloWorldRequestHandler());
         RequestHandler handler = router.handlerByRoute(request);
         Assert.assertThat(handler, instanceOf(HelloWorldRequestHandler.class));
     }

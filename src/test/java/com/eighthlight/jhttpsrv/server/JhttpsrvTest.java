@@ -25,7 +25,7 @@ public class JhttpsrvTest {
     public void setUp() throws Exception {
         mockServerSocket = mock(ServerSocket.class);
         router = new Router();
-        router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/helloworld", HelloWorldRequestHandler.class);
+        router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/helloworld", new HelloWorldRequestHandler());
         jhttpsrv = new Jhttpsrv(mockServerSocket, router);
     }
 

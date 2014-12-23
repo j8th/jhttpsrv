@@ -17,9 +17,9 @@ public class Main {
         serverSocket = myServerSocket;
         router = new Router();
 
-        router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/redirect", RedirectRequestHandler.class);
-        router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/time", TimeRequestHandler.class);
-        router.setDefaultRouteHandler(FileRequestHandler.class);
+        router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/redirect", new RedirectRequestHandler());
+        router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/time", new TimeRequestHandler());
+        router.setDefaultRouteHandler(new FileRequestHandler());
 
         jhttpsrv = new Jhttpsrv(serverSocket, router);
     }

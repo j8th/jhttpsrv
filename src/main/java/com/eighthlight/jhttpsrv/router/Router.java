@@ -1,5 +1,6 @@
 package com.eighthlight.jhttpsrv.router;
 
+import com.eighthlight.jhttpsrv.handler.FileRequestHandler;
 import com.eighthlight.jhttpsrv.handler.OKRequestHandler;
 import com.eighthlight.jhttpsrv.handler.RequestHandler;
 import com.eighthlight.jhttpsrv.request.Request;
@@ -8,38 +9,29 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Router {
-    private Class<? extends RequestHandler> defaultHandler;
-    private Map<String, Class<? extends RequestHandler>> routes;
+    private RequestHandler defaultHandler;
+    private Map<String, RequestHandler> routes;
 
     public Router() {
-        defaultHandler = OKRequestHandler.class;
-        routes = new LinkedHashMap<String, Class<? extends RequestHandler> >();
+        defaultHandler = new OKRequestHandler();
+        routes = new LinkedHashMap<String, RequestHandler>();
     }
 
     public RequestHandler handlerByRoute(Request request) {
         String requestRoute = buildRequestRoute(request.getMethod(), request.getURL());
-        Class<? extends RequestHandler> handlerClass = routes.get(requestRoute);
-
-        RequestHandler handler = null;
-        try {
-            if(handlerClass == null)
-                handler = defaultHandler.newInstance();
-            else
-                handler = handlerClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        RequestHandler handler = routes.get(requestRoute);
+        if(handler == null)
+            return defaultHandler;
         return handler;
     }
 
-    public void addRoute(String httpmethod, String url, Class<? extends RequestHandler> handlerClass) {
+    public void addRoute(String httpmethod, String url, RequestHandler myHandler) {
         String route = buildRequestRoute(httpmethod, url);
-        routes.put(route, handlerClass);
+        routes.put(route, myHandler);
     }
 
-    public void setDefaultRouteHandler(Class<? extends RequestHandler> myClass) {
-        defaultHandler = myClass;
+    public void setDefaultRouteHandler(RequestHandler myRequestHandler) {
+        defaultHandler = myRequestHandler;
     }
 
     private String buildRequestRoute(String HttpMethod, String Url) {
