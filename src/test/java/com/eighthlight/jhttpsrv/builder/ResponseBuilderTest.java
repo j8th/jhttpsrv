@@ -48,6 +48,12 @@ public class ResponseBuilderTest {
     }
 
     @Test
+    public void testBuildHeadersWithEmptyHeaders() {
+        response.setHeaders(new ResponseHeader());
+        Assert.assertArrayEquals(new byte[0], responseBuilder.buildHeaders(response));
+    }
+
+    @Test
     public void testBuildBody() {
         byte[] bodyBytes = GETHelloworldResponse.BODY.getBytes(StandardCharsets.UTF_8);
         Assert.assertArrayEquals(bodyBytes, responseBuilder.buildBody(response));
