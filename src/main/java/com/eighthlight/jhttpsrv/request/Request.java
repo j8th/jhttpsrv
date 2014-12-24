@@ -33,8 +33,8 @@ public class Request {
         return method;
     }
 
-    public boolean isEmpty() {
-        if(method != "" || url != "" || !header.isEmpty())
+    public boolean isValid() {
+        if(method == "" || url == "")
             return false;
         return true;
     }

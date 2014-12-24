@@ -42,10 +42,10 @@ public class RequestTest {
     }
 
     @Test
-    public void testIsEmpty() {
-        Assert.assertFalse(request.isEmpty());
+    public void testIsValid() {
+        Assert.assertTrue(request.isValid());
 
         request = new Request(new HashMap<String, String>(), new RequestHeader(new HashMap<String, String>()));
-        Assert.assertTrue(request.isEmpty());
+        Assert.assertFalse(request.isValid());
     }
 }
