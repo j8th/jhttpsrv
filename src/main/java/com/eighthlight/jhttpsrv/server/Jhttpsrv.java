@@ -6,6 +6,7 @@ import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.handler.RequestHandler;
 import com.eighthlight.jhttpsrv.router.Router;
+import com.eighthlight.jhttpsrv.worker.Worker;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,28 +26,13 @@ public class Jhttpsrv implements Runnable {
         router = myRouter;
     }
 
-    public void handle(Socket mySocket) throws IOException {
-        InputStream is = mySocket.getInputStream();
-        OutputStream os = mySocket.getOutputStream();
-
-        Request request = requestParser.parseInputStream(is);
-        if(request.isEmpty()) {
-            mySocket.close();
-            return;
-        }
-        RequestHandler handler = router.handlerByRoute(request);
-        Response response = handler.run(request);
-
-        byte[] responseBytes = responseBuilder.buildResponse(response);
-        os.write(responseBytes);
-        mySocket.close();
-    }
-
     public void run() {
         while(true){
             try {
-                Socket mySocket = serverSocket.accept();
-                handle(mySocket);
+                Socket socket = serverSocket.accept();
+                // TODO: Create a test for this.
+                Worker worker = new Worker(socket, router);
+                worker.run();
             } catch (IOException e) {
                 e.printStackTrace();
             }
