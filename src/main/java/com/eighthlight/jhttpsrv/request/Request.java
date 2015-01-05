@@ -9,17 +9,13 @@ public class Request {
     private String method;
     private String url;
     private RequestHeader header;
-
-    public Request(Map<String, String> myRequestLine, RequestHeader myHeader) {
-        method = myRequestLine.getOrDefault(ProtocolStrings.METHOD, "");
-        url = myRequestLine.getOrDefault(ProtocolStrings.URL, "");
-        header = myHeader;
-    }
+    private RequestBody body;
 
     public Request(Map<String, String> myRequestLine, RequestHeader myHeader, RequestBody myBody) {
         method = myRequestLine.getOrDefault(ProtocolStrings.METHOD, "");
         url = myRequestLine.getOrDefault(ProtocolStrings.URL, "");
         header = myHeader;
+        body = myBody;
     }
 
     public RequestHeader getHeader() {

@@ -22,7 +22,8 @@ public class RequestTest {
         parser = new RequestParser();
         requestLine = parser.parseRequestLine(GETHelloworldRequest.REQUEST_LINE);
         header = new RequestHeader(parser.parseHeaders(GETHelloworldRequest.HEADERS));
-        request = new Request(requestLine, header);
+        body = new RequestBody("");
+        request = new Request(requestLine, header, body);
     }
 
     @Test
@@ -47,7 +48,7 @@ public class RequestTest {
 
     @Test
     public void testEmptyRequestIsInvalid() {
-        request = new Request(new HashMap<String, String>(), new RequestHeader(new HashMap<String, String>()));
+        request = new Request(new HashMap<String, String>(), new RequestHeader(new HashMap<String, String>()), new RequestBody(""));
         Assert.assertFalse(request.isValid());
     }
 
@@ -58,7 +59,7 @@ public class RequestTest {
         requestLine.put(ProtocolStrings.URL, "ekkk");
         requestLine.put(ProtocolStrings.PROTOCOL_VERSION, "HTTP/1.1");
 
-        request = new Request(requestLine, new RequestHeader(new HashMap<String, String>()));
+        request = new Request(requestLine, new RequestHeader(new HashMap<String, String>()), new RequestBody(""));
         Assert.assertFalse(request.isValid());
     }
 }
