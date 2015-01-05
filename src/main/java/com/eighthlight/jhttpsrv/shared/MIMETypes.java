@@ -1,6 +1,5 @@
 package com.eighthlight.jhttpsrv.shared;
 
-import java.io.File;
 import java.util.*;
 
 public class MIMETypes {
