@@ -32,6 +32,11 @@ public class RequestTest {
     }
 
     @Test
+    public void testGetBody() {
+        Assert.assertEquals(body, request.getBody());
+    }
+
+    @Test
     public void testGetURL() {
         Assert.assertEquals("/helloworld", request.getURL());
     }

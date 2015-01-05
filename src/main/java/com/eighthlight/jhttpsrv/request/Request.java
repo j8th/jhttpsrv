@@ -22,6 +22,10 @@ public class Request {
         return header;
     }
 
+    public RequestBody getBody() {
+        return body;
+    }
+
     public String getURL() {
         return url;
     }
