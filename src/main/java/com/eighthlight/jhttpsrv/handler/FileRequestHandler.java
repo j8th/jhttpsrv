@@ -1,6 +1,5 @@
 package com.eighthlight.jhttpsrv.handler;
 
-import com.eighthlight.jhttpsrv.handler.RequestHandler;
 import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.response.ResponseBody;
@@ -10,7 +9,6 @@ import com.eighthlight.jhttpsrv.shared.StatusCodes;
 import com.eighthlight.jhttpsrv.shared.StringUtils;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;

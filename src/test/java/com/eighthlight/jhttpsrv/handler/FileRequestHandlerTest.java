@@ -5,12 +5,10 @@ import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.shared.MIMETypes;
 import com.eighthlight.jhttpsrv.shared.StatusCodes;
 import com.eighthlight.jhttpsrv.testmessage.chrome.*;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
