@@ -51,7 +51,7 @@ public class Worker implements Runnable {
             os.write(responseBytes);
             socket.close();
         } catch (IOException e) {
-            //TODO: Return a 500 response.
+            e.printStackTrace();
         }
     }
 
