@@ -8,7 +8,7 @@ import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.response.ResponseBody;
 import com.eighthlight.jhttpsrv.response.ResponseHeader;
 import com.eighthlight.jhttpsrv.router.Router;
-import com.eighthlight.jhttpsrv.shared.StatusCodes;
+import com.eighthlight.jhttpsrv.constants.StatusCodes;
 
 import java.io.IOException;
 import java.io.InputStream;

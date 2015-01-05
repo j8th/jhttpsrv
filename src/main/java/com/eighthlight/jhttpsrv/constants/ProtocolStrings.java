@@ -1,8 +1,4 @@
-package com.eighthlight.jhttpsrv.shared;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+package com.eighthlight.jhttpsrv.constants;
 
 public class ProtocolStrings {
     public static final String HTTP_METHOD_GET  = "GET";

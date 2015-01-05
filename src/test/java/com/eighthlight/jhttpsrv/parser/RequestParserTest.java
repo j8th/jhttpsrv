@@ -2,9 +2,8 @@ package com.eighthlight.jhttpsrv.parser;
 
 import com.eighthlight.jhttpsrv.request.RequestHeader;
 import com.eighthlight.jhttpsrv.request.Request;
-import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
+import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -3,13 +3,11 @@ package com.eighthlight.jhttpsrv.builder;
 import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.response.ResponseBody;
 import com.eighthlight.jhttpsrv.response.ResponseHeader;
-import com.eighthlight.jhttpsrv.shared.ProtocolIntegers;
-import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
+import com.eighthlight.jhttpsrv.constants.ProtocolIntegers;
+import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 
 public class ResponseBuilder {

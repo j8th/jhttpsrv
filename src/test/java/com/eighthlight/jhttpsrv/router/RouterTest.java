@@ -5,7 +5,7 @@ import com.eighthlight.jhttpsrv.handler.HelloWorldRequestHandler;
 import com.eighthlight.jhttpsrv.handler.OKRequestHandler;
 import com.eighthlight.jhttpsrv.handler.RequestHandler;
 import com.eighthlight.jhttpsrv.request.Request;
-import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
+import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
 import com.eighthlight.jhttpsrv.testmessage.chrome.TestRequestMaker;
 import org.junit.Assert;

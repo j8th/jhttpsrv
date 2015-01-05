@@ -2,10 +2,9 @@ package com.eighthlight.jhttpsrv.handler;
 
 import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.response.Response;
-import com.eighthlight.jhttpsrv.shared.StatusCodes;
+import com.eighthlight.jhttpsrv.constants.StatusCodes;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldResponse;
 import com.eighthlight.jhttpsrv.testmessage.chrome.TestRequestMaker;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

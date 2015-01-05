@@ -3,8 +3,8 @@ package com.eighthlight.jhttpsrv.parser;
 import com.eighthlight.jhttpsrv.request.RequestBody;
 import com.eighthlight.jhttpsrv.request.RequestHeader;
 import com.eighthlight.jhttpsrv.request.Request;
-import com.eighthlight.jhttpsrv.shared.ProtocolIntegers;
-import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
+import com.eighthlight.jhttpsrv.constants.ProtocolIntegers;
+import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;

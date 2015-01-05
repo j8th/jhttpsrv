@@ -1,6 +1,6 @@
 package com.eighthlight.jhttpsrv.response;
 
-import com.eighthlight.jhttpsrv.shared.StatusCodes;
+import com.eighthlight.jhttpsrv.constants.StatusCodes;
 
 public class Response {
     private static final String HTTP_VERSION = "1.1";

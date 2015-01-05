@@ -4,8 +4,8 @@ import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.response.ResponseBody;
 import com.eighthlight.jhttpsrv.response.ResponseHeader;
-import com.eighthlight.jhttpsrv.shared.MIMETypes;
-import com.eighthlight.jhttpsrv.shared.StatusCodes;
+import com.eighthlight.jhttpsrv.constants.MIMETypes;
+import com.eighthlight.jhttpsrv.constants.StatusCodes;
 import com.eighthlight.jhttpsrv.util.StringUtils;
 
 import java.io.IOException;

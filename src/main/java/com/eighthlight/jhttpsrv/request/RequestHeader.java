@@ -1,8 +1,7 @@
 package com.eighthlight.jhttpsrv.request;
 
-import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
+import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
 
-import java.util.IntSummaryStatistics;
 import java.util.Map;
 
 public class RequestHeader {

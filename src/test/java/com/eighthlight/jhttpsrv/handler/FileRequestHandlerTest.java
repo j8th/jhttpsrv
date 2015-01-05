@@ -2,8 +2,8 @@ package com.eighthlight.jhttpsrv.handler;
 
 import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.response.Response;
-import com.eighthlight.jhttpsrv.shared.MIMETypes;
-import com.eighthlight.jhttpsrv.shared.StatusCodes;
+import com.eighthlight.jhttpsrv.constants.MIMETypes;
+import com.eighthlight.jhttpsrv.constants.StatusCodes;
 import com.eighthlight.jhttpsrv.testmessage.chrome.*;
 import org.junit.Assert;
 import org.junit.Before;

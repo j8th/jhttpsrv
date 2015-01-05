@@ -1,4 +1,4 @@
-package com.eighthlight.jhttpsrv.shared;
+package com.eighthlight.jhttpsrv.constants;
 
 import java.util.Collections;
 import java.util.HashMap;

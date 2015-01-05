@@ -3,7 +3,7 @@ package com.eighthlight.jhttpsrv;
 import com.eighthlight.jhttpsrv.handler.*;
 import com.eighthlight.jhttpsrv.router.Router;
 import com.eighthlight.jhttpsrv.server.Jhttpsrv;
-import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
+import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
 
 import java.io.IOException;
 import java.net.ServerSocket;

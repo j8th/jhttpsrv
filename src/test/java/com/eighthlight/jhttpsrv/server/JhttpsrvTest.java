@@ -1,13 +1,6 @@
 package com.eighthlight.jhttpsrv.server;
 
-import com.eighthlight.jhttpsrv.handler.HelloWorldRequestHandler;
-import com.eighthlight.jhttpsrv.mocks.MockSocket;
 import com.eighthlight.jhttpsrv.router.Router;
-import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
-import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
-import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldResponse;
-import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;

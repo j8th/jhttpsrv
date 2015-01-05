@@ -1,8 +1,6 @@
 package com.eighthlight.jhttpsrv.response;
 
-import com.eighthlight.jhttpsrv.shared.MIMETypes;
-import com.eighthlight.jhttpsrv.shared.StatusCodes;
-import org.junit.After;
+import com.eighthlight.jhttpsrv.constants.StatusCodes;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

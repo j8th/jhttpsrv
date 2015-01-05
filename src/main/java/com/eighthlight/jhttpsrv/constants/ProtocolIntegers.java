@@ -1,4 +1,4 @@
-package com.eighthlight.jhttpsrv.shared;
+package com.eighthlight.jhttpsrv.constants;
 
 public class ProtocolIntegers {
     public static final int CR = 13;
