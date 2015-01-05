@@ -7,5 +7,4 @@ public class ProtocolIntegers {
     public static final int[] END_OF_HTTP_HEADER = {CR, LF, CR, LF};
 
     public static final int LIMIT_HEADER_FIELD_SIZE = 8192;
-    public static final int LIMIT_BODY_FIELD_SIZE = 8192;
 }
