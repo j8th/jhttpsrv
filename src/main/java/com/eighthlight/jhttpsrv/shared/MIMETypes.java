@@ -7,6 +7,7 @@ public class MIMETypes {
     public static final String HTML = "text/html";
     public static final String PLAIN_TEXT = "text/plain";
     public static final String JPEG = "image/jpeg";
+    public static final String OCTET_STREAM = "application/octet-stream";
 
     private static final Map<String, String[]> MIMEType_FileExtensions;
     static {
@@ -26,6 +27,6 @@ public class MIMETypes {
             if(Arrays.asList(FileExtensions).contains(fileExt))
                 return MIMEType;
         }
-        throw new IllegalArgumentException(String.format("'%s' is not a valid file extension.", fileExt));
+        return OCTET_STREAM;
     }
 }

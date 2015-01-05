@@ -26,14 +26,12 @@ public class FileRequestHandler implements RequestHandler {
         if(Files.isReadable(abspath) && !Files.isDirectory(abspath)) {
             try {
                 byte[] bytes = Files.readAllBytes(abspath);
+                String contentType = MIMETypes.FileExt2MIMEType(ext);
+                if(contentType == MIMETypes.OCTET_STREAM)
+                    contentType = MIMETypes.HTML;
 
                 body.setContent(bytes);
-                // TODO: Refactor to not use exception.
-                try {
-                    header.setContentType(MIMETypes.FileExt2MIMEType(ext));
-                } catch (IllegalArgumentException e) {
-                    header.setContentType(MIMETypes.HTML);
-                }
+                header.setContentType(contentType);
                 header.setContentLength(body.getContentLength());
             } catch (IOException e) {
                 e.printStackTrace();

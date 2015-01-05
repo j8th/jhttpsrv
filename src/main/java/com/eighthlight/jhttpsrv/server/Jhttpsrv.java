@@ -30,7 +30,6 @@ public class Jhttpsrv implements Runnable {
         while(true){
             try {
                 Socket socket = serverSocket.accept();
-                // TODO: Create a test for this.
                 Worker worker = new Worker(socket, router);
                 worker.run();
             } catch (IOException e) {
