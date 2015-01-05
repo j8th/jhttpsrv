@@ -1,4 +1,4 @@
-package com.eighthlight.jhttpsrv.shared;
+package com.eighthlight.jhttpsrv.util;
 
 public class StringUtils {
     /*

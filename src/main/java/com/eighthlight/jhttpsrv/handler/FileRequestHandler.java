@@ -6,7 +6,7 @@ import com.eighthlight.jhttpsrv.response.ResponseBody;
 import com.eighthlight.jhttpsrv.response.ResponseHeader;
 import com.eighthlight.jhttpsrv.shared.MIMETypes;
 import com.eighthlight.jhttpsrv.shared.StatusCodes;
-import com.eighthlight.jhttpsrv.shared.StringUtils;
+import com.eighthlight.jhttpsrv.util.StringUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;

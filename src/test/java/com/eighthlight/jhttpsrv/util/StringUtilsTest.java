@@ -1,11 +1,8 @@
-package com.eighthlight.jhttpsrv.shared;
+package com.eighthlight.jhttpsrv.util;
 
-import org.junit.After;
+import com.eighthlight.jhttpsrv.util.StringUtils;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class StringUtilsTest {
     @Test
