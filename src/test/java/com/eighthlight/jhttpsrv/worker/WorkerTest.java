@@ -14,6 +14,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
 
@@ -47,18 +51,6 @@ public class WorkerTest {
         worker = new Worker(socket, router);
         worker.run();
 
-        /* TODO:  This should be a bad request, not a 404.
-        正  ~   nc localhost 8080
-lknelkn lknnnnn lknelnel
-
-
-
-HTTP/1.1 404 Not Found
-
-正  ~
-
-         */
-
         // TODO: Assert that the socket's outputstream actually gets the response...
         //Assert.assertEquals("", socket.getOutputStreamAsString());
         Assert.assertEquals(StatusCodes.BAD_REQUEST, worker.getResponse().getStatusCode());
@@ -78,15 +70,21 @@ HTTP/1.1 404 Not Found
     }
 
     @Test
-    public void testHandleBadRequest() throws Exception {
-        MockSocket socket = new MockSocket();
-        socket.seedInputStream("GET /form.html ");
+    public void testHandleBadRequests() throws Exception {
+        List<String> badRequests = new ArrayList<String>();
+        badRequests.add("GET /form.html ");
+        badRequests.add("lknelkn lknnnnn lknelnel\r\n");
 
-        worker = new Worker(socket, router);
-        worker.run();
+        for(String badRequest : badRequests) {
+            MockSocket socket = new MockSocket();
+            socket.seedInputStream(badRequest);
 
-        Assert.assertEquals(StatusCodes.BAD_REQUEST, worker.getResponse().getStatusCode());
-        Assert.assertTrue(socket.isClosed());
+            worker = new Worker(socket, router);
+            worker.run();
+
+            Assert.assertEquals("Failing Bad Request Text: '" + badRequest + "'", StatusCodes.BAD_REQUEST, worker.getResponse().getStatusCode());
+            Assert.assertTrue(socket.isClosed());
+        }
     }
 
 }

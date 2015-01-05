@@ -44,8 +44,22 @@ public class RequestTest {
     @Test
     public void testIsValid() {
         Assert.assertTrue(request.isValid());
+    }
 
+    @Test
+    public void testEmptyRequestIsInvalid() {
         request = new Request(new HashMap<String, String>(), new RequestHeader(new HashMap<String, String>()));
+        Assert.assertFalse(request.isValid());
+    }
+
+    @Test
+    public void testGarbageRequestIsInvalid() {
+        Map<String, String> requestLine = new HashMap<String, String>();
+        requestLine.put(ProtocolStrings.METHOD, "laknfe");
+        requestLine.put(ProtocolStrings.URL, "ekkk");
+        requestLine.put(ProtocolStrings.PROTOCOL_VERSION, "HTTP/1.1");
+
+        request = new Request(requestLine, new RequestHeader(new HashMap<String, String>()));
         Assert.assertFalse(request.isValid());
     }
 }

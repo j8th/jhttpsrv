@@ -7,6 +7,7 @@ import java.util.List;
 public class ProtocolStrings {
     public static final String HTTP_METHOD_GET  = "GET";
     public static final String HTTP_METHOD_POST = "POST";
+    public static final String[] HTTP_METHODS = {HTTP_METHOD_GET, HTTP_METHOD_POST};
 
     public static final String METHOD = "Method";
     public static final String URL = "URL";

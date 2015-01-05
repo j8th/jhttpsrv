@@ -2,6 +2,7 @@ package com.eighthlight.jhttpsrv.request;
 
 import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public class Request {
@@ -34,7 +35,9 @@ public class Request {
     }
 
     public boolean isValid() {
-        if(method == "" || url == "")
+        if(!Arrays.asList(ProtocolStrings.HTTP_METHODS).contains(method))
+            return false;
+        if(url == "")
             return false;
         return true;
     }
