@@ -4,7 +4,6 @@ import com.eighthlight.jhttpsrv.handler.HelloWorldRequestHandler;
 import com.eighthlight.jhttpsrv.mocks.MockSocket;
 import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.router.Router;
-import com.eighthlight.jhttpsrv.shared.ProtocolIntegers;
 import com.eighthlight.jhttpsrv.shared.ProtocolStrings;
 import com.eighthlight.jhttpsrv.shared.StatusCodes;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
@@ -12,14 +11,11 @@ import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldResponse;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.junit.Assert.*;
 
 public class WorkerTest {
     private Worker worker;
@@ -51,8 +47,7 @@ public class WorkerTest {
         worker = new Worker(socket, router);
         worker.run();
 
-        // TODO: Assert that the socket's outputstream actually gets the response...
-        //Assert.assertEquals("", socket.getOutputStreamAsString());
+        Assert.assertNotEquals("", socket.getOutputStreamAsString());
         Assert.assertEquals(StatusCodes.BAD_REQUEST, worker.getResponse().getStatusCode());
         Assert.assertTrue(socket.isClosed());
     }
