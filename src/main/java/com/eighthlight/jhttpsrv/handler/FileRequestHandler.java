@@ -27,12 +27,11 @@ public class FileRequestHandler implements RequestHandler {
             try {
                 byte[] bytes = Files.readAllBytes(abspath);
                 String contentType = MIMETypes.FileExt2MIMEType(ext);
-                if(contentType == MIMETypes.OCTET_STREAM)
-                    contentType = MIMETypes.HTML;
 
                 body.setContent(bytes);
                 header.setContentType(contentType);
                 header.setContentLength(body.getContentLength());
+                response.setStatusCode(StatusCodes.OK);
             } catch (IOException e) {
                 e.printStackTrace();
             }

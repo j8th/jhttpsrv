@@ -52,6 +52,17 @@ public class FileRequestHandlerTest {
     }
 
     @Test
+    public void testGzipFile() throws Exception {
+        Request request = TestRequestMaker.fromString(GETgzipFileRequest.ENTIRE_MESSAGE);
+        Response response = fileRequestHandler.run(request);
+        byte[] fileBytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/www/download/testdl.txt.gz"));
+
+        Assert.assertEquals(MIMETypes.GZIP, response.getHeaders().getContentType());
+        Assert.assertArrayEquals(fileBytes, response.getBody().getContent());
+        Assert.assertEquals(StatusCodes.OK, response.getStatusCode());
+    }
+
+    @Test
     public void testRequestedFileUnreadable() throws Exception {
         Request request = TestRequestMaker.fromString(GET404Request.ENTIRE_MESSAGE);
         Response response = fileRequestHandler.run(request);
