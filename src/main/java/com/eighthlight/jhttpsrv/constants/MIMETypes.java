@@ -6,6 +6,7 @@ public class MIMETypes {
     public static final String HTML = "text/html";
     public static final String PLAIN_TEXT = "text/plain";
     public static final String JPEG = "image/jpeg";
+    public static final String JSON = "application/json";
     public static final String GZIP = "application/x-gzip";
     public static final String OCTET_STREAM = "application/octet-stream";
 
@@ -17,6 +18,7 @@ public class MIMETypes {
         myMap.put(PLAIN_TEXT, new String[] {"txt"});
         myMap.put(JPEG, new String[] {"jpeg", "jpg"});
         myMap.put(GZIP, new String[] {"gz"});
+        myMap.put(JSON, new String[] {"json"});
 
         MIMEType_FileExtensions = Collections.unmodifiableMap(myMap);
     }

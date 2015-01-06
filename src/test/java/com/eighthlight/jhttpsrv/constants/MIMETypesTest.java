@@ -10,6 +10,7 @@ public class MIMETypesTest {
         Assert.assertEquals(MIMETypes.PLAIN_TEXT, MIMETypes.FileExt2MIMEType("txt"));
         Assert.assertEquals(MIMETypes.JPEG, MIMETypes.FileExt2MIMEType("jpg"));
         Assert.assertEquals(MIMETypes.GZIP, MIMETypes.FileExt2MIMEType("gz"));
+        Assert.assertEquals(MIMETypes.JSON, MIMETypes.FileExt2MIMEType("json"));
     }
 
     @Test
