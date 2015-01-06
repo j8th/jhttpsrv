@@ -19,6 +19,7 @@ public class Main {
 
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/redirect", new RedirectRequestHandler());
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/time", new TimeRequestHandler());
+        router.addRoute(ProtocolStrings.HTTP_METHOD_POST, "/formsubmit", new FormRequestHandler());
         router.setDefaultRequestHandler(new FileRequestHandler());
 
         jhttpsrv = new Jhttpsrv(serverSocket, router);
