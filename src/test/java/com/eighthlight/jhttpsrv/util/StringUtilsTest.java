@@ -13,11 +13,13 @@ public class StringUtilsTest {
         String noExtension = "/some/path/to/a/file/without/an/extension";
         String trickyDotNoExt = "/Dots/In/The/Dir.Name/OhNo";
         String trickyDotWithExt = "/Dots/In/The/Dir.Name/OhNo.jpg";
+        String txtGzip = "/download/testdl.txt.gz";
 
         Assert.assertEquals("txt", StringUtils.getFileExtension(myAbsFilePath));
         Assert.assertEquals("", StringUtils.getFileExtension(noExtension));
         Assert.assertEquals("", StringUtils.getFileExtension(trickyDotNoExt));
         Assert.assertEquals("jpg", StringUtils.getFileExtension(trickyDotWithExt));
+        Assert.assertEquals("gz", StringUtils.getFileExtension(txtGzip));
     }
 
     @Test
