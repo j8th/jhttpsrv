@@ -1,5 +1,8 @@
 package com.eighthlight.jhttpsrv.util;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class StringUtils {
     /*
      * Credit where credit's due:
@@ -16,5 +19,20 @@ public class StringUtils {
         }
 
         return extension;
+    }
+
+    public static Map<String, String> parseHttpFormData(String formData) {
+        Map<String, String> result = new HashMap<String, String>();
+        if(formData == null)
+            return result;
+
+        String[] tokens = formData.split("&");
+        for(int i = 0; i < tokens.length; i++) {
+            String[] subtokens = tokens[i].split("=");
+            if(subtokens.length == 2)
+                result.put(subtokens[0], subtokens[1]);
+        }
+
+        return result;
     }
 }
