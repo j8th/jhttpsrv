@@ -10,4 +10,8 @@ public class RequestBody {
     public boolean isEmpty() {
         return rawBody.equals("");
     }
+
+    public String getContent() {
+        return rawBody;
+    }
 }
