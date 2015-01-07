@@ -10,8 +10,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
+import static java.nio.charset.StandardCharsets.*;
+import static org.hamcrest.CoreMatchers.containsString;
 
 public class FileRequestHandlerTest {
     private FileRequestHandler fileRequestHandler;
@@ -75,16 +79,21 @@ public class FileRequestHandlerTest {
     }
 
     @Test
-    public void testRequestedFileUnreadable() throws Exception {
-        Request request = TestRequestMaker.fromString(GET404Request.ENTIRE_MESSAGE);
+    public void testDirectoryRequestReturnsHTMLListing() throws Exception {
+        Request request = TestRequestMaker.fromString(GETDirectoryRequest.ENTIRE_MESSAGE);
         Response response = fileRequestHandler.run(request);
 
-        Assert.assertEquals(StatusCodes.NOT_FOUND, response.getStatusCode());
+        Assert.assertEquals(StatusCodes.OK, response.getStatusCode());
+        Assert.assertEquals(MIMETypes.HTML, response.getHeaders().getContentType());
+        String content = new String(response.getBody().getContent(), StandardCharsets.UTF_8);
+        Assert.assertThat(content, containsString("<a href=\"/dirtest/candy/\">candy/</a>"));
+        Assert.assertThat(content, containsString("<a href=\"/dirtest/hello.html\">hello.html</a>"));
+        Assert.assertThat(content, containsString("<a href=\"/\">^</a>"));
     }
 
     @Test
-    public void testRequestingDirectoryGives404() throws Exception {
-        Request request = TestRequestMaker.fromString(GETDirectoryRequest.ENTIRE_MESSAGE);
+    public void testRequestedFileUnreadable() throws Exception {
+        Request request = TestRequestMaker.fromString(GET404Request.ENTIRE_MESSAGE);
         Response response = fileRequestHandler.run(request);
 
         Assert.assertEquals(StatusCodes.NOT_FOUND, response.getStatusCode());

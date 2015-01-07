@@ -1,7 +1,7 @@
 package com.eighthlight.jhttpsrv.testmessage.chrome;
 
 public class GETDirectoryRequest {
-    public final static String REQUEST_LINE = "GET /images HTTP/1.1\r\n";
+    public final static String REQUEST_LINE = "GET /dirtest HTTP/1.1\r\n";
 
     public final static String HEADERS =
                     "Host: localhost\r\n" +
