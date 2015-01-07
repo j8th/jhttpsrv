@@ -13,9 +13,6 @@ public class Jhttpsrv implements Runnable {
     private ServerSocket serverSocket;
     private Router router;
 
-    private RequestParser requestParser = new RequestParser();
-    private ResponseBuilder responseBuilder = new ResponseBuilder();
-
     public Jhttpsrv(ServerSocket myServerSocket, Router myRouter) {
         serverSocket = myServerSocket;
         router = myRouter;
