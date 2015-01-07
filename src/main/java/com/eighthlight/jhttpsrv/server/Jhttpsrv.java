@@ -2,15 +2,10 @@ package com.eighthlight.jhttpsrv.server;
 
 import com.eighthlight.jhttpsrv.builder.ResponseBuilder;
 import com.eighthlight.jhttpsrv.parser.RequestParser;
-import com.eighthlight.jhttpsrv.request.Request;
-import com.eighthlight.jhttpsrv.response.Response;
-import com.eighthlight.jhttpsrv.handler.RequestHandler;
 import com.eighthlight.jhttpsrv.router.Router;
 import com.eighthlight.jhttpsrv.worker.Worker;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
