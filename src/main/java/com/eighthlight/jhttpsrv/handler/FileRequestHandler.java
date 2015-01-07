@@ -70,7 +70,11 @@ public class FileRequestHandler implements RequestHandler {
     }
 
     public static void setRootDir(String absolutePath) {
-        rootdir = absolutePath;
+        Path path = Paths.get(absolutePath);
+        if(Files.isDirectory(path) && Files.isReadable(path))
+            rootdir = absolutePath;
+        else
+            throw new IllegalArgumentException(String.format("'%s' is either not a directory or is unreadable.", absolutePath));
     }
 
     private String getPathRelativeToRootDir(File file) {

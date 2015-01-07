@@ -20,6 +20,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 public class FileRequestHandlerTest {
     private FileRequestHandler fileRequestHandler;
     private Request request;
+    private String defaultRootDir = System.getProperty("user.dir") + "/www";
 
     @Before
     public void setUp() throws Exception {
@@ -106,8 +107,19 @@ public class FileRequestHandlerTest {
 
     @Test
     public void testSetRootDirectory() throws Exception {
-        FileRequestHandler.setRootDir("/path/to/some/dir");
-        Assert.assertEquals("/path/to/some/dir", FileRequestHandler.getRootDir());
+        String subDir = defaultRootDir + "/dirtest";
+        FileRequestHandler.setRootDir(subDir);
+        Assert.assertEquals(subDir, FileRequestHandler.getRootDir());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetDefaultRootDirectoryGarbageParamThrowsException() {
+        FileRequestHandler.setRootDir("Something not a directory");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetDefaultRootDirectoryIntegerThrowsException() {
+        FileRequestHandler.setRootDir("8080");
     }
 
     private byte[] getTestFileBytes(String testFilePathRelativeToWWWRoot) throws IOException {
