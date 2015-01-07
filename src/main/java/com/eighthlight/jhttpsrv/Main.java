@@ -1,5 +1,6 @@
 package com.eighthlight.jhttpsrv;
 
+import com.eighthlight.jhttpsrv.args.CmdArgs;
 import com.eighthlight.jhttpsrv.handler.*;
 import com.eighthlight.jhttpsrv.router.Router;
 import com.eighthlight.jhttpsrv.server.Jhttpsrv;
@@ -9,30 +10,32 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 public class Main {
-    private static ServerSocket serverSocket;
-    private static Router router;
-    private static Jhttpsrv jhttpsrv;
+    public static void main(String[] args) throws IOException {
+        CmdArgs cmdArgs = new CmdArgs(args);
 
-    public static void init(ServerSocket myServerSocket) throws IOException {
-        serverSocket = myServerSocket;
-        router = new Router();
+        ServerSocket serverSocket;
+        try {
+            int port = Integer.parseInt(cmdArgs.getPort());
+            serverSocket = new ServerSocket(port);
+        } catch (Exception e) {
+            System.out.println("Port must be an integer between 0 and 65,535.");
+            return;
+        }
 
+        try {
+            FileRequestHandler.setRootDir(cmdArgs.getDirectory());
+        } catch (IllegalArgumentException e) {
+            System.out.println("The www root directory must be a readable directory.");
+            return;
+        }
+
+        Router router = new Router();
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/redirect", new RedirectRequestHandler());
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/time", new TimeRequestHandler());
         router.addRoute(ProtocolStrings.HTTP_METHOD_POST, "/formsubmit", new FormRequestHandler());
         router.setDefaultRequestHandler(new FileRequestHandler());
 
-        jhttpsrv = new Jhttpsrv(serverSocket, router);
-    }
-
-    public static Jhttpsrv getJhttpsrv() {
-        return jhttpsrv;
-    }
-
-    public static void main(String[] args) throws IOException {
-        ServerSocket myServerSocket = new ServerSocket(8080);
-        init(myServerSocket);
-
+        Jhttpsrv jhttpsrv = new Jhttpsrv(serverSocket, router);
         jhttpsrv.run();
     }
 }
