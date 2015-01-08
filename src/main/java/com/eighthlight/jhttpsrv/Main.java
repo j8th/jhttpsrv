@@ -18,14 +18,14 @@ public class Main {
             int port = Integer.parseInt(cmdArgs.getPort());
             serverSocket = new ServerSocket(port);
         } catch (Exception e) {
-            System.out.println("Port must be an integer between 0 and 65,535.");
+            System.err.println("Port must be an integer between 0 and 65,535.");
             return;
         }
 
         try {
             FileRequestHandler.setRootDir(cmdArgs.getDirectory());
         } catch (IllegalArgumentException e) {
-            System.out.println("The www root directory must be a readable directory.");
+            System.err.println("The www root directory must be a readable directory.");
             return;
         }
 
