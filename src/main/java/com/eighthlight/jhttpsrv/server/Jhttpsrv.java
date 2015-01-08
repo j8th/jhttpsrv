@@ -21,7 +21,7 @@ public class Jhttpsrv implements Runnable {
             try {
                 Socket socket = serverSocket.accept();
                 Worker worker = new Worker(socket, router);
-                worker.run();
+                new Thread(worker).start();
             } catch (IOException e) {
                 e.printStackTrace();
             }
