@@ -1,23 +1,19 @@
 package com.eighthlight.jhttpsrv.server;
 
+import com.eighthlight.jhttpsrv.mocks.MockServerSocket;
 import com.eighthlight.jhttpsrv.router.Router;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
-
-import java.net.ServerSocket;
-
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.mock;
 
 public class JhttpsrvTest {
-    private ServerSocket mockServerSocket;
+    private MockServerSocket mockServerSocket;
     private Router router;
     private Jhttpsrv jhttpsrv;
 
     @Before
     public void setUp() throws Exception {
-        mockServerSocket = mock(ServerSocket.class);
+        mockServerSocket = new MockServerSocket();
         router = new Router();
         jhttpsrv = new Jhttpsrv(mockServerSocket, router);
     }
@@ -25,6 +21,7 @@ public class JhttpsrvTest {
     @Test
     public void testRun() throws Exception {
         new Thread(jhttpsrv).start();
-        Mockito.verify(mockServerSocket, atLeastOnce()).accept();
+        Thread.sleep(500);
+        assertTrue(mockServerSocket.acceptCalledAtLeastOnce());
     }
 }
