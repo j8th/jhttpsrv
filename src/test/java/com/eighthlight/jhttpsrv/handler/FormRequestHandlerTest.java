@@ -4,6 +4,7 @@ import com.eighthlight.jhttpsrv.constants.StatusCodes;
 import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.testmessage.chrome.POSTFormRequest;
+import com.eighthlight.jhttpsrv.testmessage.chrome.PUTFormRequest;
 import com.eighthlight.jhttpsrv.testmessage.chrome.TestRequestMaker;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,5 +36,13 @@ public class FormRequestHandlerTest {
         assertThat(content, containsString("cloudy"));
         assertThat(content, containsString("city"));
         assertThat(content, containsString("Chicago"));
+    }
+
+    @Test
+    public void testPUTRequest() throws Exception {
+        Request request = TestRequestMaker.fromString(PUTFormRequest.ENTIRE_MESSAGE);
+        Response response = handler.run(request);
+
+        assertEquals(StatusCodes.OK, response.getStatusCode());
     }
 }
