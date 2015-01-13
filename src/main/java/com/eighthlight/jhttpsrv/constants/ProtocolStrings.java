@@ -4,10 +4,14 @@ public class ProtocolStrings {
     public static final String HTTP_METHOD_GET  = "GET";
     public static final String HTTP_METHOD_POST = "POST";
     public static final String HTTP_METHOD_PUT = "PUT";
+    public static final String HTTP_METHOD_HEAD = "HEAD";
+    public static final String HTTP_METHOD_OPTIONS = "OPTIONS";
     public static final String[] HTTP_METHODS = {
             HTTP_METHOD_GET,
             HTTP_METHOD_POST,
-            HTTP_METHOD_PUT
+            HTTP_METHOD_PUT,
+            HTTP_METHOD_HEAD,
+            HTTP_METHOD_OPTIONS
     };
 
     public static final String METHOD = "Method";
@@ -24,4 +28,5 @@ public class ProtocolStrings {
     public static final String CONTENT_LENGTH = "Content-Length";
     public static final String CONTENT_TYPE = "Content-Type";
     public static final String LOCATION = "Location";
+    public static final String ALLOW = "Allow";
 }
