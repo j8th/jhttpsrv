@@ -34,8 +34,11 @@ public class Main {
         String redirectURL = String.format("http://localhost:%d/", port);
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/redirect", new RedirectRequestHandler(redirectURL));
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/time", new TimeRequestHandler());
-        router.addRoute(ProtocolStrings.HTTP_METHOD_POST, "/form", new FormRequestHandler());
-        router.addRoute(ProtocolStrings.HTTP_METHOD_PUT, "/form", new FormRequestHandler());
+        DataHandler dataHandler = new DataHandler();
+        router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/form", dataHandler);
+        router.addRoute(ProtocolStrings.HTTP_METHOD_POST, "/form", dataHandler);
+        router.addRoute(ProtocolStrings.HTTP_METHOD_PUT, "/form", dataHandler);
+        router.addRoute(ProtocolStrings.HTTP_METHOD_DELETE, "/form", dataHandler);
         router.addRoute(ProtocolStrings.HTTP_METHOD_OPTIONS, "/method_options", new OptionsRequestHandler());
         router.setDefaultRequestHandler(new FileRequestHandler());
 
