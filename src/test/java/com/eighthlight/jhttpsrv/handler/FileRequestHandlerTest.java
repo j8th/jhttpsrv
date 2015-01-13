@@ -1,5 +1,6 @@
 package com.eighthlight.jhttpsrv.handler;
 
+import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
 import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.constants.MIMETypes;
@@ -98,6 +99,23 @@ public class FileRequestHandlerTest {
         Response response = fileRequestHandler.run(request);
 
         Assert.assertEquals(StatusCodes.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    public void testPOSTRequestToExistingFileReturns405() throws Exception {
+        Request request = TestRequestMaker.fromString(POSTtextfileRequest.ENTIRE_MESSAGE);
+        Response response = fileRequestHandler.run(request);
+
+        Assert.assertEquals(StatusCodes.METHOD_NOT_ALLOWED, response.getStatusCode());
+    }
+
+    @Test
+    public void testPUTRequestToExistingFileReturns405() throws Exception {
+        Request request = TestRequestMaker.fromString(PUTtextfileRequest.ENTIRE_MESSAGE);
+        Response response = fileRequestHandler.run(request);
+
+        Assert.assertEquals(ProtocolStrings.HTTP_METHOD_PUT, request.getMethod());
+        Assert.assertEquals(StatusCodes.METHOD_NOT_ALLOWED, response.getStatusCode());
     }
 
     @Test
