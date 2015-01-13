@@ -1,5 +1,6 @@
 package com.eighthlight.jhttpsrv.handler;
 
+import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
 import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.response.ResponseBody;
@@ -33,34 +34,42 @@ public class FileRequestHandler implements RequestHandler {
         ResponseHeader header = new ResponseHeader();
         ResponseBody body = new ResponseBody();
 
-        Path abspath = Paths.get(rootdir + request.getURL());
-        String ext = StringUtils.getFileExtension(rootdir + request.getURL());
-        if(Files.isReadable(abspath)) {
-            if(Files.isDirectory(abspath)) {
-                String content = createDirectoryListingHtml(abspath);
-
-                header.setContentType(MIMETypes.HTML);
-                body.setContent(content);
-                response.setStatusCode(StatusCodes.OK);
-            } else {
-                try {
-                    byte[] bytes = Files.readAllBytes(abspath);
-                    String contentType = MIMETypes.FileExt2MIMEType(ext);
-
-                    body.setContent(bytes);
-                    header.setContentType(contentType);
-                    header.setContentLength(body.getContentLength());
-                    response.setStatusCode(StatusCodes.OK);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        } else {
-            response.setStatusCode(StatusCodes.NOT_FOUND);
-        }
-
         response.setHeaders(header);
         response.setBody(body);
+
+        Path abspath = Paths.get(rootdir + request.getURL());
+        String ext = StringUtils.getFileExtension(rootdir + request.getURL());
+
+        if(!Files.isReadable(abspath)) {
+            response.setStatusCode(StatusCodes.NOT_FOUND);
+            return response;
+        }
+
+        if(!request.getMethod().equals(ProtocolStrings.HTTP_METHOD_GET)) {
+            response.setStatusCode(StatusCodes.METHOD_NOT_ALLOWED);
+            return response;
+        }
+
+        if(Files.isDirectory(abspath)) {
+            String content = createDirectoryListingHtml(abspath);
+
+            header.setContentType(MIMETypes.HTML);
+            body.setContent(content);
+            response.setStatusCode(StatusCodes.OK);
+            return response;
+        }
+
+        try {
+            byte[] bytes = Files.readAllBytes(abspath);
+            String contentType = MIMETypes.FileExt2MIMEType(ext);
+
+            body.setContent(bytes);
+            header.setContentType(contentType);
+            header.setContentLength(body.getContentLength());
+            response.setStatusCode(StatusCodes.OK);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return response;
     }
