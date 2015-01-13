@@ -3,10 +3,14 @@ package com.eighthlight.jhttpsrv.request;
 import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
+import com.eighthlight.jhttpsrv.testmessage.chrome.POSTFormRequest;
+import com.eighthlight.jhttpsrv.testmessage.chrome.PUTtextfileRequest;
+import com.eighthlight.jhttpsrv.testmessage.chrome.TestRequestMaker;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.swing.text.TabExpander;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,7 +51,21 @@ public class RequestTest {
     }
 
     @Test
-    public void testIsValid() {
+    public void testGETRequestIsValid() {
+        Assert.assertTrue(request.isValid());
+    }
+
+    @Test
+    public void testPOSTRequestIsValid() throws Exception {
+        Request request = TestRequestMaker.fromString(POSTFormRequest.ENTIRE_MESSAGE);
+
+        Assert.assertTrue(request.isValid());
+    }
+
+    @Test
+    public void testPUTRequestIsValid() throws Exception {
+        Request request = TestRequestMaker.fromString(PUTtextfileRequest.ENTIRE_MESSAGE);
+
         Assert.assertTrue(request.isValid());
     }
 
