@@ -4,6 +4,7 @@ public class ResponseHeader {
     private String contenttype = "";
     private int contentlength = 0;
     private String location = "";
+    private String[] allow = {};
 
     public String getContentType() {
         return contenttype;
@@ -27,5 +28,13 @@ public class ResponseHeader {
 
     public void setLocation(String myLocation) {
         location = myLocation;
+    }
+
+    public void setAllow(String[] allow) {
+        this.allow = allow;
+    }
+
+    public String[] getAllow() {
+        return allow;
     }
 }

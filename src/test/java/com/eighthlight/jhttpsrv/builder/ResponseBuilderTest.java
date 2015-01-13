@@ -1,12 +1,13 @@
 package com.eighthlight.jhttpsrv.builder;
 
+import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
 import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.response.ResponseBody;
 import com.eighthlight.jhttpsrv.response.ResponseHeader;
 import com.eighthlight.jhttpsrv.constants.MIMETypes;
 import com.eighthlight.jhttpsrv.constants.StatusCodes;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldResponse;
-import org.junit.Assert;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,30 +38,41 @@ public class ResponseBuilderTest {
     @Test
     public void testBuildStatusLine() {
         byte[] statusLineBytes = GETHelloworldResponse.STATUS_LINE.getBytes(StandardCharsets.UTF_8);
-        Assert.assertArrayEquals(statusLineBytes, responseBuilder.buildStatusLine(response));
+        assertArrayEquals(statusLineBytes, responseBuilder.buildStatusLine(response));
     }
 
     @Test
     public void testBuildHeaders() {
         byte[] headerBytes = GETHelloworldResponse.HEADERS.getBytes(StandardCharsets.UTF_8);
-        Assert.assertArrayEquals(headerBytes, responseBuilder.buildHeaders(response));
+        assertArrayEquals(headerBytes, responseBuilder.buildHeaders(response.getHeaders()));
     }
 
     @Test
     public void testBuildHeadersWithEmptyHeaders() {
         response.setHeaders(new ResponseHeader());
-        Assert.assertArrayEquals(new byte[0], responseBuilder.buildHeaders(response));
+        assertArrayEquals(new byte[0], responseBuilder.buildHeaders(response.getHeaders()));
+    }
+
+    @Test
+    public void testBuildHeadersWithAllow() {
+        ResponseHeader header = new ResponseHeader();
+        header.setAllow(new String[] {ProtocolStrings.HTTP_METHOD_GET, ProtocolStrings.HTTP_METHOD_POST});
+        byte[] headerBytes = "Allow: GET,POST\r\n".getBytes(StandardCharsets.UTF_8);
+
+        assertArrayEquals(headerBytes, responseBuilder.buildHeaders(header));
     }
 
     @Test
     public void testBuildBody() {
         byte[] bodyBytes = GETHelloworldResponse.BODY.getBytes(StandardCharsets.UTF_8);
-        Assert.assertArrayEquals(bodyBytes, responseBuilder.buildBody(response));
+        assertArrayEquals(bodyBytes, responseBuilder.buildBody(response.getBody()));
     }
 
     @Test
     public void testBuildResponse() {
         byte[] responseBytes = GETHelloworldResponse.ENTIRE_MESSAGE.getBytes(StandardCharsets.UTF_8);
-        Assert.assertArrayEquals(responseBytes, responseBuilder.buildResponse(response));
+        assertArrayEquals(responseBytes, responseBuilder.buildResponse(response));
     }
+
+
 }

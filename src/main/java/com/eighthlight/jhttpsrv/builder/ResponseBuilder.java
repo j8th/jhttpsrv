@@ -9,6 +9,7 @@ import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 public class ResponseBuilder {
     public byte[] buildStatusLine(Response response) {
@@ -20,27 +21,26 @@ public class ResponseBuilder {
         return result.getBytes(StandardCharsets.UTF_8);
     }
 
-    public byte[] buildHeaders(Response response) {
+    public byte[] buildHeaders(ResponseHeader header) {
         String result = "";
-        ResponseHeader header = response.getHeaders();
 
         result += buildHeaderString(ProtocolStrings.CONTENT_LENGTH, header.getContentLength());
         result += buildHeaderString(ProtocolStrings.CONTENT_TYPE, header.getContentType());
         result += buildHeaderString(ProtocolStrings.LOCATION, header.getLocation());
+        result += buildHeaderString(ProtocolStrings.ALLOW, header.getAllow());
 
         return result.getBytes(StandardCharsets.UTF_8);
     }
 
-    public byte[] buildBody(Response response) {
-        ResponseBody body = response.getBody();
+    public byte[] buildBody(ResponseBody body) {
         return body.getContent();
     }
 
     public byte[] buildResponse(Response response) {
         byte[] statusLineBytes = buildStatusLine(response);
-        byte[] headerBytes = buildHeaders(response);
+        byte[] headerBytes = buildHeaders(response.getHeaders());
         byte[] emptyLine = new byte[] {ProtocolIntegers.CR, ProtocolIntegers.LF};
-        byte[] bodyBytes = buildBody(response);
+        byte[] bodyBytes = buildBody(response.getBody());
 
         ByteArrayOutputStream myos = new ByteArrayOutputStream();
         try {
@@ -65,6 +65,12 @@ public class ResponseBuilder {
     private String buildHeaderString(String headerKey, int headerVal) {
         if(headerVal > 0)
             return String.format("%s: %s\r\n", headerKey, headerVal);
+        return "";
+    }
+
+    private String buildHeaderString(String headerKey, String[] headerVal) {
+        if(headerVal.length > 0)
+            return String.format("%s: %s\r\n", headerKey, String.join(",", Arrays.asList(headerVal)));
         return "";
     }
 }

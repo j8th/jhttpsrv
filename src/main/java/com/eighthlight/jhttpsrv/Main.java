@@ -36,6 +36,7 @@ public class Main {
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/time", new TimeRequestHandler());
         router.addRoute(ProtocolStrings.HTTP_METHOD_POST, "/form", new FormRequestHandler());
         router.addRoute(ProtocolStrings.HTTP_METHOD_PUT, "/form", new FormRequestHandler());
+        router.addRoute(ProtocolStrings.HTTP_METHOD_OPTIONS, "/method_options", new OptionsRequestHandler());
         router.setDefaultRequestHandler(new FileRequestHandler());
 
         Jhttpsrv jhttpsrv = new Jhttpsrv(serverSocket, router);

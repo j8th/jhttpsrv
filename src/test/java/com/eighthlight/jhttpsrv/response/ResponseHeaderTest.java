@@ -1,7 +1,9 @@
 package com.eighthlight.jhttpsrv.response;
 
 import com.eighthlight.jhttpsrv.constants.MIMETypes;
-import org.junit.Assert;
+import static org.junit.Assert.*;
+
+import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,22 +17,30 @@ public class ResponseHeaderTest {
 
     @Test
     public void testSet_Get_ContentType() {
-        Assert.assertEquals("", responseHeader.getContentType());
+        assertEquals("", responseHeader.getContentType());
         responseHeader.setContentType(MIMETypes.HTML);
-        Assert.assertEquals(MIMETypes.HTML, responseHeader.getContentType());
+        assertEquals(MIMETypes.HTML, responseHeader.getContentType());
     }
 
     @Test
     public void testSet_Get_ContentLength() {
-        Assert.assertEquals(0, responseHeader.getContentLength());
+        assertEquals(0, responseHeader.getContentLength());
         responseHeader.setContentLength(412);
-        Assert.assertEquals(412, responseHeader.getContentLength());
+        assertEquals(412, responseHeader.getContentLength());
     }
 
     @Test
     public void testSet_Get_Location() {
-        Assert.assertEquals("", responseHeader.getLocation());
+        assertEquals("", responseHeader.getLocation());
         responseHeader.setLocation("http://example.com/redirect/here");
-        Assert.assertEquals("http://example.com/redirect/here", responseHeader.getLocation());
+        assertEquals("http://example.com/redirect/here", responseHeader.getLocation());
+    }
+
+    @Test
+    public void testSet_Get_Allow() {
+        assertArrayEquals(new String[0], responseHeader.getAllow());
+        String[] allowMethods = {ProtocolStrings.HTTP_METHOD_GET, ProtocolStrings.HTTP_METHOD_POST};
+        responseHeader.setAllow(allowMethods);
+        assertArrayEquals(allowMethods, responseHeader.getAllow());
     }
 }
