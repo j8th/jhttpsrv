@@ -14,8 +14,9 @@ public class Main {
         CmdArgs cmdArgs = new CmdArgs(args);
 
         ServerSocket serverSocket;
+        int port;
         try {
-            int port = Integer.parseInt(cmdArgs.getPort());
+            port = Integer.parseInt(cmdArgs.getPort());
             serverSocket = new ServerSocket(port);
         } catch (Exception e) {
             System.err.println("Port must be an integer between 0 and 65,535.");
@@ -30,7 +31,8 @@ public class Main {
         }
 
         Router router = new Router();
-        router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/redirect", new RedirectRequestHandler());
+        String redirectURL = String.format("http://localhost:%d/", port);
+        router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/redirect", new RedirectRequestHandler(redirectURL));
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/time", new TimeRequestHandler());
         router.addRoute(ProtocolStrings.HTTP_METHOD_POST, "/form", new FormRequestHandler());
         router.addRoute(ProtocolStrings.HTTP_METHOD_PUT, "/form", new FormRequestHandler());

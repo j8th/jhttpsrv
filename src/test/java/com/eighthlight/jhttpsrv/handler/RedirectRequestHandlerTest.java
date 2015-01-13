@@ -15,7 +15,7 @@ public class RedirectRequestHandlerTest {
 
     @Before
     public void setUp() throws Exception {
-        handler = new RedirectRequestHandler();
+        handler = new RedirectRequestHandler("http://localhost:8080/");
         request = TestRequestMaker.fromString(GETHelloworldResponse.ENTIRE_MESSAGE);
     }
 
@@ -23,6 +23,6 @@ public class RedirectRequestHandlerTest {
     public void testRun() throws Exception {
         Response response = handler.run(request);
         Assert.assertEquals(StatusCodes.TEMPORARY_REDIRECT, response.getStatusCode());
-        Assert.assertEquals("/time", response.getHeaders().getLocation());
+        Assert.assertEquals("http://localhost:8080/", response.getHeaders().getLocation());
     }
 }
