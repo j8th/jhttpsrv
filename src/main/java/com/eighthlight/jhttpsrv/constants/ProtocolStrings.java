@@ -6,12 +6,14 @@ public class ProtocolStrings {
     public static final String HTTP_METHOD_PUT = "PUT";
     public static final String HTTP_METHOD_HEAD = "HEAD";
     public static final String HTTP_METHOD_OPTIONS = "OPTIONS";
+    public static final String HTTP_METHOD_DELETE = "DELETE";
     public static final String[] HTTP_METHODS = {
             HTTP_METHOD_GET,
             HTTP_METHOD_POST,
             HTTP_METHOD_PUT,
             HTTP_METHOD_HEAD,
-            HTTP_METHOD_OPTIONS
+            HTTP_METHOD_OPTIONS,
+            HTTP_METHOD_DELETE
     };
 
     public static final String METHOD = "Method";
