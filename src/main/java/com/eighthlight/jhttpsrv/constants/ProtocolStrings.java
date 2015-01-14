@@ -2,6 +2,7 @@ package com.eighthlight.jhttpsrv.constants;
 
 public class ProtocolStrings {
     public static final String HTTP_METHOD_GET  = "GET";
+    public static final String HTTP_METHOD_PATCH = "PATCH";
     public static final String HTTP_METHOD_POST = "POST";
     public static final String HTTP_METHOD_PUT = "PUT";
     public static final String HTTP_METHOD_HEAD = "HEAD";
@@ -9,6 +10,7 @@ public class ProtocolStrings {
     public static final String HTTP_METHOD_DELETE = "DELETE";
     public static final String[] HTTP_METHODS = {
             HTTP_METHOD_GET,
+            HTTP_METHOD_PATCH,
             HTTP_METHOD_POST,
             HTTP_METHOD_PUT,
             HTTP_METHOD_HEAD,
