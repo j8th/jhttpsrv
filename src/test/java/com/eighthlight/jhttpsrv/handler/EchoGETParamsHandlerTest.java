@@ -21,7 +21,7 @@ public class EchoGETParamsHandlerTest {
         handler = new EchoGETParamsHandler();
     }
 
-    //@Test
+    @Test
     public void testRun() throws Exception {
         Request request = TestRequestMaker.fromString(GETparamsRequest.ENTIRE_MESSAGE);
         Response response = handler.run(request);
