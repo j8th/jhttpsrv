@@ -43,6 +43,7 @@ public class Main {
         router.addRoute(ProtocolStrings.HTTP_METHOD_DELETE, "/form", dataHandler);
         router.addRoute(ProtocolStrings.HTTP_METHOD_OPTIONS, "/method_options", new OptionsRequestHandler());
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/parameters", new EchoGETParamsHandler());
+        router.addRoute(ProtocolStrings.HTTP_METHOD_PATCH, "/patch-content.txt", new PatchHandler(new FileRequestHandler()));
         router.setDefaultRequestHandler(new FileRequestHandler());
 
         Jhttpsrv jhttpsrv = new Jhttpsrv(serverSocket, router, config);
