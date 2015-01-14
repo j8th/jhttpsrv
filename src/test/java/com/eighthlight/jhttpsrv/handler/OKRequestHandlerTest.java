@@ -6,6 +6,7 @@ import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.constants.MIMETypes;
 import com.eighthlight.jhttpsrv.constants.StatusCodes;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
+import com.eighthlight.jhttpsrv.testmessage.chrome.TestRequestMaker;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,10 +21,7 @@ public class OKRequestHandlerTest {
 
     @Before
     public void setUp() throws Exception {
-        RequestParser parser = new RequestParser();
-        InputStream is = new ByteArrayInputStream(GETHelloworldRequest.ENTIRE_MESSAGE.getBytes(StandardCharsets.UTF_8));
-
-        request = parser.parseInputStream(is);
+        request = TestRequestMaker.fromString(GETHelloworldRequest.ENTIRE_MESSAGE);
         okRequestHandler = new OKRequestHandler();
     }
 

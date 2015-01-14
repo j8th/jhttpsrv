@@ -14,22 +14,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.net.URL;
 
 public class Worker implements Runnable {
     private Socket socket;
+    private RequestParser parser;
     private Router router;
     private Response response;
 
-    public Worker(Socket mySocket, Router myRouter) {
-        socket = mySocket;
-        router = myRouter;
+    public Worker(Socket socket, RequestParser parser, Router router) {
+        this.socket = socket;
+        this.parser = parser;
+        this.router = router;
     }
 
     public void run() {
         try {
             InputStream is = socket.getInputStream();
             OutputStream os = socket.getOutputStream();
-            RequestParser parser = new RequestParser();
             ResponseBuilder builder = new ResponseBuilder();
 
             Request request = parser.parseInputStream(is);
