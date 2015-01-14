@@ -70,7 +70,7 @@ public class RequestParserTest {
         try {
             Request request = myParser.parseInputStream(myis);
             Assert.assertEquals(ProtocolStrings.HTTP_METHOD_GET, request.getMethod());
-            Assert.assertEquals("/helloworld", request.getURL());
+            Assert.assertEquals("/helloworld", request.getURLPath());
             RequestHeader header = request.getHeader();
             Assert.assertEquals("localhost", header.getHost());
         } catch (IOException e) {
