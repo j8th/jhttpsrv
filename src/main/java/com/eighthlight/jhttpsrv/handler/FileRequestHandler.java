@@ -37,8 +37,8 @@ public class FileRequestHandler implements RequestHandler {
         response.setHeaders(header);
         response.setBody(body);
 
-        Path abspath = Paths.get(rootdir + request.getURL());
-        String ext = StringUtils.getFileExtension(rootdir + request.getURL());
+        Path abspath = Paths.get(rootdir + request.getURLPath());
+        String ext = StringUtils.getFileExtension(rootdir + request.getURLPath());
 
         if(!Files.isReadable(abspath)) {
             response.setStatusCode(StatusCodes.NOT_FOUND);

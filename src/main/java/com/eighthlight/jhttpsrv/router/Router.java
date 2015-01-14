@@ -1,6 +1,5 @@
 package com.eighthlight.jhttpsrv.router;
 
-import com.eighthlight.jhttpsrv.handler.FileRequestHandler;
 import com.eighthlight.jhttpsrv.handler.OKRequestHandler;
 import com.eighthlight.jhttpsrv.handler.RequestHandler;
 import com.eighthlight.jhttpsrv.request.Request;
@@ -18,7 +17,7 @@ public class Router {
     }
 
     public RequestHandler handlerByRoute(Request request) {
-        String requestRoute = buildRequestRoute(request.getMethod(), request.getURL());
+        String requestRoute = buildRequestRoute(request.getMethod(), request.getURLPath());
         RequestHandler handler = routes.get(requestRoute);
         if(handler == null)
             return defaultHandler;
