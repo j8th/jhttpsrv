@@ -9,11 +9,17 @@ import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
 public class RequestParser {
     public static final String CRLF = "\r\n";
+    private URL contextURL;
+
+    public RequestParser(URL contextURL) {
+        this.contextURL = contextURL;
+    }
 
     public Map<String, String> parseRequestLine(String requestLine) {
         HashMap<String, String> result = new HashMap<String, String>();
@@ -66,7 +72,10 @@ public class RequestParser {
             body = new RequestBody(bodyString);
         }
 
-        return new Request(requestLineMap, header, body);
+        String method = requestLineMap.getOrDefault(ProtocolStrings.METHOD, "");
+        URL url = new URL(contextURL, requestLineMap.getOrDefault(ProtocolStrings.URL, ""));
+
+        return new Request(method, url, header, body);
     }
 
     private byte[] getHeaderBytes(BufferedInputStream bufferedInputStream) throws IOException {

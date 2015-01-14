@@ -2,10 +2,8 @@ package com.eighthlight.jhttpsrv.request;
 
 import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.Map;
 
 public class Request {
     private String method;
@@ -13,17 +11,11 @@ public class Request {
     private RequestHeader header;
     private RequestBody body;
 
-    public Request(Map<String, String> myRequestLine, RequestHeader myHeader, RequestBody myBody) {
-        method = myRequestLine.getOrDefault(ProtocolStrings.METHOD, "");
-        try {
-            URL context = new URL("http://localhost:8080/");
-            url = new URL(context, myRequestLine.getOrDefault(ProtocolStrings.URL, ""));
-        } catch (MalformedURLException e) {
-            url = null;
-            e.printStackTrace();
-        }
-        header = myHeader;
-        body = myBody;
+    public Request(String method, URL url, RequestHeader header, RequestBody body) {
+        this.method = method;
+        this.url = url;
+        this.header = header;
+        this.body = body;
     }
 
     public RequestHeader getHeader() {

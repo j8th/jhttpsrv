@@ -11,6 +11,7 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +21,8 @@ public class RequestParserTest {
 
     @Before
     public void setUp() throws Exception {
-        myParser = new RequestParser();
+        URL context = new URL("http://localhost:8080/");
+        myParser = new RequestParser(context);
     }
 
     @Test

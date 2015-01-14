@@ -2,6 +2,7 @@ package com.eighthlight.jhttpsrv.worker;
 
 import com.eighthlight.jhttpsrv.handler.HelloWorldRequestHandler;
 import com.eighthlight.jhttpsrv.mocks.MockSocket;
+import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.router.Router;
 import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
@@ -12,6 +13,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,10 +21,13 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 
 public class WorkerTest {
     private Worker worker;
+    private RequestParser parser;
     private Router router;
 
     @Before
     public void setUp() throws Exception {
+        URL context = new URL("http://localhost:8080/");
+        parser = new RequestParser(context);
         router = new Router();
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/helloworld", new HelloWorldRequestHandler());
     }
@@ -32,7 +37,7 @@ public class WorkerTest {
         MockSocket socket = new MockSocket();
         socket.seedInputStream(GETHelloworldRequest.ENTIRE_MESSAGE);
 
-        worker = new Worker(socket, router);
+        worker = new Worker(socket, parser, router);
         worker.run();
 
         Assert.assertEquals(GETHelloworldResponse.ENTIRE_MESSAGE, socket.getOutputStreamAsString());
@@ -44,7 +49,7 @@ public class WorkerTest {
         MockSocket socket = new MockSocket();
         socket.seedInputStream("");
 
-        worker = new Worker(socket, router);
+        worker = new Worker(socket, parser, router);
         worker.run();
 
         Assert.assertNotEquals("", socket.getOutputStreamAsString());
@@ -57,8 +62,7 @@ public class WorkerTest {
         MockSocket socket = new MockSocket();
         socket.seedInputStream(GETHelloworldRequest.ENTIRE_MESSAGE);
 
-        worker = new Worker(socket, router);
-
+        worker = new Worker(socket, parser, router);
         Assert.assertNull(worker.getResponse());
         worker.run();
         Assert.assertThat(worker.getResponse(), instanceOf(Response.class));
@@ -74,7 +78,7 @@ public class WorkerTest {
             MockSocket socket = new MockSocket();
             socket.seedInputStream(badRequest);
 
-            worker = new Worker(socket, router);
+            worker = new Worker(socket, parser, router);
             worker.run();
 
             Assert.assertEquals("Failing Bad Request Text: '" + badRequest + "'", StatusCodes.BAD_REQUEST, worker.getResponse().getStatusCode());

@@ -1,6 +1,7 @@
 package com.eighthlight.jhttpsrv;
 
 import com.eighthlight.jhttpsrv.args.CmdArgs;
+import com.eighthlight.jhttpsrv.config.Config;
 import com.eighthlight.jhttpsrv.handler.*;
 import com.eighthlight.jhttpsrv.router.Router;
 import com.eighthlight.jhttpsrv.server.Jhttpsrv;
@@ -14,10 +15,11 @@ public class Main {
         CmdArgs cmdArgs = new CmdArgs(args);
 
         ServerSocket serverSocket;
-        int port;
+        Config config;
         try {
-            port = Integer.parseInt(cmdArgs.getPort());
-            serverSocket = new ServerSocket(port);
+            int port = Integer.parseInt(cmdArgs.getPort());
+            config = new Config(port);
+            serverSocket = new ServerSocket(config.getPort());
         } catch (Exception e) {
             System.err.println("Port must be an integer between 0 and 65,535.");
             return;
@@ -31,7 +33,7 @@ public class Main {
         }
 
         Router router = new Router();
-        String redirectURL = String.format("http://localhost:%d/", port);
+        String redirectURL = String.format("http://localhost:%d/", config.getPort());
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/redirect", new RedirectRequestHandler(redirectURL));
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/time", new TimeRequestHandler());
         DataHandler dataHandler = new DataHandler();
@@ -43,7 +45,7 @@ public class Main {
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/parameters", new EchoGETParamsHandler());
         router.setDefaultRequestHandler(new FileRequestHandler());
 
-        Jhttpsrv jhttpsrv = new Jhttpsrv(serverSocket, router);
+        Jhttpsrv jhttpsrv = new Jhttpsrv(serverSocket, router, config);
         jhttpsrv.run();
     }
 }

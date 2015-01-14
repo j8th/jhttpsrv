@@ -2,12 +2,14 @@ package com.eighthlight.jhttpsrv.request;
 
 import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
+import com.eighthlight.jhttpsrv.response.ResponseHeader;
 import com.eighthlight.jhttpsrv.testmessage.chrome.*;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,11 +22,14 @@ public class RequestTest {
 
     @Before
     public void setUp() throws Exception {
-        parser = new RequestParser();
+        URL context = new URL("http://localhost:8080");
+        parser = new RequestParser(context);
         requestLine = parser.parseRequestLine(GETHelloworldRequest.REQUEST_LINE);
+        String method = requestLine.get(ProtocolStrings.METHOD);
+        URL url = new URL(context, requestLine.get(ProtocolStrings.URL));
         header = new RequestHeader(parser.parseHeaders(GETHelloworldRequest.HEADERS));
         body = new RequestBody("");
-        request = new Request(requestLine, header, body);
+        request = new Request(method, url, header, body);
     }
 
     @Test
@@ -81,18 +86,13 @@ public class RequestTest {
 
     @Test
     public void testEmptyRequestIsInvalid() {
-        request = new Request(new HashMap<String, String>(), new RequestHeader(new HashMap<String, String>()), new RequestBody(""));
+        request = new Request("", null, new RequestHeader(new HashMap<String, String>()), new RequestBody(""));
         assertFalse(request.isValid());
     }
 
     @Test
     public void testGarbageRequestIsInvalid() {
-        Map<String, String> requestLine = new HashMap<String, String>();
-        requestLine.put(ProtocolStrings.METHOD, "laknfe");
-        requestLine.put(ProtocolStrings.URL, "ekkk");
-        requestLine.put(ProtocolStrings.PROTOCOL_VERSION, "HTTP/1.1");
-
-        request = new Request(requestLine, new RequestHeader(new HashMap<String, String>()), new RequestBody(""));
+        request = new Request("laknfe", null, new RequestHeader(new HashMap<String, String>()), new RequestBody(""));
         assertFalse(request.isValid());
     }
 }

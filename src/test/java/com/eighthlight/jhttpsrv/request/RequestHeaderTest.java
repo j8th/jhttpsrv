@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +17,8 @@ public class RequestHeaderTest {
 
     @Before
     public void setUp() throws Exception {
-        RequestParser myParser = new RequestParser();
+        URL context = new URL("http://localhost:8080/");
+        RequestParser myParser = new RequestParser(context);
         myHeadersMap = myParser.parseHeaders(GETHelloworldRequest.HEADERS);
         myHeader = new RequestHeader(myHeadersMap);
     }
