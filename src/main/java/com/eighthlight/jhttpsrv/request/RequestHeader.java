@@ -12,6 +12,7 @@ public class RequestHeader {
     private String userAgent;
     private String[] acceptEncoding;
     private String[] acceptLanguage;
+    private String range;
 
     public RequestHeader(Map<String, String> headers) {
         String myHeader;
@@ -36,6 +37,9 @@ public class RequestHeader {
 
         myHeader = headers.get(ProtocolStrings.ACCEPT_LANGUAGE);
         acceptLanguage = myHeader == null ? new String[0] : myHeader.split(",");
+
+        myHeader = headers.get(ProtocolStrings.RANGE);
+        range = myHeader == null ? "" : myHeader;
     }
 
     public String getHost() {
@@ -64,6 +68,10 @@ public class RequestHeader {
 
     public int getContentLength() {
         return contentlength;
+    }
+
+    public String getRange() {
+        return range;
     }
 
     public boolean isEmpty() {

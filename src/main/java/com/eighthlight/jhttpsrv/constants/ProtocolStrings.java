@@ -22,15 +22,16 @@ public class ProtocolStrings {
     public static final String URL = "URL";
     public static final String PROTOCOL_VERSION = "Protocol-Version";
 
-    public static final String HOST = "Host";
-    public static final String CONNECTION = "Connection";
     public static final String ACCEPT = "Accept";
-    public static final String USER_AGENT = "User-Agent";
     public static final String ACCEPT_ENCODING = "Accept-Encoding";
     public static final String ACCEPT_LANGUAGE = "Accept-Language";
+    public static final String CONNECTION = "Connection";
+    public static final String HOST = "Host";
+    public static final String RANGE = "Range";
+    public static final String USER_AGENT = "User-Agent";
 
+    public static final String ALLOW = "Allow";
     public static final String CONTENT_LENGTH = "Content-Length";
     public static final String CONTENT_TYPE = "Content-Type";
     public static final String LOCATION = "Location";
-    public static final String ALLOW = "Allow";
 }

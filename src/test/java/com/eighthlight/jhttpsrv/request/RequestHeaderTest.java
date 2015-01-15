@@ -2,6 +2,7 @@ package com.eighthlight.jhttpsrv.request;
 
 import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
+import com.eighthlight.jhttpsrv.testmessage.chrome.rangehandler.GETrange0to12Request;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,13 +13,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RequestHeaderTest {
+    private RequestParser myParser;
     private Map<String, String> myHeadersMap;
     private RequestHeader myHeader;
 
     @Before
     public void setUp() throws Exception {
         URL context = new URL("http://localhost:8080/");
-        RequestParser myParser = new RequestParser(context);
+        myParser = new RequestParser(context);
         myHeadersMap = myParser.parseHeaders(GETHelloworldRequest.HEADERS);
         myHeader = new RequestHeader(myHeadersMap);
     }
@@ -60,6 +62,14 @@ public class RequestHeaderTest {
     @Test
     public void testGetContentLength() {
         Assert.assertEquals(0, myHeader.getContentLength());
+    }
+
+    @Test
+    public void testGetRange() {
+        myHeadersMap = myParser.parseHeaders(GETrange0to12Request.HEADERS);
+        myHeader = new RequestHeader(myHeadersMap);
+
+        Assert.assertEquals("bytes=0-12", myHeader.getRange());
     }
 
     @Test
