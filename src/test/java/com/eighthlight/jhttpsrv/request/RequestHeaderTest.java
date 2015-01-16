@@ -2,6 +2,8 @@ package com.eighthlight.jhttpsrv.request;
 
 import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
+import com.eighthlight.jhttpsrv.testmessage.chrome.TestRequestMaker;
+import com.eighthlight.jhttpsrv.testmessage.chrome.basicauthhandler.GETlogsWithAuthRequest;
 import com.eighthlight.jhttpsrv.testmessage.chrome.rangehandler.GETrange0to12Request;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -40,6 +42,13 @@ public class RequestHeaderTest {
     public void testGetAcceptLanguage() {
         String[] expected = {"en-US", "en;q=0.8"};
         assertEquals(expected, header.getAcceptLanguage());
+    }
+
+    @Test
+    public void testGetAuthorization() throws Exception {
+        RequestHeader header = TestRequestMaker.fromString(GETlogsWithAuthRequest.ENTIRE_MESSAGE).getHeader();
+
+        assertEquals("Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==", header.getAuthorization());
     }
 
     @Test
