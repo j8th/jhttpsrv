@@ -25,25 +25,9 @@ public class RequestHeaderTest {
     }
 
     @Test
-    public void testGetHost() {
-        assertEquals("localhost", header.getHost());
-    }
-
-    @Test
-    public void testGetConnection() {
-        assertEquals("keep-alive", header.getConnection());
-    }
-
-    @Test
     public void testGetAccept() {
         String[] expected = {"text/html", "application/xhtml+xml", "application/xml;q=0.9", "image/webp", "*/*;q=0.8"};
         assertEquals(expected, header.getAccept());
-    }
-
-    @Test
-    public void testGetUserAgent() {
-        assertEquals("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36",
-                header.getUserAgent());
     }
 
     @Test
@@ -59,8 +43,18 @@ public class RequestHeaderTest {
     }
 
     @Test
+    public void testGetConnection() {
+        assertEquals("keep-alive", header.getConnection());
+    }
+
+    @Test
     public void testGetContentLength() {
         assertEquals(0, header.getContentLength());
+    }
+
+    @Test
+    public void testGetHost() {
+        assertEquals("localhost", header.getHost());
     }
 
     @Test
@@ -69,6 +63,12 @@ public class RequestHeaderTest {
         header = new RequestHeader(headersMap);
 
         assertEquals("bytes=0-12", header.getRange());
+    }
+
+    @Test
+    public void testGetUserAgent() {
+        assertEquals("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36",
+                header.getUserAgent());
     }
 
     @Test
