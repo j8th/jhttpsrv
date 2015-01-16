@@ -8,6 +8,7 @@ public class RequestHeader {
     private String[] accept;
     private String[] acceptEncoding;
     private String[] acceptLanguage;
+    private String authorization;
     private String connection;
     private int contentlength;
     private String host;
@@ -25,6 +26,9 @@ public class RequestHeader {
 
         myHeader = headers.get(ProtocolStrings.ACCEPT_LANGUAGE);
         acceptLanguage = myHeader == null ? new String[0] : myHeader.split(",");
+
+        myHeader = headers.get(ProtocolStrings.AUTHORIZATION);
+        authorization = myHeader == null ? "" : myHeader;
 
         myHeader = headers.get(ProtocolStrings.CONNECTION);
         connection = myHeader == null ? "" : myHeader;
@@ -52,6 +56,10 @@ public class RequestHeader {
 
     public String[] getAcceptLanguage() {
         return acceptLanguage;
+    }
+
+    public String getAuthorization() {
+        return authorization;
     }
 
     public String getConnection() {
