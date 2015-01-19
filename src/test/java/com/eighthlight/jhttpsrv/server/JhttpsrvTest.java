@@ -1,6 +1,7 @@
 package com.eighthlight.jhttpsrv.server;
 
 import com.eighthlight.jhttpsrv.config.Config;
+import com.eighthlight.jhttpsrv.config.Setup;
 import com.eighthlight.jhttpsrv.logger.Logger;
 import com.eighthlight.jhttpsrv.logger.MemoryLogger;
 import com.eighthlight.jhttpsrv.mocks.MockServerSocket;
@@ -20,7 +21,7 @@ public class JhttpsrvTest {
     public void setUp() throws Exception {
         mockServerSocket = new MockServerSocket();
         logger = new MemoryLogger();
-        config = new Config(9080);
+        config = new Setup().getConfig();
         router = new Router();
 
         jhttpsrv = new Jhttpsrv(mockServerSocket, router, logger, config);

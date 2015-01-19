@@ -5,8 +5,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class CmdArgsTest {
-    private final String expectedDefaultDir = System.getProperty("user.dir") + "/www";
-
     @Test
     public void testGetPort() {
         String[] goodArgs = {"--port", "80"};
@@ -28,7 +26,7 @@ public class CmdArgsTest {
         String[] emptyArgs = {};
         CmdArgs cmdArgs = new CmdArgs(emptyArgs);
 
-        assertEquals("8080", cmdArgs.getPort());
+        assertEquals("", cmdArgs.getPort());
     }
 
     @Test
@@ -60,7 +58,7 @@ public class CmdArgsTest {
         String[] emptyArgs = {};
         CmdArgs cmdArgs = new CmdArgs(emptyArgs);
 
-        assertEquals(expectedDefaultDir, cmdArgs.getDirectory());
+        assertEquals("", cmdArgs.getDirectory());
     }
 
     @Test
@@ -76,7 +74,7 @@ public class CmdArgsTest {
         String[] missingParamArgs = {"--directory"};
         CmdArgs cmdArgs = new CmdArgs(missingParamArgs);
 
-        assertEquals(expectedDefaultDir, cmdArgs.getDirectory());
+        assertEquals("", cmdArgs.getDirectory());
     }
 
     @Test

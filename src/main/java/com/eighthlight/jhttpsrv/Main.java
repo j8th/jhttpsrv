@@ -2,6 +2,7 @@ package com.eighthlight.jhttpsrv;
 
 import com.eighthlight.jhttpsrv.args.CmdArgs;
 import com.eighthlight.jhttpsrv.config.Config;
+import com.eighthlight.jhttpsrv.config.Setup;
 import com.eighthlight.jhttpsrv.handler.*;
 import com.eighthlight.jhttpsrv.logger.Logger;
 import com.eighthlight.jhttpsrv.logger.MemoryLogger;
@@ -16,22 +17,27 @@ public class Main {
     public static void main(String[] args) throws IOException {
         CmdArgs cmdArgs = new CmdArgs(args);
 
+        Setup setup = new Setup();
+        if(!cmdArgs.getPort().equals(""))
+            setup.setPort(Integer.parseInt(cmdArgs.getPort()));
+        if(!cmdArgs.getDirectory().equals(""))
+            setup.setRootWWWDirectory(cmdArgs.getDirectory());
+
+        Config config = setup.getConfig();
+
         ServerSocket serverSocket;
-        Config config;
         try {
-            int port = Integer.parseInt(cmdArgs.getPort());
-            config = new Config(port);
             serverSocket = new ServerSocket(config.getPort());
         } catch (Exception e) {
-            System.err.println("Port must be an integer between 0 and 65,535.");
+            System.err.println(e.getMessage());
             return;
         }
 
         FileRequestHandler fileRequestHandler;
         try {
-            fileRequestHandler = new FileRequestHandler(cmdArgs.getDirectory());
+            fileRequestHandler = new FileRequestHandler(config.getRootWWWDirectory());
         } catch (IllegalArgumentException e) {
-            System.err.println("The www root directory must be a readable directory.");
+            System.err.println(e.getMessage());
             return;
         }
 
