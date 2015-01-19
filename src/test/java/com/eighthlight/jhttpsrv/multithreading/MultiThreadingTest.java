@@ -4,6 +4,8 @@ import com.eighthlight.jhttpsrv.config.Config;
 import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
 import com.eighthlight.jhttpsrv.constants.StatusCodes;
 import com.eighthlight.jhttpsrv.handler.TimeRequestHandler;
+import com.eighthlight.jhttpsrv.logger.Logger;
+import com.eighthlight.jhttpsrv.logger.MemoryLogger;
 import com.eighthlight.jhttpsrv.router.Router;
 import com.eighthlight.jhttpsrv.server.Jhttpsrv;
 import static org.junit.Assert.*;
@@ -14,11 +16,12 @@ import java.net.ServerSocket;
 public class MultiThreadingTest {
     @Test
     public void testMultithreadingTime() throws Exception {
+        Logger logger = new MemoryLogger();
         Config config = new Config(9000);
         ServerSocket serverSocket = new ServerSocket(config.getPort());
         Router router = new Router();
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/time", new TimeRequestHandler());
-        Jhttpsrv jhttpsrv = new Jhttpsrv(serverSocket, router, config);
+        Jhttpsrv jhttpsrv = new Jhttpsrv(serverSocket, router, logger, config);
 
         ThreadingHttpClient[] clients = new ThreadingHttpClient[20];
         for(int i = 0; i < clients.length; i++)

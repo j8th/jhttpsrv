@@ -1,6 +1,8 @@
 package com.eighthlight.jhttpsrv.server;
 
 import com.eighthlight.jhttpsrv.config.Config;
+import com.eighthlight.jhttpsrv.logger.Logger;
+import com.eighthlight.jhttpsrv.logger.MemoryLogger;
 import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.router.Router;
 import com.eighthlight.jhttpsrv.worker.Worker;
@@ -15,10 +17,12 @@ public class Jhttpsrv implements Runnable {
     private ServerSocket serverSocket;
     private Router router;
     private RequestParser parser;
+    private Logger logger;
 
-    public Jhttpsrv(ServerSocket serverSocket, Router router, Config config) {
+    public Jhttpsrv(ServerSocket serverSocket, Router router, Logger logger, Config config) {
         this.serverSocket = serverSocket;
         this.router = router;
+        this.logger = logger;
         try {
             URL context = new URL(String.format("http://localhost:%d/", config.getPort()));
             parser = new RequestParser(context);
@@ -31,7 +35,7 @@ public class Jhttpsrv implements Runnable {
         while(true){
             try {
                 Socket socket = serverSocket.accept();
-                Worker worker = new Worker(socket, parser, router);
+                Worker worker = new Worker(socket, parser, router, logger);
                 new Thread(worker).start();
             } catch (IOException e) {
                 e.printStackTrace();
