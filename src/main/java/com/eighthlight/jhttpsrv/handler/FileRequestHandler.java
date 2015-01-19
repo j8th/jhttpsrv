@@ -30,7 +30,11 @@ public class FileRequestHandler implements RequestHandler {
             "<p><a href=\"%s\">%s</a></p>";
 
     public FileRequestHandler(String rootDirAbsolutePath) {
-        setRootDir(rootDirAbsolutePath);
+        Path path = Paths.get(rootDirAbsolutePath);
+        if(Files.isDirectory(path) && Files.isReadable(path))
+            rootdir = rootDirAbsolutePath;
+        else
+            throw new IllegalArgumentException(String.format("'%s' is either not a directory or is unreadable.", rootDirAbsolutePath));
     }
 
     public Response run(Request request) {
@@ -80,14 +84,6 @@ public class FileRequestHandler implements RequestHandler {
 
     public String getRootDir() {
         return rootdir;
-    }
-
-    public void setRootDir(String absolutePath) {
-        Path path = Paths.get(absolutePath);
-        if(Files.isDirectory(path) && Files.isReadable(path))
-            rootdir = absolutePath;
-        else
-            throw new IllegalArgumentException(String.format("'%s' is either not a directory or is unreadable.", absolutePath));
     }
 
     private String getPathRelativeToRootDir(File file) {
