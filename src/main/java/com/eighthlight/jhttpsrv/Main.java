@@ -19,7 +19,13 @@ public class Main {
 
         Setup setup = new Setup();
         if(!cmdArgs.getPort().equals(""))
-            setup.setPort(Integer.parseInt(cmdArgs.getPort()));
+            try {
+                setup.setPort(Integer.parseInt(cmdArgs.getPort()));
+            } catch (NumberFormatException e) {
+                System.err.println("Supplied port must be an integer.");
+                System.exit(1);
+                return;
+            }
         if(!cmdArgs.getDirectory().equals(""))
             setup.setRootWWWDirectory(cmdArgs.getDirectory());
 
