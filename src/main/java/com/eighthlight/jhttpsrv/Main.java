@@ -3,6 +3,8 @@ package com.eighthlight.jhttpsrv;
 import com.eighthlight.jhttpsrv.args.CmdArgs;
 import com.eighthlight.jhttpsrv.config.Config;
 import com.eighthlight.jhttpsrv.handler.*;
+import com.eighthlight.jhttpsrv.logger.Logger;
+import com.eighthlight.jhttpsrv.logger.MemoryLogger;
 import com.eighthlight.jhttpsrv.router.Router;
 import com.eighthlight.jhttpsrv.server.Jhttpsrv;
 import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
@@ -32,6 +34,8 @@ public class Main {
             return;
         }
 
+        Logger logger = new MemoryLogger();
+
         Router router = new Router();
         String redirectURL = String.format("http://localhost:%d/", config.getPort());
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/redirect", new RedirectRequestHandler(redirectURL));
@@ -48,7 +52,7 @@ public class Main {
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/logs", new BasicAuthHandler(new HelloWorldRequestHandler(), "admin", "hunter2"));
         router.setDefaultRequestHandler(new FileRequestHandler());
 
-        Jhttpsrv jhttpsrv = new Jhttpsrv(serverSocket, router, config);
+        Jhttpsrv jhttpsrv = new Jhttpsrv(serverSocket, router, logger, config);
         jhttpsrv.run();
     }
 }

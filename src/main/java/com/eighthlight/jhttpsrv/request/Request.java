@@ -38,6 +38,10 @@ public class Request {
         return method;
     }
 
+    public String getRequestLine() {
+        return String.format("%s %s HTTP/1.1", method, url.getPath());
+    }
+
     public boolean isValid() {
         if(!Arrays.asList(ProtocolStrings.HTTP_METHODS).contains(method))
             return false;

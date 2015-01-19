@@ -2,6 +2,7 @@ package com.eighthlight.jhttpsrv.worker;
 
 import com.eighthlight.jhttpsrv.builder.ResponseBuilder;
 import com.eighthlight.jhttpsrv.handler.RequestHandler;
+import com.eighthlight.jhttpsrv.logger.Logger;
 import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.response.Response;
@@ -20,12 +21,14 @@ public class Worker implements Runnable {
     private Socket socket;
     private RequestParser parser;
     private Router router;
+    private Logger logger;
     private Response response;
 
-    public Worker(Socket socket, RequestParser parser, Router router) {
+    public Worker(Socket socket, RequestParser parser, Router router, Logger logger) {
         this.socket = socket;
         this.parser = parser;
         this.router = router;
+        this.logger = logger;
     }
 
     public void run() {
@@ -35,6 +38,7 @@ public class Worker implements Runnable {
             ResponseBuilder builder = new ResponseBuilder();
 
             Request request = parser.parseInputStream(is);
+            logger.log(request.getRequestLine());
             if (request.isValid()) {
                 RequestHandler handler = router.handlerByRoute(request);
                 response = handler.run(request);
