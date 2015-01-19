@@ -16,9 +16,9 @@ public class Jhttpsrv implements Runnable {
     private Router router;
     private RequestParser parser;
 
-    public Jhttpsrv(ServerSocket myServerSocket, Router myRouter, Config config) {
-        serverSocket = myServerSocket;
-        router = myRouter;
+    public Jhttpsrv(ServerSocket serverSocket, Router router, Config config) {
+        this.serverSocket = serverSocket;
+        this.router = router;
         try {
             URL context = new URL(String.format("http://localhost:%d/", config.getPort()));
             parser = new RequestParser(context);
