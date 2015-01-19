@@ -5,12 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CmdArgs {
-    private static String defaultPort;
-    private static String defaultDirectory;
     private static Map<String, String> tokens = new HashMap<String, String>();
     static {
-        defaultPort = "8080";
-        defaultDirectory = System.getProperty("user.dir") + "/www";
         Map<String, String> map = new HashMap<String, String>();
 
         map.put("--port", "port");
@@ -31,8 +27,8 @@ public class CmdArgs {
             if(tokens.containsKey(args[i]) && i+1 < args.length)
                 argsMap.put(tokens.get(args[i]), args[i+1]);
 
-        port = argsMap.getOrDefault("port", defaultPort);
-        directory = argsMap.getOrDefault("directory", defaultDirectory);
+        port = argsMap.getOrDefault("port", "");
+        directory = argsMap.getOrDefault("directory", "");
     }
 
     public String getPort() {
