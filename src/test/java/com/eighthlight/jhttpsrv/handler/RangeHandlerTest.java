@@ -21,8 +21,7 @@ public class RangeHandlerTest {
 
     @Before
     public void setUp() throws Exception {
-        FileRequestHandler.setRootDir(System.getProperty("user.dir") + "/www");
-        fileRequestHandler = new FileRequestHandler();
+        fileRequestHandler = new FileRequestHandler(System.getProperty("user.dir") + "/www");
         rangeHandler = new RangeHandler(fileRequestHandler);
     }
 

@@ -16,7 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class FileRequestHandler implements RequestHandler {
-    private static String rootdir = System.getProperty("user.dir") + "/www";
+    private String rootdir;
     private static final String dirListingContentTemplate =
             "<html>" +
               "<head>" +
@@ -28,6 +28,10 @@ public class FileRequestHandler implements RequestHandler {
             "</html>";
     private static final String dirListingEntryTemplate = 
             "<p><a href=\"%s\">%s</a></p>";
+
+    public FileRequestHandler(String rootDirAbsolutePath) {
+        setRootDir(rootDirAbsolutePath);
+    }
 
     public Response run(Request request) {
         Response response = new Response();
@@ -74,11 +78,11 @@ public class FileRequestHandler implements RequestHandler {
         return response;
     }
 
-    public static String getRootDir() {
+    public String getRootDir() {
         return rootdir;
     }
 
-    public static void setRootDir(String absolutePath) {
+    public void setRootDir(String absolutePath) {
         Path path = Paths.get(absolutePath);
         if(Files.isDirectory(path) && Files.isReadable(path))
             rootdir = absolutePath;
