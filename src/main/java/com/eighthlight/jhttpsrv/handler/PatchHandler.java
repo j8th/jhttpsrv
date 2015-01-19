@@ -28,7 +28,7 @@ public class PatchHandler implements RequestHandler {
         response.setBody(body);
 
         if(request.getMethod().equals(ProtocolStrings.HTTP_METHOD_PATCH)) {
-            Path abspath = Paths.get(FileRequestHandler.getRootDir() + request.getURLPath());
+            Path abspath = Paths.get(fileRequestHandler.getRootDir() + request.getURLPath());
             if(Files.isReadable(abspath) && Files.isWritable(abspath)) {
                 try {
                     FileOutputStream out = new FileOutputStream(abspath.toString());

@@ -32,7 +32,7 @@ public class RouterTest {
 
     @Test
     public void testSetDefaultRequestHandler() throws Exception {
-        router.setDefaultRequestHandler(new FileRequestHandler());
+        router.setDefaultRequestHandler(new FileRequestHandler(System.getProperty("user.dir") + "/www"));
         RequestHandler handler = router.handlerByRoute(request);
         Assert.assertThat(handler, instanceOf(FileRequestHandler.class));
     }

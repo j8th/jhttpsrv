@@ -16,11 +16,12 @@ import static org.junit.Assert.*;
 
 public class PatchHandlerTest {
     private PatchHandler handler;
+    private FileRequestHandler fileRequestHandler;
 
     @Before
     public void setUp() throws Exception {
-        FileRequestHandler.setRootDir(System.getProperty("user.dir") + "/www");
-        handler = new PatchHandler(new FileRequestHandler());
+        fileRequestHandler = new FileRequestHandler(System.getProperty("user.dir") + "/www");
+        handler = new PatchHandler(fileRequestHandler);
     }
 
     @Test

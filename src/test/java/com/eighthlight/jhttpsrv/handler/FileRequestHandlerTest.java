@@ -20,11 +20,11 @@ import static org.hamcrest.CoreMatchers.containsString;
 public class FileRequestHandlerTest {
     private FileRequestHandler fileRequestHandler;
     private Request request;
-    private String defaultRootDir = System.getProperty("user.dir") + "/www";
+    private String rootDir = System.getProperty("user.dir") + "/www";
 
     @Before
     public void setUp() throws Exception {
-        fileRequestHandler = new FileRequestHandler();
+        fileRequestHandler = new FileRequestHandler(rootDir);
         request = TestRequestMaker.fromString(GETindexhtmlRequest.ENTIRE_MESSAGE);
     }
 
@@ -32,7 +32,7 @@ public class FileRequestHandlerTest {
     public void testRun() throws Exception {
         Response response = fileRequestHandler.run(request);
 
-        String FilePath = FileRequestHandler.getRootDir() + "/index.html";
+        String FilePath = fileRequestHandler.getRootDir() + "/index.html";
         byte[] bytes = Files.readAllBytes(Paths.get(FilePath));
 
         assertEquals(MIMETypes.HTML, response.getHeaders().getContentType());
@@ -118,25 +118,25 @@ public class FileRequestHandlerTest {
     }
 
     @Test
-    public void testDefaultRootDirectory() throws Exception {
-        assertEquals(System.getProperty("user.dir") + "/www", FileRequestHandler.getRootDir());
+    public void testGetRootDir() throws Exception {
+        assertEquals(System.getProperty("user.dir") + "/www", fileRequestHandler.getRootDir());
     }
 
     @Test
-    public void testSetRootDirectory() throws Exception {
-        String subDir = defaultRootDir + "/dirtest";
-        FileRequestHandler.setRootDir(subDir);
-        assertEquals(subDir, FileRequestHandler.getRootDir());
+    public void testSetRootDir() throws Exception {
+        String subDir = rootDir + "/dirtest";
+        fileRequestHandler.setRootDir(subDir);
+        assertEquals(subDir, fileRequestHandler.getRootDir());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testSetDefaultRootDirectoryGarbageParamThrowsException() {
-        FileRequestHandler.setRootDir("Something not a directory");
+        fileRequestHandler.setRootDir("Something not a directory");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testSetDefaultRootDirectoryIntegerThrowsException() {
-        FileRequestHandler.setRootDir("8080");
+        fileRequestHandler.setRootDir("8080");
     }
 
     private byte[] getTestFileBytes(String testFilePathRelativeToWWWRoot) throws IOException {
