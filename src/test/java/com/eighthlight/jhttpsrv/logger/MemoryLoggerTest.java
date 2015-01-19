@@ -1,15 +1,9 @@
 package com.eighthlight.jhttpsrv.logger;
 
-import com.eighthlight.jhttpsrv.testmessage.chrome.rangehandler.GETrange12toBlankRequest;
 import org.junit.Before;
 import org.junit.Test;
-import sun.rmi.runtime.Log;
 
-import java.util.ConcurrentModificationException;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
