@@ -122,21 +122,14 @@ public class FileRequestHandlerTest {
         assertEquals(System.getProperty("user.dir") + "/www", fileRequestHandler.getRootDir());
     }
 
-    @Test
-    public void testSetRootDir() throws Exception {
-        String subDir = rootDir + "/dirtest";
-        fileRequestHandler.setRootDir(subDir);
-        assertEquals(subDir, fileRequestHandler.getRootDir());
+    @Test(expected = IllegalArgumentException.class)
+    public void testRootDirectoryGarbageParamThrowsException() {
+        fileRequestHandler = new FileRequestHandler("Something not a directory");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testSetDefaultRootDirectoryGarbageParamThrowsException() {
-        fileRequestHandler.setRootDir("Something not a directory");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSetDefaultRootDirectoryIntegerThrowsException() {
-        fileRequestHandler.setRootDir("8080");
+    public void testRootDirectoryIntegerThrowsException() {
+        fileRequestHandler = new FileRequestHandler("8080");
     }
 
     private byte[] getTestFileBytes(String testFilePathRelativeToWWWRoot) throws IOException {
