@@ -30,6 +30,7 @@ public class Main {
             serverSocket = new ServerSocket(config.getPort());
         } catch (Exception e) {
             System.err.println(e.getMessage());
+            System.exit(1);
             return;
         }
 
@@ -38,6 +39,7 @@ public class Main {
             fileRequestHandler = new FileRequestHandler(config.getRootWWWDirectory());
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
+            System.exit(1);
             return;
         }
 
