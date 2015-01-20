@@ -10,26 +10,28 @@ public class MIMETypes {
     public static final String GZIP = "application/x-gzip";
     public static final String OCTET_STREAM = "application/octet-stream";
 
-    private static final Map<String, String[]> MIMEType_FileExtensions;
+    private static final Map<String, String> MIMEType_FileExtensions;
     static {
-        Map<String, String[]> myMap = new HashMap<String, String[]>();
+        Map<String, String> myMap = new HashMap<String, String>();
 
-        myMap.put(HTML, new String[] {"html", "htm"});
-        myMap.put(PLAIN_TEXT, new String[] {"txt"});
-        myMap.put(JPEG, new String[] {"jpeg", "jpg"});
-        myMap.put(GZIP, new String[] {"gz"});
-        myMap.put(JSON, new String[] {"json"});
+        myMap.put("html", HTML);
+        myMap.put("htm", HTML);
+        myMap.put("txt", PLAIN_TEXT);
+        myMap.put("jpeg", JPEG);
+        myMap.put("jpg", JPEG);
+        myMap.put("gz", GZIP);
+        myMap.put("json", JSON);
 
         MIMEType_FileExtensions = Collections.unmodifiableMap(myMap);
     }
 
     public static String FileExt2MIMEType(String fileExt) throws IllegalArgumentException {
-        for(Map.Entry<String, String[]> e : MIMEType_FileExtensions.entrySet()) {
-            String MIMEType = e.getKey();
-            String[] FileExtensions = e.getValue();
-            if(Arrays.asList(FileExtensions).contains(fileExt))
-                return MIMEType;
-        }
+        if(fileExt.length() > 0 && fileExt.charAt(0) == '.')
+            fileExt = fileExt.substring(1);
+
+        String MIMEType = MIMEType_FileExtensions.get(fileExt);
+        if(MIMEType != null)
+            return MIMEType;
         return OCTET_STREAM;
     }
 }
