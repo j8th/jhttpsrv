@@ -5,6 +5,7 @@ A small http server written in Java.
 
 ## Required Software
 Gradle can be installed via Homebrew.
+
 `brew install gradle`
 
 
