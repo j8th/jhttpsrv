@@ -29,19 +29,19 @@ public class RequestHeaderTest {
     @Test
     public void testGetAccept() {
         String[] expected = {"text/html", "application/xhtml+xml", "application/xml;q=0.9", "image/webp", "*/*;q=0.8"};
-        assertEquals(expected, header.getAccept());
+        assertArrayEquals(expected, header.getAccept());
     }
 
     @Test
     public void testGetAcceptEncoding() {
         String[] expected = new String[0];
-        assertEquals(expected, header.getAcceptEncoding());
+        assertArrayEquals(expected, header.getAcceptEncoding());
     }
 
     @Test
     public void testGetAcceptLanguage() {
         String[] expected = {"en-US", "en;q=0.8"};
-        assertEquals(expected, header.getAcceptLanguage());
+        assertArrayEquals(expected, header.getAcceptLanguage());
     }
 
     @Test

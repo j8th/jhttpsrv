@@ -7,7 +7,9 @@ import com.eighthlight.jhttpsrv.response.ResponseBody;
 import com.eighthlight.jhttpsrv.response.ResponseHeader;
 import com.eighthlight.jhttpsrv.util.StringUtils;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,8 +27,13 @@ public class EchoGETParamsHandler implements RequestHandler {
         String[] pair;
         for(int i = 0; i < tokens.length; i++) {
             pair = tokens[i].split("=");
-            if(pair.length == 2)
-                getParams.put(pair[0], URLDecoder.decode(pair[1]));
+            if(pair.length == 2) {
+                try {
+                    getParams.put(pair[0], URLDecoder.decode(pair[1], StandardCharsets.UTF_8.toString()));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         String content = "";
