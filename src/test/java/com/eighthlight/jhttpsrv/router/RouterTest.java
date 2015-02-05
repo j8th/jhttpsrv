@@ -7,6 +7,8 @@ import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETindexhtmlRequest;
 import com.eighthlight.jhttpsrv.testmessage.chrome.TestRequestMaker;
 import static org.junit.Assert.*;
+
+import com.eighthlight.jhttpsrv.testmessage.chrome.datahandler.POSTDataRequest;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -58,5 +60,35 @@ public class RouterTest {
 
         assertEquals(helloWorldRequestHandler, router.handlerByRoute(helloWorldRequest));
         assertEquals(fileRequestHandler, router.handlerByRoute(indexRequest));
+    }
+
+    @Test
+    public void testMatchingNeitherRouteNorVerbReturns404Handler() throws Exception {
+        request = TestRequestMaker.fromString(POSTDataRequest.ENTIRE_MESSAGE);
+        router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/index.html", new FileRequestHandler(rootDirPath));
+
+        RequestHandler requestHandler = router.handlerByRoute(request);
+
+        assertThat(requestHandler, instanceOf(NotFoundRequestHandler.class));
+    }
+
+    @Test
+    public void testNoMatchingRoute_MatchingVerb_Returns404Handler() throws Exception {
+        request = TestRequestMaker.fromString(POSTDataRequest.ENTIRE_MESSAGE);
+        router.addRoute(ProtocolStrings.HTTP_METHOD_POST, "/not-so-restful", new DataHandler());
+
+        RequestHandler requestHandler = router.handlerByRoute(request);
+
+        assertThat(requestHandler, instanceOf(NotFoundRequestHandler.class));
+    }
+
+    @Test
+    public void testMatchingRoute_NoMatchingVerbReturns405Handler() throws Exception {
+        request = TestRequestMaker.fromString(POSTDataRequest.ENTIRE_MESSAGE);
+        router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/restful", new DataHandler());
+
+        RequestHandler requestHandler = router.handlerByRoute(request);
+
+        assertThat(requestHandler, instanceOf(MethodNotAllowedRequestHandler.class));
     }
 }
