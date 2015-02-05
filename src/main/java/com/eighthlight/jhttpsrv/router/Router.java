@@ -6,34 +6,41 @@ import com.eighthlight.jhttpsrv.request.Request;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class Router {
     private RequestHandler defaultHandler;
-    private Map<String, RequestHandler> routes;
+    private Map<Route, RequestHandler> routes;
 
     public Router() {
         defaultHandler = new OKRequestHandler();
-        routes = new LinkedHashMap<String, RequestHandler>();
+        routes = new LinkedHashMap<Route, RequestHandler>();
     }
 
     public RequestHandler handlerByRoute(Request request) {
-        String requestRoute = buildRequestRoute(request.getMethod(), request.getURLPath());
-        RequestHandler handler = routes.get(requestRoute);
-        if(handler == null)
-            return defaultHandler;
-        return handler;
+        for(Map.Entry<Route, RequestHandler> entry : routes.entrySet()) {
+            Route route = entry.getKey();
+            RequestHandler requestHandler = entry.getValue();
+
+            if(route.matches(request))
+                return requestHandler;
+        }
+
+        return defaultHandler;
     }
 
     public void addRoute(String httpMethod, String url, RequestHandler requestHandler) {
-        String route = buildRequestRoute(httpMethod, url);
+        String quoted = Pattern.quote(url);
+        addRegexRoute(httpMethod, quoted, requestHandler);
+    }
+
+    public void addRegexRoute(String httpMethod, String urlRegex, RequestHandler requestHandler) {
+        Pattern pattern = Pattern.compile(urlRegex);
+        Route route = new Route(httpMethod, pattern);
         routes.put(route, requestHandler);
     }
 
     public void setDefaultRequestHandler(RequestHandler requestHandler) {
         defaultHandler = requestHandler;
-    }
-
-    private String buildRequestRoute(String httpMethod, String url) {
-        return String.format("%s %s", httpMethod, url);
     }
 }
