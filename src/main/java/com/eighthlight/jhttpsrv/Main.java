@@ -65,7 +65,7 @@ public class Main {
         router.addRoute(ProtocolStrings.HTTP_METHOD_PATCH, "/patch-content.txt", new PatchHandler(fileRequestHandler));
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/partial_content.txt", new RangeHandler(fileRequestHandler));
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/logs", new BasicAuthHandler(new LogsRequestHandler(logger), "admin", "hunter2"));
-        router.setDefaultRequestHandler(fileRequestHandler);
+        router.addRegexRoute(ProtocolStrings.HTTP_METHOD_GET, "/.*", fileRequestHandler);
 
         Jhttpsrv jhttpsrv = new Jhttpsrv(serverSocket, router, logger, config);
         jhttpsrv.run();

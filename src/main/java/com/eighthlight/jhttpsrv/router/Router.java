@@ -1,6 +1,6 @@
 package com.eighthlight.jhttpsrv.router;
 
-import com.eighthlight.jhttpsrv.handler.OKRequestHandler;
+import com.eighthlight.jhttpsrv.handler.NotFoundRequestHandler;
 import com.eighthlight.jhttpsrv.handler.RequestHandler;
 import com.eighthlight.jhttpsrv.request.Request;
 
@@ -13,7 +13,7 @@ public class Router {
     private Map<Route, RequestHandler> routes;
 
     public Router() {
-        defaultHandler = new OKRequestHandler();
+        defaultHandler = new NotFoundRequestHandler();
         routes = new LinkedHashMap<Route, RequestHandler>();
     }
 
@@ -38,9 +38,5 @@ public class Router {
         Pattern pattern = Pattern.compile(urlRegex);
         Route route = new Route(httpMethod, pattern);
         routes.put(route, requestHandler);
-    }
-
-    public void setDefaultRequestHandler(RequestHandler requestHandler) {
-        defaultHandler = requestHandler;
     }
 }

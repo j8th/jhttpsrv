@@ -27,14 +27,7 @@ public class RouterTest {
     @Test
     public void testDefaultRoute() throws Exception {
         RequestHandler handler = router.handlerByRoute(request);
-        assertThat(handler, instanceOf(OKRequestHandler.class));
-    }
-
-    @Test
-    public void testSetDefaultRequestHandler() throws Exception {
-        router.setDefaultRequestHandler(new FileRequestHandler(rootDirPath));
-        RequestHandler handler = router.handlerByRoute(request);
-        assertThat(handler, instanceOf(FileRequestHandler.class));
+        assertThat(handler, instanceOf(NotFoundRequestHandler.class));
     }
 
     @Test
