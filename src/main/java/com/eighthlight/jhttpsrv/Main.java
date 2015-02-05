@@ -60,11 +60,14 @@ public class Main {
         router.addRoute(ProtocolStrings.HTTP_METHOD_POST, "/form", dataHandler);
         router.addRoute(ProtocolStrings.HTTP_METHOD_PUT, "/form", dataHandler);
         router.addRoute(ProtocolStrings.HTTP_METHOD_DELETE, "/form", dataHandler);
-        router.addRoute(ProtocolStrings.HTTP_METHOD_OPTIONS, "/method_options", new OptionsRequestHandler());
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/parameters", new EchoGETParamsHandler());
         router.addRoute(ProtocolStrings.HTTP_METHOD_PATCH, "/patch-content.txt", new PatchHandler(fileRequestHandler));
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/partial_content.txt", new RangeHandler(fileRequestHandler));
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/logs", new BasicAuthHandler(new LogsRequestHandler(logger), "admin", "hunter2"));
+        router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/method_options", new OKRequestHandler());
+        router.addRoute(ProtocolStrings.HTTP_METHOD_HEAD, "/method_options", new OKRequestHandler());
+        router.addRoute(ProtocolStrings.HTTP_METHOD_POST, "/method_options", new OKRequestHandler());
+        router.addRoute(ProtocolStrings.HTTP_METHOD_PUT, "/method_options", new OKRequestHandler());
         router.addRegexRoute(ProtocolStrings.HTTP_METHOD_GET, "/.*", fileRequestHandler);
 
         Jhttpsrv jhttpsrv = new Jhttpsrv(serverSocket, router, logger, config);

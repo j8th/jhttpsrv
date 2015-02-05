@@ -1,7 +1,9 @@
 package com.eighthlight.jhttpsrv.router;
 
+import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
 import com.eighthlight.jhttpsrv.handler.MethodNotAllowedRequestHandler;
 import com.eighthlight.jhttpsrv.handler.NotFoundRequestHandler;
+import com.eighthlight.jhttpsrv.handler.OptionsRequestHandler;
 import com.eighthlight.jhttpsrv.handler.RequestHandler;
 import com.eighthlight.jhttpsrv.request.Request;
 
@@ -20,6 +22,9 @@ public class Router {
     }
 
     public RequestHandler handlerByRoute(Request request) {
+        if(ProtocolStrings.HTTP_METHOD_OPTIONS.equals(request.getMethod()))
+            return new OptionsRequestHandler(options);
+
         for(Map.Entry<Route, RequestHandler> entry : routes.entrySet()) {
             Route route = entry.getKey();
             RequestHandler requestHandler = entry.getValue();
