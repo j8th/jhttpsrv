@@ -24,16 +24,16 @@ public class Router {
         return handler;
     }
 
-    public void addRoute(String httpmethod, String url, RequestHandler myHandler) {
-        String route = buildRequestRoute(httpmethod, url);
-        routes.put(route, myHandler);
+    public void addRoute(String httpMethod, String url, RequestHandler requestHandler) {
+        String route = buildRequestRoute(httpMethod, url);
+        routes.put(route, requestHandler);
     }
 
-    public void setDefaultRequestHandler(RequestHandler myRequestHandler) {
-        defaultHandler = myRequestHandler;
+    public void setDefaultRequestHandler(RequestHandler requestHandler) {
+        defaultHandler = requestHandler;
     }
 
-    private String buildRequestRoute(String HttpMethod, String Url) {
-        return String.format("%s %s", HttpMethod, Url);
+    private String buildRequestRoute(String httpMethod, String url) {
+        return String.format("%s %s", httpMethod, url);
     }
 }
