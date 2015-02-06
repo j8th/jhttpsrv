@@ -1,5 +1,6 @@
 package com.eighthlight.jhttpsrv.multithreading;
 
+import com.eighthlight.jhttpsrv.builder.ResponseBuilder;
 import com.eighthlight.jhttpsrv.client.SimpleHttpClient;
 import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
 import com.eighthlight.jhttpsrv.constants.StatusCodes;
@@ -20,10 +21,11 @@ public class MultiThreadingTest {
     public void testMultithreadingTime() throws Exception {
         Logger logger = new MemoryLogger();
         RequestParser parser = new RequestParser(new URL("http://localhost:8080/"));
+        ResponseBuilder builder = new ResponseBuilder();
         ServerSocket serverSocket = new ServerSocket(8080);
         Router router = new Router();
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/time", new TimeRequestHandler());
-        Server server = new Server(serverSocket, router, logger, parser);
+        Server server = new Server(serverSocket, router, logger, parser, builder);
 
         SimpleHttpClient[] clients = new SimpleHttpClient[20];
         for(int i = 0; i < clients.length; i++)
