@@ -1,5 +1,7 @@
 package com.eighthlight.jhttpsrv.config;
 
+import com.eighthlight.jhttpsrv.args.CmdArgs;
+
 public class Setup {
     private int port;
     private String rootWWWDirectory;
@@ -15,6 +17,14 @@ public class Setup {
 
     public void setRootWWWDirectory(String rootWWWDirectory) {
         this.rootWWWDirectory = rootWWWDirectory;
+    }
+
+    public void setFromCmdArgs(CmdArgs cmdArgs) {
+        if(!cmdArgs.getPort().equals(""))
+            port = Integer.parseInt(cmdArgs.getPort());
+
+        if(!cmdArgs.getDirectory().equals(""))
+            rootWWWDirectory = cmdArgs.getDirectory();
     }
 
     public Config getConfig() {
