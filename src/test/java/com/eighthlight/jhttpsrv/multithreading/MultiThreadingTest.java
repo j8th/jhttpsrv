@@ -9,7 +9,7 @@ import com.eighthlight.jhttpsrv.handler.TimeRequestHandler;
 import com.eighthlight.jhttpsrv.logger.Logger;
 import com.eighthlight.jhttpsrv.logger.MemoryLogger;
 import com.eighthlight.jhttpsrv.router.Router;
-import com.eighthlight.jhttpsrv.server.Jhttpsrv;
+import com.eighthlight.jhttpsrv.server.Server;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
@@ -23,13 +23,13 @@ public class MultiThreadingTest {
         ServerSocket serverSocket = new ServerSocket(config.getPort());
         Router router = new Router();
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/time", new TimeRequestHandler());
-        Jhttpsrv jhttpsrv = new Jhttpsrv(serverSocket, router, logger, config);
+        Server server = new Server(serverSocket, router, logger, config);
 
         SimpleHttpClient[] clients = new SimpleHttpClient[20];
         for(int i = 0; i < clients.length; i++)
             clients[i] = new SimpleHttpClient("http://localhost:8080/time");
 
-        new Thread(jhttpsrv).start();
+        new Thread(server).start();
         for(int i = 0; i < clients.length; i++)
             new Thread(clients[i]).start();
 
