@@ -1,16 +1,13 @@
 package com.eighthlight.jhttpsrv.server;
 
-import com.eighthlight.jhttpsrv.config.Config;
 import com.eighthlight.jhttpsrv.logger.Logger;
 import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.router.Router;
 import com.eighthlight.jhttpsrv.worker.Worker;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.URL;
 
 public class Server implements Runnable {
     private ServerSocket serverSocket;
@@ -18,16 +15,11 @@ public class Server implements Runnable {
     private RequestParser parser;
     private Logger logger;
 
-    public Server(ServerSocket serverSocket, Router router, Logger logger, Config config) {
+    public Server(ServerSocket serverSocket, Router router, Logger logger, RequestParser parser) {
         this.serverSocket = serverSocket;
         this.router = router;
         this.logger = logger;
-        try {
-            URL context = new URL(config.getOrigin());
-            parser = new RequestParser(context);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        this.parser = parser;
     }
 
     public void run() {

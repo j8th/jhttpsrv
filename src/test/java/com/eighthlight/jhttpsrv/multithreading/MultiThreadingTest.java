@@ -1,29 +1,29 @@
 package com.eighthlight.jhttpsrv.multithreading;
 
 import com.eighthlight.jhttpsrv.client.SimpleHttpClient;
-import com.eighthlight.jhttpsrv.config.Config;
-import com.eighthlight.jhttpsrv.config.Setup;
 import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
 import com.eighthlight.jhttpsrv.constants.StatusCodes;
 import com.eighthlight.jhttpsrv.handler.TimeRequestHandler;
 import com.eighthlight.jhttpsrv.logger.Logger;
 import com.eighthlight.jhttpsrv.logger.MemoryLogger;
+import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.router.Router;
 import com.eighthlight.jhttpsrv.server.Server;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
 import java.net.ServerSocket;
+import java.net.URL;
 
 public class MultiThreadingTest {
     @Test
     public void testMultithreadingTime() throws Exception {
         Logger logger = new MemoryLogger();
-        Config config = new Setup().getConfig();
-        ServerSocket serverSocket = new ServerSocket(config.getPort());
+        RequestParser parser = new RequestParser(new URL("http://localhost:8080/"));
+        ServerSocket serverSocket = new ServerSocket(8080);
         Router router = new Router();
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/time", new TimeRequestHandler());
-        Server server = new Server(serverSocket, router, logger, config);
+        Server server = new Server(serverSocket, router, logger, parser);
 
         SimpleHttpClient[] clients = new SimpleHttpClient[20];
         for(int i = 0; i < clients.length; i++)
