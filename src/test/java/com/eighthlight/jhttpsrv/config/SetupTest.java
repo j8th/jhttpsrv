@@ -1,5 +1,6 @@
 package com.eighthlight.jhttpsrv.config;
 
+import com.eighthlight.jhttpsrv.args.CmdArgs;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,6 +30,22 @@ public class SetupTest {
         config = setup.getConfig();
 
         assertEquals(expectedDir, config.getRootWWWDirectory());
+    }
+
+    @Test
+    public void testSetFromCmdArgs() throws Exception {
+        CmdArgs cmdArgs = new CmdArgs(new String[] {
+                "--port", "7400",
+                "-d", "/var/www"
+        });
+        setup.setPort(4000);
+        setup.setRootWWWDirectory("/tmp");
+        setup.setFromCmdArgs(cmdArgs);
+        config = setup.getConfig();
+
+        assertEquals(7400, config.getPort());
+        assertEquals("/var/www", config.getRootWWWDirectory());
+        assertEquals("http://localhost:7400/", config.getOrigin());
     }
 
     @Test
