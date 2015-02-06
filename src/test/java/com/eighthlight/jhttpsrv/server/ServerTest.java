@@ -1,13 +1,12 @@
 package com.eighthlight.jhttpsrv.server;
 
 import com.eighthlight.jhttpsrv.client.SimpleHttpClient;
-import com.eighthlight.jhttpsrv.config.Config;
-import com.eighthlight.jhttpsrv.config.Setup;
 import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
 import com.eighthlight.jhttpsrv.constants.StatusCodes;
 import com.eighthlight.jhttpsrv.handler.HelloWorldRequestHandler;
 import com.eighthlight.jhttpsrv.logger.Logger;
 import com.eighthlight.jhttpsrv.logger.MemoryLogger;
+import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.router.Router;
 import static org.junit.Assert.*;
 
@@ -16,24 +15,25 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.net.ServerSocket;
+import java.net.URL;
 
 public class ServerTest {
     private ServerSocket serverSocket;
     private Router router;
     private Logger logger;
-    private Config config;
     private Server server;
+    private RequestParser parser;
 
     @Before
     public void setUp() throws Exception {
         serverSocket = new ServerSocket(8081);
         logger = new MemoryLogger();
-        config = new Setup().getConfig();
         router = new Router();
+        parser = new RequestParser(new URL("http://localhost:8081/"));
 
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/helloworld", new HelloWorldRequestHandler());
 
-        server = new Server(serverSocket, router, logger, config);
+        server = new Server(serverSocket, router, logger, parser);
     }
 
     @Test
