@@ -15,18 +15,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.net.URL;
 
 public class Worker implements Runnable {
     private Socket socket;
     private RequestParser parser;
+    private ResponseBuilder builder;
     private Router router;
     private Logger logger;
     private Response response;
 
-    public Worker(Socket socket, RequestParser parser, Router router, Logger logger) {
+    public Worker(Socket socket, RequestParser parser, ResponseBuilder builder, Router router, Logger logger) {
         this.socket = socket;
         this.parser = parser;
+        this.builder = builder;
         this.router = router;
         this.logger = logger;
     }
@@ -35,7 +36,6 @@ public class Worker implements Runnable {
         try {
             InputStream is = socket.getInputStream();
             OutputStream os = socket.getOutputStream();
-            ResponseBuilder builder = new ResponseBuilder();
 
             Request request = parser.parseInputStream(is);
             logger.log(request.getRequestLine());

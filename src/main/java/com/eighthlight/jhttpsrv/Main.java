@@ -1,6 +1,7 @@
 package com.eighthlight.jhttpsrv;
 
 import com.eighthlight.jhttpsrv.args.CmdArgs;
+import com.eighthlight.jhttpsrv.builder.ResponseBuilder;
 import com.eighthlight.jhttpsrv.config.Config;
 import com.eighthlight.jhttpsrv.config.Setup;
 import com.eighthlight.jhttpsrv.handler.*;
@@ -51,7 +52,10 @@ public class Main {
             e.printStackTrace();
         }
 
+        ResponseBuilder builder = new ResponseBuilder();
+
         Logger logger = new MemoryLogger();
+
         Router router = new Router();
 
         String redirectURL = String.format("http://localhost:%d/", config.getPort());
@@ -81,7 +85,7 @@ public class Main {
         router.addRoute(ProtocolStrings.HTTP_METHOD_PUT, "/method_options", new OKRequestHandler());
         router.addRegexRoute(ProtocolStrings.HTTP_METHOD_GET, "/.*", fileRequestHandler);
 
-        Server server = new Server(serverSocket, router, logger, parser);
+        Server server = new Server(serverSocket, router, logger, parser, builder);
         server.run();
     }
 }

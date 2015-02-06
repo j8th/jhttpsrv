@@ -1,5 +1,6 @@
 package com.eighthlight.jhttpsrv.server;
 
+import com.eighthlight.jhttpsrv.builder.ResponseBuilder;
 import com.eighthlight.jhttpsrv.client.SimpleHttpClient;
 import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
 import com.eighthlight.jhttpsrv.constants.StatusCodes;
@@ -23,6 +24,7 @@ public class ServerTest {
     private Logger logger;
     private Server server;
     private RequestParser parser;
+    private ResponseBuilder builder;
 
     @Before
     public void setUp() throws Exception {
@@ -30,10 +32,11 @@ public class ServerTest {
         logger = new MemoryLogger();
         router = new Router();
         parser = new RequestParser(new URL("http://localhost:8081/"));
+        builder = new ResponseBuilder();
 
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/helloworld", new HelloWorldRequestHandler());
 
-        server = new Server(serverSocket, router, logger, parser);
+        server = new Server(serverSocket, router, logger, parser, builder);
     }
 
     @Test
