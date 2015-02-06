@@ -7,7 +7,7 @@ import com.eighthlight.jhttpsrv.handler.*;
 import com.eighthlight.jhttpsrv.logger.Logger;
 import com.eighthlight.jhttpsrv.logger.MemoryLogger;
 import com.eighthlight.jhttpsrv.router.Router;
-import com.eighthlight.jhttpsrv.server.Jhttpsrv;
+import com.eighthlight.jhttpsrv.server.Server;
 import com.eighthlight.jhttpsrv.constants.ProtocolStrings;
 
 import java.io.IOException;
@@ -50,12 +50,12 @@ public class Main {
         }
 
         Logger logger = new MemoryLogger();
-
         Router router = new Router();
+
         String redirectURL = String.format("http://localhost:%d/", config.getPort());
+        DataHandler dataHandler = new DataHandler();
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/redirect", new RedirectRequestHandler(redirectURL));
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/time", new TimeRequestHandler());
-        DataHandler dataHandler = new DataHandler();
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/form", dataHandler);
         router.addRoute(ProtocolStrings.HTTP_METHOD_POST, "/form", dataHandler);
         router.addRoute(ProtocolStrings.HTTP_METHOD_PUT, "/form", dataHandler);
@@ -70,7 +70,7 @@ public class Main {
         router.addRoute(ProtocolStrings.HTTP_METHOD_PUT, "/method_options", new OKRequestHandler());
         router.addRegexRoute(ProtocolStrings.HTTP_METHOD_GET, "/.*", fileRequestHandler);
 
-        Jhttpsrv jhttpsrv = new Jhttpsrv(serverSocket, router, logger, config);
-        jhttpsrv.run();
+        Server server = new Server(serverSocket, router, logger, config);
+        server.run();
     }
 }

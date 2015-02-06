@@ -15,15 +15,14 @@ import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldResponse;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 
-public class JhttpsrvTest {
+public class ServerTest {
     private ServerSocket serverSocket;
     private Router router;
     private Logger logger;
     private Config config;
-    private Jhttpsrv jhttpsrv;
+    private Server server;
 
     @Before
     public void setUp() throws Exception {
@@ -34,12 +33,12 @@ public class JhttpsrvTest {
 
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/helloworld", new HelloWorldRequestHandler());
 
-        jhttpsrv = new Jhttpsrv(serverSocket, router, logger, config);
+        server = new Server(serverSocket, router, logger, config);
     }
 
     @Test
     public void testRun() throws Exception {
-        new Thread(jhttpsrv).start();
+        new Thread(server).start();
 
         int waitTimeMilliseconds = 3 * 1000;
         int numClients = 2;

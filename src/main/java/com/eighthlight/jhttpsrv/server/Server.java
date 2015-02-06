@@ -12,13 +12,13 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
 
-public class Jhttpsrv implements Runnable {
+public class Server implements Runnable {
     private ServerSocket serverSocket;
     private Router router;
     private RequestParser parser;
     private Logger logger;
 
-    public Jhttpsrv(ServerSocket serverSocket, Router router, Logger logger, Config config) {
+    public Server(ServerSocket serverSocket, Router router, Logger logger, Config config) {
         this.serverSocket = serverSocket;
         this.router = router;
         this.logger = logger;
