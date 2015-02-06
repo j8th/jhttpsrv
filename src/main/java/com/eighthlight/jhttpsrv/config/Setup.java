@@ -37,6 +37,10 @@ public class Setup {
         public String getRootWWWDirectory() {
             return rootWWWDirectory;
         }
+
+        public String getOrigin() {
+            return String.format("http://localhost:%d/", port);
+        }
     }
 
 }
