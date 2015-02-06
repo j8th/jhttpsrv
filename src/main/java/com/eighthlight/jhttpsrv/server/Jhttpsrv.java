@@ -2,7 +2,6 @@ package com.eighthlight.jhttpsrv.server;
 
 import com.eighthlight.jhttpsrv.config.Config;
 import com.eighthlight.jhttpsrv.logger.Logger;
-import com.eighthlight.jhttpsrv.logger.MemoryLogger;
 import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.router.Router;
 import com.eighthlight.jhttpsrv.worker.Worker;
