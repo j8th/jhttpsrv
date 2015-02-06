@@ -32,10 +32,19 @@ public class SetupTest {
     }
 
     @Test
+    public void testGetOrigin() throws Exception {
+        setup.setPort(4000);
+        config = setup.getConfig();
+
+        assertEquals("http://localhost:4000/", config.getOrigin());
+    }
+
+    @Test
     public void testDefaults() {
         config = setup.getConfig();
 
         assertEquals(8080, config.getPort());
         assertEquals(System.getProperty("user.dir") + "/www", config.getRootWWWDirectory());
+        assertEquals("http://localhost:8080/", config.getOrigin());
     }
 }

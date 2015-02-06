@@ -23,7 +23,7 @@ public class Server implements Runnable {
         this.router = router;
         this.logger = logger;
         try {
-            URL context = new URL(String.format("http://localhost:%d/", config.getPort()));
+            URL context = new URL(config.getOrigin());
             parser = new RequestParser(context);
         } catch (MalformedURLException e) {
             e.printStackTrace();
