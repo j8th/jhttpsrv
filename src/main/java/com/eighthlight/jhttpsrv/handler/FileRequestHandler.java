@@ -39,22 +39,14 @@ public class FileRequestHandler implements RequestHandler {
 
     public Response run(Request request) {
         Response response = new Response();
-        ResponseHeader header = new ResponseHeader();
-        ResponseBody body = new ResponseBody();
-
-        response.setHeaders(header);
-        response.setBody(body);
+        ResponseHeader header = response.getHeaders();
+        ResponseBody body = response.getBody();
 
         Path abspath = Paths.get(rootdir + request.getURLPath());
         String ext = StringUtils.getFileExtension(rootdir + request.getURLPath());
 
         if(!Files.isReadable(abspath)) {
             response.setStatusCode(StatusCodes.NOT_FOUND);
-            return response;
-        }
-
-        if(!request.getMethod().equals(ProtocolStrings.HTTP_METHOD_GET)) {
-            response.setStatusCode(StatusCodes.METHOD_NOT_ALLOWED);
             return response;
         }
 

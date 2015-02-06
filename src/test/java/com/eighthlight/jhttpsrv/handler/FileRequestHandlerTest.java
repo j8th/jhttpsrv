@@ -101,23 +101,6 @@ public class FileRequestHandlerTest {
     }
 
     @Test
-    public void testPOSTRequestToExistingFileReturns405() throws Exception {
-        Request request = TestRequestMaker.fromString(POSTtextfileRequest.ENTIRE_MESSAGE);
-        Response response = fileRequestHandler.run(request);
-
-        assertEquals(StatusCodes.METHOD_NOT_ALLOWED, response.getStatusCode());
-    }
-
-    @Test
-    public void testPUTRequestToExistingFileReturns405() throws Exception {
-        Request request = TestRequestMaker.fromString(PUTtextfileRequest.ENTIRE_MESSAGE);
-        Response response = fileRequestHandler.run(request);
-
-        assertEquals(ProtocolStrings.HTTP_METHOD_PUT, request.getMethod());
-        assertEquals(StatusCodes.METHOD_NOT_ALLOWED, response.getStatusCode());
-    }
-
-    @Test
     public void testGetRootDir() throws Exception {
         assertEquals(System.getProperty("user.dir") + "/www", fileRequestHandler.getRootDir());
     }
