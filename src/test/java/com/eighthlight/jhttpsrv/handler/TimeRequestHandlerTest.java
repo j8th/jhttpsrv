@@ -1,12 +1,10 @@
 package com.eighthlight.jhttpsrv.handler;
 
-import com.eighthlight.jhttpsrv.parser.RequestParser;
 import com.eighthlight.jhttpsrv.request.Request;
 import com.eighthlight.jhttpsrv.response.Response;
 import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldRequest;
 import com.eighthlight.jhttpsrv.testmessage.chrome.TestRequestMaker;
-import org.junit.After;
-import org.junit.Assert;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,7 +31,7 @@ public class TimeRequestHandlerTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm zzz");
         String now = zdt.format(formatter);
         String body = new String(response.getBody().getContent(), StandardCharsets.UTF_8);
-        Assert.assertEquals(now, body);
+        assertEquals(now, body);
     }
 
     @Test
@@ -45,6 +43,6 @@ public class TimeRequestHandlerTest {
         long difference = after - before;
 
         if(difference < 100 || difference > 300)
-            Assert.fail("The TimeRequestHandler did not wait roughly the allotted time (200 milliseconds).");
+            fail("The TimeRequestHandler did not wait roughly the allotted time (200 milliseconds).");
     }
 }
