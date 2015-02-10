@@ -46,7 +46,7 @@ public class WorkerTest {
         MockSocket socket = new MockSocket();
         socket.seedInputStream(GETHelloworldRequest.ENTIRE_MESSAGE);
 
-        worker = new Worker(socket, parser, builder, router, logger);
+        worker = new Worker(socket, router, logger, parser, builder);
         worker.run();
 
         Assert.assertEquals(GETHelloworldResponse.ENTIRE_MESSAGE, socket.getOutputStreamAsString());
@@ -58,7 +58,7 @@ public class WorkerTest {
         MockSocket socket = new MockSocket();
         socket.seedInputStream("");
 
-        worker = new Worker(socket, parser, builder, router, logger);
+        worker = new Worker(socket, router, logger, parser, builder);
         worker.run();
 
         Assert.assertNotEquals("", socket.getOutputStreamAsString());
@@ -71,7 +71,7 @@ public class WorkerTest {
         MockSocket socket = new MockSocket();
         socket.seedInputStream(GETHelloworldRequest.ENTIRE_MESSAGE);
 
-        worker = new Worker(socket, parser, builder, router, logger);
+        worker = new Worker(socket, router, logger, parser, builder);
         Assert.assertNull(worker.getResponse());
         worker.run();
         Assert.assertThat(worker.getResponse(), instanceOf(Response.class));
@@ -87,7 +87,7 @@ public class WorkerTest {
             MockSocket socket = new MockSocket();
             socket.seedInputStream(badRequest);
 
-            worker = new Worker(socket, parser, builder, router, logger);
+            worker = new Worker(socket, router, logger, parser, builder);
             worker.run();
 
             Assert.assertEquals("Failing Bad Request Text: '" + badRequest + "'", StatusCodes.BAD_REQUEST, worker.getResponse().getStatusCode());
@@ -104,11 +104,11 @@ public class WorkerTest {
         socket2.seedInputStream(PUTtextfileRequest.ENTIRE_MESSAGE);
         socket3.seedInputStream(POSTFormRequest.ENTIRE_MESSAGE);
 
-        worker = new Worker(socket1, parser, builder, router, logger);
+        worker = new Worker(socket1, router, logger, parser, builder);
         worker.run();
-        worker = new Worker(socket2, parser, builder, router, logger);
+        worker = new Worker(socket2, router, logger, parser, builder);
         worker.run();
-        worker = new Worker(socket3, parser, builder, router, logger);
+        worker = new Worker(socket3, router, logger, parser, builder);
         worker.run();
 
         List<String> messages = logger.getMessages();
