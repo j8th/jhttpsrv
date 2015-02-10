@@ -45,8 +45,8 @@ public class MemoryLoggerTest {
 
     @Test
     public void testThreadSafety() throws Exception {
-        int numWritingThreads = 1000;
-        final int numMessagesPerThread = 10000;
+        int numWritingThreads = 100;
+        final int numMessagesPerThread = 1000;
         int totalExpectedLogMessages = numWritingThreads * numMessagesPerThread;
         Thread[] writers = new Thread[numWritingThreads];
         for(int i = 0; i < writers.length; i++) {

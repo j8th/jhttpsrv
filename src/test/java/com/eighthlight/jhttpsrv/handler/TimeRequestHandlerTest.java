@@ -21,12 +21,12 @@ public class TimeRequestHandlerTest {
 
     @Before
     public void setUp() throws Exception {
-        timeRequestHandler = new TimeRequestHandler();
         request = TestRequestMaker.fromString(GETHelloworldRequest.ENTIRE_MESSAGE);
     }
 
     @Test
     public void testRun() throws Exception {
+        timeRequestHandler = new TimeRequestHandler(0);
         Response response = timeRequestHandler.run(request);
         ZoneId zoneid = ZoneId.of("US/Central");
         ZonedDateTime zdt = ZonedDateTime.now(zoneid);
@@ -37,13 +37,14 @@ public class TimeRequestHandlerTest {
     }
 
     @Test
-    public void testWaits() throws Exception {
+    public void testWaitsTheIndicatedMilliseconds() throws Exception {
+        timeRequestHandler = new TimeRequestHandler(200);
         long before = System.currentTimeMillis();
         timeRequestHandler.run(request);
         long after = System.currentTimeMillis();
         long difference = after - before;
 
-        if(difference < 900 || difference > 1100)
-            Assert.fail("The TimeRequestHandler did not wait one second.");
+        if(difference < 100 || difference > 300)
+            Assert.fail("The TimeRequestHandler did not wait roughly the allotted time (200 milliseconds).");
     }
 }
