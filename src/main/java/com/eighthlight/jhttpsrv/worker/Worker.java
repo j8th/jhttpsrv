@@ -18,18 +18,18 @@ import java.net.Socket;
 
 public class Worker implements Runnable {
     private Socket socket;
-    private RequestParser parser;
-    private ResponseBuilder builder;
     private Router router;
     private Logger logger;
+    private RequestParser parser;
+    private ResponseBuilder builder;
     private Response response;
 
-    public Worker(Socket socket, RequestParser parser, ResponseBuilder builder, Router router, Logger logger) {
+    public Worker(Socket socket, Router router, Logger logger, RequestParser parser, ResponseBuilder builder) {
         this.socket = socket;
-        this.parser = parser;
-        this.builder = builder;
         this.router = router;
         this.logger = logger;
+        this.parser = parser;
+        this.builder = builder;
     }
 
     public void run() {

@@ -29,7 +29,7 @@ public class Server implements Runnable {
         while(true){
             try {
                 Socket socket = serverSocket.accept();
-                Worker worker = new Worker(socket, parser, builder, router, logger);
+                Worker worker = new Worker(socket, router, logger, parser, builder);
                 new Thread(worker).start();
             } catch (IOException e) {
                 e.printStackTrace();
