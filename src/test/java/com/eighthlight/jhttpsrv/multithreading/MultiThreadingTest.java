@@ -24,7 +24,7 @@ public class MultiThreadingTest {
         ResponseBuilder builder = new ResponseBuilder();
         ServerSocket serverSocket = new ServerSocket(8080);
         Router router = new Router();
-        router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/time", new TimeRequestHandler());
+        router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/time", new TimeRequestHandler(200));
         Server server = new Server(serverSocket, router, logger, parser, builder);
 
         SimpleHttpClient[] clients = new SimpleHttpClient[20];
@@ -35,7 +35,7 @@ public class MultiThreadingTest {
         for(int i = 0; i < clients.length; i++)
             new Thread(clients[i]).start();
 
-        Thread.sleep(2000);
+        Thread.sleep(400);
 
         for(int i = 0; i < clients.length; i++) {
             try {

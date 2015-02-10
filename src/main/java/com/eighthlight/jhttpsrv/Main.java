@@ -34,7 +34,7 @@ public class Main {
             FileRequestHandler fileRequestHandler = new FileRequestHandler(config.getRootWWWDirectory());
             DataHandler dataHandler = new DataHandler();
             router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/redirect", new RedirectRequestHandler(config.getOrigin()));
-            router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/time", new TimeRequestHandler());
+            router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/time", new TimeRequestHandler(1000));
             router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/form", dataHandler);
             router.addRoute(ProtocolStrings.HTTP_METHOD_POST, "/form", dataHandler);
             router.addRoute(ProtocolStrings.HTTP_METHOD_PUT, "/form", dataHandler);

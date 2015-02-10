@@ -12,13 +12,19 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class TimeRequestHandler implements RequestHandler {
+    private int waitTimeMilliseconds;
+
+    public TimeRequestHandler(int waitTimeMilliseconds) {
+        this.waitTimeMilliseconds = waitTimeMilliseconds;
+    }
+
     public Response run(Request request) {
         Response response = new Response();
         ResponseHeader header = new ResponseHeader();
         ResponseBody body = new ResponseBody();
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(waitTimeMilliseconds);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
