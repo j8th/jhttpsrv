@@ -13,19 +13,22 @@ import com.eighthlight.jhttpsrv.server.Server;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.URL;
 
 public class MultiThreadingTest {
     @Test
     public void testMultithreadingTime() throws Exception {
+        PrintStream printStream = new PrintStream(new ByteArrayOutputStream());
         Logger logger = new MemoryLogger();
         RequestParser parser = new RequestParser(new URL("http://localhost:8080/"));
         ResponseBuilder builder = new ResponseBuilder();
         ServerSocket serverSocket = new ServerSocket(8080);
         Router router = new Router();
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/time", new TimeRequestHandler(200));
-        Server server = new Server(serverSocket, router, logger, parser, builder);
+        Server server = new Server(printStream, serverSocket, router, logger, parser, builder);
 
         SimpleHttpClient[] clients = new SimpleHttpClient[20];
         for(int i = 0; i < clients.length; i++)

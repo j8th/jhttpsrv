@@ -15,10 +15,15 @@ import com.eighthlight.jhttpsrv.testmessage.chrome.GETHelloworldResponse;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class ServerTest {
+    private ByteArrayOutputStream byteArrayOutputStream;
+    private PrintStream printStream;
     private ServerSocket serverSocket;
     private Router router;
     private Logger logger;
@@ -28,6 +33,8 @@ public class ServerTest {
 
     @Before
     public void setUp() throws Exception {
+        byteArrayOutputStream = new ByteArrayOutputStream();
+        printStream = new PrintStream(byteArrayOutputStream);
         serverSocket = new ServerSocket(8081);
         logger = new MemoryLogger();
         router = new Router();
@@ -36,7 +43,7 @@ public class ServerTest {
 
         router.addRoute(ProtocolStrings.HTTP_METHOD_GET, "/helloworld", new HelloWorldRequestHandler());
 
-        server = new Server(serverSocket, router, logger, parser, builder);
+        server = new Server(printStream, serverSocket, router, logger, parser, builder);
     }
 
     @Test
@@ -52,5 +59,6 @@ public class ServerTest {
             assertEquals(String.format("Client #%d failed: ", i), StatusCodes.OK, simpleHttpClient.getResponseCode());
             assertEquals(String.format("Client #%d failed: ", i), GETHelloworldResponse.BODY, simpleHttpClient.getContent());
         }
+        assertEquals("Server started on port 8081...\n", byteArrayOutputStream.toString(StandardCharsets.UTF_8.toString()));
     }
 }

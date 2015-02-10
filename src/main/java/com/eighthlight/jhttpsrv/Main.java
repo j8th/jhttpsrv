@@ -49,7 +49,7 @@ public class Main {
             router.addRoute(ProtocolStrings.HTTP_METHOD_PUT, "/method_options", new OKRequestHandler());
             router.addRegexRoute(ProtocolStrings.HTTP_METHOD_GET, "/.*", fileRequestHandler);
 
-            Server server = new Server(serverSocket, router, logger, parser, builder);
+            Server server = new Server(System.out, serverSocket, router, logger, parser, builder);
             server.run();
         } catch (Exception e) {
             System.err.println(e.getMessage());
